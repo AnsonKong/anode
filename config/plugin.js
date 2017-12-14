@@ -10,3 +10,8 @@ exports.nunjucks = {
 	enabled: true,
 	package: 'egg-view-nunjucks'
 }
+
+exports.mongoose = {
+	enabled: true,
+	package: 'egg-mongoose'
+}

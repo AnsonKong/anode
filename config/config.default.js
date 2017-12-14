@@ -9,11 +9,20 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  config.logger = {
+    consoleLevel: 'DEBUG'
+  };
+
   config.view = {
   	defaultViewEngine: 'nunjucks',
   	mapping: {
   		'.tpl': 'nunjucks'
   	}
+  };
+
+  config.mongoose = {
+    url: 'mongodb://127.0.0.1/egg',
+    options: {}
   };
 
   return config;

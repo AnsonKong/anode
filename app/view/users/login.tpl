@@ -5,16 +5,16 @@
 		<link href="/public/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<form class="form" method="post" action="/api/v1/users">
+		<form class="form" method="post" action="/users/login">
 			<div class="form-group">
 				<label>电子邮箱</label>
 				<input class="form-control" type="email" name="username" placeholder="Email">
 			</div>
 			<div class="form-group">
 				<label>密码</label>
-				<input class="form-control" type="email" name="username" placeholder="Email">
+				<input class="form-control" type="password" name="password" placeholder="Password">
 			</div>
-			<a class="btn btn-default" href="">提交</a>
+			<button class="btn btn-default">登录</a>
 		</form>
 		<script type="text/javascript" src="/public/js/jquery.min.js"></script>
 		<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>

@@ -1,262 +1,267 @@
 {
-  "keys": "E:\\wamp64\\www\\egg-example\\config\\config.default.js",
-  "middleware": "E:\\wamp64\\www\\egg-example\\config\\config.default.js",
-  "view": {
-    "defaultViewEngine": "E:\\wamp64\\www\\egg-example\\config\\config.default.js",
-    "mapping": {
-      ".tpl": "E:\\wamp64\\www\\egg-example\\config\\config.default.js"
+  "keys": "E:\\egg-example\\config\\config.default.js",
+  "middleware": "E:\\egg-example\\config\\config.default.js",
+  "logger": {
+    "consoleLevel": "E:\\egg-example\\config\\config.default.js",
+    "dir": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "encoding": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "env": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "level": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "disableConsoleAfterReady": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "outputJSON": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "buffer": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "appLogName": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "coreLogName": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "agentLogName": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "errorLogName": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "coreLogger": {
+      "consoleLevel": "E:\\egg-example\\node_modules\\egg\\config\\config.local.js"
     },
-    "root": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view\\config\\config.default.js",
-    "cache": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view\\config\\config.local.js",
-    "defaultExtension": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view\\config\\config.default.js"
+    "allowDebugAtProd": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
+  },
+  "view": {
+    "defaultViewEngine": "E:\\egg-example\\config\\config.default.js",
+    "mapping": {
+      ".tpl": "E:\\egg-example\\config\\config.default.js"
+    },
+    "root": "E:\\egg-example\\node_modules\\egg-view\\config\\config.default.js",
+    "cache": "E:\\egg-example\\node_modules\\egg-view\\config\\config.local.js",
+    "defaultExtension": "E:\\egg-example\\node_modules\\egg-view\\config\\config.default.js"
+  },
+  "mongoose": {
+    "url": "E:\\egg-example\\config\\config.default.js",
+    "options": "E:\\egg-example\\config\\config.default.js"
   },
   "session": {
-    "maxAge": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
-    "key": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
-    "httpOnly": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
-    "encrypt": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-session\\config\\config.default.js"
+    "maxAge": "E:\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
+    "key": "E:\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
+    "httpOnly": "E:\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
+    "encrypt": "E:\\egg-example\\node_modules\\egg-session\\config\\config.default.js"
   },
   "security": {
-    "domainWhiteList": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-    "protocolWhiteList": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-    "defaultMiddleware": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+    "domainWhiteList": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+    "protocolWhiteList": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+    "defaultMiddleware": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
     "csrf": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "useSession": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "ignoreJSON": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "cookieName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "sessionName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "headerName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "bodyName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "queryName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "useSession": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "ignoreJSON": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "cookieName": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "sessionName": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "headerName": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "bodyName": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "queryName": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "xframe": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "value": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "value": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "hsts": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.local.js",
-      "maxAge": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "includeSubdomains": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.local.js",
+      "maxAge": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "includeSubdomains": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "dta": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "methodnoallow": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "noopen": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "nosniff": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "xssProtection": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "value": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "value": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     },
     "csp": {
-      "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
-      "policy": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+      "enable": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js",
+      "policy": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
     }
   },
   "helper": {
-    "shtml": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
+    "shtml": "E:\\egg-example\\node_modules\\egg-security\\config\\config.default.js"
   },
   "jsonp": {
-    "limit": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-jsonp\\config\\config.default.js",
-    "callback": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-jsonp\\config\\config.default.js",
-    "csrf": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-jsonp\\config\\config.default.js"
+    "limit": "E:\\egg-example\\node_modules\\egg-jsonp\\config\\config.default.js",
+    "callback": "E:\\egg-example\\node_modules\\egg-jsonp\\config\\config.default.js",
+    "csrf": "E:\\egg-example\\node_modules\\egg-jsonp\\config\\config.default.js"
   },
   "onerror": {
-    "errorPageUrl": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-onerror\\config\\config.default.js",
-    "appErrorFilter": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-onerror\\config\\config.default.js"
+    "errorPageUrl": "E:\\egg-example\\node_modules\\egg-onerror\\config\\config.default.js",
+    "appErrorFilter": "E:\\egg-example\\node_modules\\egg-onerror\\config\\config.default.js"
   },
   "i18n": {
-    "defaultLocale": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
-    "dirs": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
-    "queryField": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
-    "cookieField": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
-    "cookieMaxAge": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js"
+    "defaultLocale": "E:\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
+    "dirs": "E:\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
+    "queryField": "E:\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
+    "cookieField": "E:\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js",
+    "cookieMaxAge": "E:\\egg-example\\node_modules\\egg-i18n\\config\\config.default.js"
   },
   "watcher": {
-    "type": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-watcher\\config\\config.local.js",
+    "type": "E:\\egg-example\\node_modules\\egg-watcher\\config\\config.local.js",
     "eventSources": {
-      "default": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-watcher\\config\\config.default.js",
-      "development": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-watcher\\config\\config.default.js"
+      "default": "E:\\egg-example\\node_modules\\egg-watcher\\config\\config.default.js",
+      "development": "E:\\egg-example\\node_modules\\egg-watcher\\config\\config.default.js"
     }
   },
   "multipart": {
-    "autoFields": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "defaultCharset": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "fieldNameSize": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "fieldSize": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "fields": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "fileSize": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "files": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "fileExtensions": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
-    "whitelist": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js"
+    "autoFields": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "defaultCharset": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fieldNameSize": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fieldSize": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fields": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fileSize": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "files": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "fileExtensions": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js",
+    "whitelist": "E:\\egg-example\\node_modules\\egg-multipart\\config\\config.default.js"
   },
   "development": {
-    "watchDirs": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-development\\config\\config.default.js",
-    "ignoreDirs": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-development\\config\\config.default.js",
-    "fastReady": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-development\\config\\config.default.js",
-    "reloadOnDebug": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-development\\config\\config.default.js"
+    "watchDirs": "E:\\egg-example\\node_modules\\egg-development\\config\\config.default.js",
+    "ignoreDirs": "E:\\egg-example\\node_modules\\egg-development\\config\\config.default.js",
+    "fastReady": "E:\\egg-example\\node_modules\\egg-development\\config\\config.default.js",
+    "reloadOnDebug": "E:\\egg-example\\node_modules\\egg-development\\config\\config.default.js"
   },
   "logrotator": {
-    "filesRotateByHour": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
-    "hourDelimiter": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
-    "filesRotateBySize": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
-    "maxFileSize": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
-    "maxFiles": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
-    "rotateDuration": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
-    "maxDays": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js"
+    "filesRotateByHour": "E:\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "hourDelimiter": "E:\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "filesRotateBySize": "E:\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "maxFileSize": "E:\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "maxFiles": "E:\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "rotateDuration": "E:\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js",
+    "maxDays": "E:\\egg-example\\node_modules\\egg-logrotator\\config\\config.default.js"
   },
   "static": {
-    "prefix": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
-    "dir": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
-    "dynamic": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
-    "preload": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
-    "buffer": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
-    "maxFiles": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-static\\config\\config.default.js"
+    "prefix": "E:\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
+    "dir": "E:\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
+    "dynamic": "E:\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
+    "preload": "E:\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
+    "buffer": "E:\\egg-example\\node_modules\\egg-static\\config\\config.default.js",
+    "maxFiles": "E:\\egg-example\\node_modules\\egg-static\\config\\config.default.js"
   },
   "nunjucks": {
-    "autoescape": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
-    "throwOnUndefined": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
-    "trimBlocks": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
-    "lstripBlocks": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
-    "cache": "E:\\wamp64\\www\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.local.js"
+    "autoescape": "E:\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "throwOnUndefined": "E:\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "trimBlocks": "E:\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "lstripBlocks": "E:\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "cache": "E:\\egg-example\\node_modules\\egg-view-nunjucks\\config\\config.local.js"
   },
-  "env": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "name": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "proxy": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "protocolHeaders": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "ipHeaders": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "hostHeaders": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "env": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "name": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "proxy": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "protocolHeaders": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "ipHeaders": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "hostHeaders": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
   "pkg": {
-    "name": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "version": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "description": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "private": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "name": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "version": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "description": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "private": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
     "dependencies": {
-      "egg": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "egg-scripts": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "egg-view-nunjucks": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "egg": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-mongoose": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-scripts": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-view-nunjucks": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
     "devDependencies": {
-      "autod": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "autod-egg": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "egg-bin": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "egg-ci": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "egg-mock": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "eslint": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "eslint-config-egg": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "webstorm-disable-index": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "autod": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "autod-egg": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-bin": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-ci": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-mock": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "eslint": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "eslint-config-egg": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "webstorm-disable-index": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
     "engines": {
-      "node": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "node": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
     "scripts": {
-      "start": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "stop": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "dev": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "debug": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "test": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "test-local": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "cov": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "lint": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "ci": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "autod": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "start": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "stop": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "dev": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "debug": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "test": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "test-local": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "cov": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "lint": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "ci": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "autod": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
     "ci": {
-      "version": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "version": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
     "repository": {
-      "type": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "url": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "type": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "url": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
-    "author": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "license": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+    "author": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "license": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
   },
-  "baseDir": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "HOME": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "rundir": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "baseDir": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "HOME": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "rundir": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
   "dump": {
-    "ignore": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+    "ignore": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
   },
   "confusedConfigurations": {
-    "bodyparser": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "notFound": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "sitefile": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "middlewares": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "httpClient": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+    "bodyparser": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "notFound": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "sitefile": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "middlewares": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "httpClient": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
   },
   "notfound": {
-    "pageUrl": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+    "pageUrl": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
   },
   "siteFile": {
-    "/favicon.ico": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+    "/favicon.ico": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
   },
   "bodyParser": {
-    "enable": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "encoding": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "formLimit": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "jsonLimit": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "strict": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "enable": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "encoding": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "formLimit": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "jsonLimit": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "strict": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
     "queryString": {
-      "arrayLimit": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "depth": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "parameterLimit": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "arrayLimit": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "depth": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "parameterLimit": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     }
-  },
-  "logger": {
-    "dir": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "encoding": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "env": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "level": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "consoleLevel": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "disableConsoleAfterReady": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "outputJSON": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "buffer": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "appLogName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "coreLogName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "agentLogName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "errorLogName": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "coreLogger": {
-      "consoleLevel": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.local.js"
-    },
-    "allowDebugAtProd": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
   },
   "httpclient": {
-    "enableDNSCache": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "dnsCacheMaxLength": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-    "dnsCacheMaxAge": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "enableDNSCache": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "dnsCacheMaxLength": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+    "dnsCacheMaxAge": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
     "request": {
-      "timeout": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "timeout": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
     "httpAgent": {
-      "keepAlive": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "freeSocketKeepAliveTimeout": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "maxSockets": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "maxFreeSockets": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "keepAlive": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "freeSocketKeepAliveTimeout": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "maxSockets": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "maxFreeSockets": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },
     "httpsAgent": {
-      "keepAlive": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "freeSocketKeepAliveTimeout": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "maxSockets": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "maxFreeSockets": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "keepAlive": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "freeSocketKeepAliveTimeout": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "maxSockets": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "maxFreeSockets": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     }
   },
-  "coreMiddleware": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-  "workerStartTimeout": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "coreMiddleware": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+  "workerStartTimeout": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
   "cluster": {
     "listen": {
-      "path": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "port": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js",
-      "hostname": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+      "path": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "port": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "hostname": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     }
   },
   "clusterClient": {
-    "responseTimeout": "E:\\wamp64\\www\\egg-example\\node_modules\\egg\\config\\config.default.js"
+    "responseTimeout": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
   }
 }
