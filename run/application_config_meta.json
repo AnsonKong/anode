@@ -32,6 +32,11 @@
     "url": "E:\\egg-example\\config\\config.default.js",
     "options": "E:\\egg-example\\config\\config.default.js"
   },
+  "passportGithub": {
+    "key": "E:\\egg-example\\config\\config.default.js",
+    "secret": "E:\\egg-example\\config\\config.default.js",
+    "callbackURL": "E:\\egg-example\\node_modules\\egg-passport-github\\config\\config.default.js"
+  },
   "session": {
     "maxAge": "E:\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
     "key": "E:\\egg-example\\node_modules\\egg-session\\config\\config.default.js",
@@ -163,6 +168,8 @@
     "dependencies": {
       "egg": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
       "egg-mongoose": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-passport": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
+      "egg-passport-github": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
       "egg-scripts": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js",
       "egg-view-nunjucks": "E:\\egg-example\\node_modules\\egg\\config\\config.default.js"
     },

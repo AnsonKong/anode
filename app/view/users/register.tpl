@@ -5,7 +5,7 @@
 		<link href="/public/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<form class="form" method="post" action="/users/register">
+		<form class="form" method="post" action="/register">
 			<div class="form-group">
 				<label>电子邮箱</label>
 				<input class="form-control" type="email" name="username" placeholder="Email">

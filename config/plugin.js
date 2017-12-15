@@ -7,11 +7,21 @@ exports.security = {
 };
 
 exports.nunjucks = {
-	enabled: true,
+	enable: true,
 	package: 'egg-view-nunjucks'
-}
+};
 
 exports.mongoose = {
-	enabled: true,
+	enable: true,
 	package: 'egg-mongoose'
-}
+};
+
+exports.passport = {
+	enable: true,
+	package: 'egg-passport',
+};
+
+exports.passportGithub = {
+	enable: true,
+	package: 'egg-passport-github',
+};

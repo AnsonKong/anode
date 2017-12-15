@@ -94,6 +94,8 @@
         "E:\\egg-example\\node_modules\\egg-view\\config\\locales",
         "E:\\egg-example\\node_modules\\egg-view-nunjucks\\config\\locales",
         "E:\\egg-example\\node_modules\\egg-mongoose\\config\\locales",
+        "E:\\egg-example\\node_modules\\egg-passport\\config\\locales",
+        "E:\\egg-example\\node_modules\\egg-passport-github\\config\\locales",
         "E:\\egg-example\\node_modules\\egg\\config\\locales",
         "E:\\egg-example\\config\\locales"
       ],
@@ -166,6 +168,20 @@
       "url": "mongodb://127.0.0.1/egg",
       "options": {}
     },
+    "passportGithub": {
+      "key": "bc0efa68b703557940f3",
+      "secret": "<String len: 40>",
+      "callbackURL": "/passport/github/callback",
+      "passReqToCallback": true,
+      "clientID": "bc0efa68b703557940f3",
+      "clientSecret": "<String len: 40>",
+      "authorizationURL": "https://github.com/login/oauth/authorize",
+      "tokenURL": "https://github.com/login/oauth/access_token",
+      "scopeSeparator": ",",
+      "customHeaders": {
+        "User-Agent": "passport-github"
+      }
+    },
     "env": "local",
     "name": "egg-example",
     "keys": "<String len: 30>",
@@ -181,6 +197,8 @@
       "dependencies": {
         "egg": "^2.0.0",
         "egg-mongoose": "^2.1.1",
+        "egg-passport": "^2.0.0",
+        "egg-passport-github": "^1.0.0",
         "egg-scripts": "^2.1.0",
         "egg-view-nunjucks": "^2.1.4"
       },
@@ -299,7 +317,9 @@
       "overrideMethod",
       "session",
       "securities",
-      "i18n"
+      "i18n",
+      "passportInitialize",
+      "passportSession"
     ],
     "workerStartTimeout": 600000,
     "cluster": {
@@ -322,7 +342,9 @@
       "overrideMethod",
       "session",
       "securities",
-      "i18n"
+      "i18n",
+      "passportInitialize",
+      "passportSession"
     ],
     "appMiddlewares": [],
     "appMiddleware": [],
@@ -486,9 +508,8 @@
       "version": "2.0.0"
     },
     "nunjucks": {
-      "enabled": true,
-      "package": "egg-view-nunjucks",
       "enable": true,
+      "package": "egg-view-nunjucks",
       "name": "nunjucks",
       "dependencies": [
         "security",
@@ -501,9 +522,8 @@
       "version": "2.1.4"
     },
     "mongoose": {
-      "enabled": true,
-      "package": "egg-mongoose",
       "enable": true,
+      "package": "egg-mongoose",
       "name": "mongoose",
       "dependencies": [],
       "optionalDependencies": [],
@@ -511,6 +531,32 @@
       "from": "E:\\egg-example\\config\\plugin.js",
       "path": "E:\\egg-example\\node_modules\\egg-mongoose",
       "version": "2.1.1"
+    },
+    "passport": {
+      "enable": true,
+      "package": "egg-passport",
+      "name": "passport",
+      "dependencies": [
+        "session"
+      ],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "E:\\egg-example\\config\\plugin.js",
+      "path": "E:\\egg-example\\node_modules\\egg-passport",
+      "version": "2.0.0"
+    },
+    "passportGithub": {
+      "enable": true,
+      "package": "egg-passport-github",
+      "name": "passportGithub",
+      "dependencies": [
+        "passport"
+      ],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "E:\\egg-example\\config\\plugin.js",
+      "path": "E:\\egg-example\\node_modules\\egg-passport-github",
+      "version": "1.0.0"
     }
   }
 }
