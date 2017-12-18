@@ -53,7 +53,8 @@ class UsersController extends Controller {
 	async home() {
 		const user_id = this.ctx.params.id;
 		const user = await this.ctx.model.User.findOne({ _id: user_id });
-		const createdTopics = await this.ctx.model.Topic.find({ user_id });
+		const createdTopics = await this.ctx.model.Topic.find({ user_id }).sort({ created_time: -1 }).limit(5);
+		this.ctx.helper.parseTopics(createdTopics);
 		
 		await this.ctx.render('user/home.tpl', { user, createdTopics });
 	}
@@ -62,9 +63,10 @@ class UsersController extends Controller {
 	async topics() {
 		const user_id = this.ctx.params.id;
 		const user = await this.ctx.model.User.findOne({ _id: user_id });
-		const list = await this.ctx.model.Topic.find({ user_id });
-		
-		await this.ctx.render('user/topics.tpl', { user, list: list });
+		const topics = await this.ctx.model.Topic.find({ user_id }).sort({ created_time: -1 });
+		this.ctx.helper.parseTopics(topics);
+
+		await this.ctx.render('user/topics.tpl', { user, topics });
 	}
 }
 

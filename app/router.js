@@ -29,6 +29,8 @@ module.exports = app => {
   router.get('/topic/create', controller.topic.new);
   router.post('/topic/create', controller.topic.create);
   router.get('/topic/:id', controller.topic.read);
+  router.get('/topic/:id/edit', controller.topic.edit);
+  router.post('/topic/:id/edit', controller.topic.update);
 
   // 3.user
   router.get('/user/:id', controller.user.home);
