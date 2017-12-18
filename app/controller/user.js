@@ -43,10 +43,28 @@ class UsersController extends Controller {
 		}
 		this.ctx.body = tip;
 	}*/
-
+	// get /signout
 	async signout() {
 		this.ctx.logout();
 		this.ctx.redirect('/');
+	}
+
+	// get /user/:id
+	async home() {
+		const user_id = this.ctx.params.id;
+		const user = await this.ctx.model.User.findOne({ _id: user_id });
+		const createdTopics = await this.ctx.model.Topic.find({ user_id });
+		
+		await this.ctx.render('user/home.tpl', { user, createdTopics });
+	}
+
+	// get /user/:id/topics
+	async topics() {
+		const user_id = this.ctx.params.id;
+		const user = await this.ctx.model.User.findOne({ _id: user_id });
+		const list = await this.ctx.model.Topic.find({ user_id });
+		
+		await this.ctx.render('user/topics.tpl', { user, list: list });
 	}
 }
 

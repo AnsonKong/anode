@@ -28,4 +28,9 @@ module.exports = app => {
   // 2.topic
   router.get('/topic/create', controller.topic.new);
   router.post('/topic/create', controller.topic.create);
+  router.get('/topic/:id', controller.topic.read);
+
+  // 3.user
+  router.get('/user/:id', controller.user.home);
+  router.get('/user/:id/topics', controller.user.topics);
 };
