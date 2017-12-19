@@ -31,8 +31,11 @@ module.exports = app => {
   router.get('/topic/:id', controller.topic.read);
   router.get('/topic/:id/edit', controller.topic.edit);
   router.post('/topic/:id/edit', controller.topic.update);
+  router.post('/topic/:id/reply', controller.topic.reply);
 
-  // 3.user
+  // 3.topic reply
+
+  // 4.user
   router.get('/user/:id', controller.user.home);
   router.get('/user/:id/topics', controller.user.topics);
 };
