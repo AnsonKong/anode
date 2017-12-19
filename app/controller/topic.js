@@ -1,4 +1,6 @@
 const Controller = require('egg').Controller;
+const moment = require('moment');
+moment.locale('zh-cn');
 
 class TopicController extends Controller {
 	// get /topic/create
@@ -14,7 +16,7 @@ class TopicController extends Controller {
 		const body = this.ctx.request.body;
 		const title = Buffer.from(body.title).toString('base64');
 		const content = Buffer.from(body.content).toString('base64');
-		const created_time = new Date().getTime();
+		const created_time = moment().unix();
 		const conditions = {
 			category: body.category,
 			title,
@@ -38,9 +40,10 @@ class TopicController extends Controller {
 			const title = Buffer.from(topicDoc.title, 'base64').toString();
 			let content = Buffer.from(topicDoc.content, 'base64').toString();
 			content = require('marked')(content);
+			const fromNow = moment.unix(topicDoc.created_time).startOf('second').fromNow();
 
 			const user = await this.ctx.model.User.findOne({ _id: topicDoc.user_id });
-			await this.ctx.render('./topic/read.tpl', { user, title, content });
+			await this.ctx.render('./topic/read.tpl', { user, title, content, fromNow });
 		} else {
 			this.ctx.redirect('/');
 		}
