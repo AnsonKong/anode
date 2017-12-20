@@ -16,7 +16,7 @@ class TopicController extends Controller {
 			category: body.category,
 			title: this.ctx.helper.encodeBase64(body.title),
 			content: this.ctx.helper.encodeBase64(body.content),
-			user_id: this.ctx.user._id,
+			user: this.ctx.user._id,
 			created_time,
 			last_modified_time: created_time,
 		};
@@ -28,7 +28,10 @@ class TopicController extends Controller {
 	async read() {
 		const topicDoc = await this.ctx.model.Topic.findOne({ _id: this.ctx.params.id }).populate('replies.user');
 		if (topicDoc) {
-			const user = await this.ctx.model.User.findOne({ _id: topicDoc.user_id });
+			// 更新阅读次数
+			await topicDoc.update({ view_account: topicDoc.view_account + 1 });
+
+			const user = await this.ctx.model.User.findOne({ _id: topicDoc.user });
 			const locals = {
 				user,
 				title: this.ctx.helper.decodeBase64(topicDoc.title),
@@ -36,7 +39,6 @@ class TopicController extends Controller {
 				fromNow: this.ctx.helper.fromNow(topicDoc.created_time),
 				replies: this.ctx.helper.parseReplies(topicDoc.replies),
 			}
-			this.ctx.logger.debug('1' === '1');
 			await this.ctx.render('./topic/read.tpl', locals);
 		} else {
 			this.ctx.redirect('/');
@@ -57,6 +59,12 @@ class TopicController extends Controller {
 		} else {
 			this.ctx.redirect('/');
 		}
+	}
+
+	// get /topic/:id/del
+	async del() {
+		const topicDoc = await this.ctx.model.Topic.findOneAndRemove({ _id: this.ctx.params.id });
+		this.ctx.redirect(`/user/${topicDoc.user}`);
 	}
 
 	// post /topic/:id/edit
@@ -88,7 +96,6 @@ class TopicController extends Controller {
 		this.ctx.redirect('/topic/' + id);
 	}
 
-	
 }
 
 module.exports = TopicController;

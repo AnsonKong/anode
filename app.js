@@ -19,7 +19,7 @@ module.exports = app => {
 				const email = user.profile._json.email;
 				userDoc = await ctx.service.user.signup(email);
 				// 创建授权文档
-				authConditions["user_id"] = userDoc._id;
+				authConditions["user"] = userDoc._id;
 				authDoc = await ctx.model.Authorization.create(authConditions);
 			}
 		} else {

@@ -5,9 +5,10 @@ module.exports = app => {
 		category: { type: String },
 		title: { type: String },
 		content: { type: String },
-		user_id: { type: String },
+		user: { type: Schema.Types.ObjectId, ref: 'User' },
 		created_time: { type: Number },
 		last_modified_time: { type: Number },
+		view_account: { type: Number, default: 0 },
 		replies: [{ content: String, created_time: Number, user: { type: Schema.Types.ObjectId, ref: 'User' } }],
 	});
 

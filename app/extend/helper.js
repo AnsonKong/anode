@@ -16,8 +16,9 @@ exports.fromNow = (timestamps) => {
 exports.parseBriefTopics = (topicDocs) => {
 	topicDocs.forEach(tempDoc => {
 		tempDoc.title = this.decodeBase64(tempDoc.title);
-		// tempDoc.content = this.decodeBase64(tempDoc.content);
 		tempDoc.fromNow = this.fromNow(tempDoc.created_time);
+		tempDoc.reply_account = tempDoc.replies.length;
+		if(!tempDoc.user.avatar) tempDoc.user.avatar = this.githubAvatar(tempDoc.user._id);
 	});
 	return topicDocs;
 };

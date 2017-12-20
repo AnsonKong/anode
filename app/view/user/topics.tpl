@@ -1,5 +1,13 @@
 {% extends "../common/common.tpl" %}
 {% block title %}用户主页{% endblock %}
+{% block customHead %}
+	<style type="text/css">
+	.replyAvatar {
+			width: 30px;
+			height: 30px;
+		}
+	</style>
+{% endblock %}
 {% block content %}
 	{% import '../common/panel.tpl' as myPanel %}
 	{% set module %}

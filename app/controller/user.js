@@ -1,6 +1,6 @@
 const Controller = require('egg').Controller;
 
-class UsersController extends Controller {
+class UserController extends Controller {
 	// get /signup
 	async new() {
 		await this.ctx.render('user/signup.tpl');
@@ -53,7 +53,7 @@ class UsersController extends Controller {
 	async home() {
 		const user_id = this.ctx.params.id;
 		const user = await this.ctx.model.User.findOne({ _id: user_id });
-		const createdTopics = await this.ctx.model.Topic.find({ user_id }).sort({ created_time: -1 }).limit(5);
+		const createdTopics = await this.ctx.model.Topic.find({ user: user_id }).populate('user').sort({ created_time: -1 }).limit(5);
 		this.ctx.helper.parseBriefTopics(createdTopics);
 		
 		await this.ctx.render('user/home.tpl', { user, createdTopics });
@@ -63,11 +63,11 @@ class UsersController extends Controller {
 	async topics() {
 		const user_id = this.ctx.params.id;
 		const user = await this.ctx.model.User.findOne({ _id: user_id });
-		const topics = await this.ctx.model.Topic.find({ user_id }).sort({ created_time: -1 });
+		const topics = await this.ctx.model.Topic.find({ user: user_id }).populate('user').sort({ created_time: -1 });
 		this.ctx.helper.parseBriefTopics(topics);
 
 		await this.ctx.render('user/topics.tpl', { user, topics });
 	}
 }
 
-module.exports = UsersController;
+module.exports = UserController;
