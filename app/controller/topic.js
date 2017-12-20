@@ -26,7 +26,7 @@ class TopicController extends Controller {
 
 	// get /topic/:id
 	async read() {
-		const topicDoc = await this.ctx.model.Topic.findOne({ _id: this.ctx.params.id });
+		const topicDoc = await this.ctx.model.Topic.findOne({ _id: this.ctx.params.id }).populate('replies.user');
 		if (topicDoc) {
 			const user = await this.ctx.model.User.findOne({ _id: topicDoc.user_id });
 			const locals = {
@@ -36,6 +36,7 @@ class TopicController extends Controller {
 				fromNow: this.ctx.helper.fromNow(topicDoc.created_time),
 				replies: this.ctx.helper.parseReplies(topicDoc.replies),
 			}
+			this.ctx.logger.debug('1' === '1');
 			await this.ctx.render('./topic/read.tpl', locals);
 		} else {
 			this.ctx.redirect('/');
@@ -79,7 +80,7 @@ class TopicController extends Controller {
 		const newReply = {
 			content: this.ctx.helper.encodeBase64(body.content),
 			created_time: moment().unix(),
-			user_id: this.ctx.user._id,
+			user: this.ctx.user._id,
 		};
 		const topicDoc = await this.ctx.model.Topic.findOne({ _id: id });
 		topicDoc.replies.push(newReply);

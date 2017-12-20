@@ -16,16 +16,23 @@ exports.fromNow = (timestamps) => {
 exports.parseBriefTopics = (topicDocs) => {
 	topicDocs.forEach(tempDoc => {
 		tempDoc.title = this.decodeBase64(tempDoc.title);
-		tempDoc.content = this.decodeBase64(tempDoc.content);
-		tempDoc['fromNow'] = this.fromNow(tempDoc.created_time);
+		// tempDoc.content = this.decodeBase64(tempDoc.content);
+		tempDoc.fromNow = this.fromNow(tempDoc.created_time);
 	});
 	return topicDocs;
 };
 
 exports.parseReplies = (replies) => {
-	replies.reverse();
+	// replies.reverse();
 	replies.forEach((tempReply) => {
-		tempReply.content = this.decodeBase64(tempReply.content);
+		tempReply.content = require('marked')(this.decodeBase64(tempReply.content));
+		tempReply.fromNow = this.fromNow(tempReply.created_time);
+		if(!tempReply.user.avatar) tempReply.user.avatar = this.githubAvatar(tempReply.user._id);
 	});
 	return replies;
 };
+
+exports.githubAvatar = (name) => {
+	return '/public/img/zhihu-default-avatar.jpg';
+	// return `https://identicons.github.com/${name}.png`;
+}
