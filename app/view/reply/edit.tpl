@@ -11,19 +11,18 @@
 	</style>
 	{% import '../common/panel.tpl' as panel %}
 	{% set module %}
-		<div class="pl-3 pr-3 pt-3 pb-1">
-			<form id="myForm" method="post" action="/reply/{{ replyId }}/edit">
-				<input type="hidden" name="topicId" value="{{ topicId }}">
-				<div class="form-group">
-					<div class="border">
-						<textarea name="content">{{content}}</textarea>
-					</div>
+	<div class="pl-3 pr-3 pt-3 pb-1">
+		<form id="myForm" method="post" action="/reply/{{ reply.id }}/edit">
+			<div class="form-group">
+				<div class="border">
+					<textarea name="content">{{ helper.decodeBase64(reply.content) }}</textarea>
 				</div>
-				<div class="form-group">
-			    <a class="btn btn-primary" onclick="$('#myForm').submit()" href="#">提交</a>
-			  </div>
-			</form>
-		</div>
+			</div>
+			<div class="form-group">
+		    <a class="btn btn-primary" onclick="$('#myForm').submit()" href="#">提交</a>
+		  </div>
+		</form>
+	</div>
 	{% endset %}
 	{{ panel.init('编辑回复', module) }}
 {% endblock %}

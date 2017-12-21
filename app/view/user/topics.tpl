@@ -1,18 +1,13 @@
 {% extends "../common/common.tpl" %}
 {% block title %}用户主页{% endblock %}
 {% block customHead %}
-	<style type="text/css">
-	.replyAvatar {
-			width: 30px;
-			height: 30px;
-		}
-	</style>
+	{% include '../common/topicManagement.tpl' %}
 {% endblock %}
 {% block content %}
 	{% import '../common/panel.tpl' as myPanel %}
 	{% set module %}
     {% from '../common/topicList.tpl' import init %}
-    {{ init(topics) }}
+    {{ init(topics, helper, ctx) }}
 	{% endset %}
 	{{ myPanel.init(user.email +'创建的话题', module) }}
 {% endblock %}

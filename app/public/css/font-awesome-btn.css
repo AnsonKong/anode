@@ -1,0 +1,7 @@
+.interactive_btn {
+	opacity: .4;
+	cursor: pointer;
+}
+.interactive_btn:hover {
+	opacity: .6;
+}

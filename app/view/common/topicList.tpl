@@ -1,19 +1,22 @@
 <ul class="list-group">
-	{% macro init(list) %}
+	{% macro init(list, helper, ctx) %}
 		{% for item in list %}
 			<li class="list-group-item list-group-item-action border-left-0 border-right-0 border-bottom-1 rounded-0">
-				<div class="row align-items-center">
-					<div class="col-auto">
-						<a href="/user/{{ item.user._id }}"><img class="replyAvatar rounded" src="{{ item.user.avatar }}"></a>
+				{% set topic = item %}
+				<div class="row">
+					<!-- left -->
+					<div class="col-auto d-flex align-items-center">
+						<a href="/user/{{ topic.user.id }}"><img class="replyAvatar rounded" src="{{ helper.parseAvatar(topic.user.avatar) }}"></a>
+						<small class="text-center" style="width: 80px;">{{ topic.reply_account }} / {{ topic.view_account }}</small>
+						<a href="/topic/{{ topic.id }}">{{ helper.decodeBase64(topic.title) }}</a>
 					</div>
-					<div class="col-auto">
-						<small>{{ item.reply_account }} / {{ item.view_account }}</small>
-					</div>
-					<div class="col-auto">
-						<a href="/topic/{{ item._id }}">{{ item.title }}</a>
-					</div>
-					<div class="col-auto ml-auto">
-						<small class="text-muted">{{ item.fromNow }}</small>
+					<!-- right -->
+					<div class="col-auto ml-auto d-flex align-items-center">
+							{% if topic.user.id == ctx.user.id %}
+							<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditTopic('{{ topic.id }}')"></i>
+							<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelTopic('{{ topic.id }}')"></i>
+							{% endif %}
+							<small class="text-muted text-right" style="width: 70px;">{{ helper.fromNow(item.created_time) }}</small>
 					</div>
 				</div>
 			</li>

@@ -9,7 +9,7 @@ module.exports = app => {
 		created_time: { type: Number },
 		last_modified_time: { type: Number },
 		view_account: { type: Number, default: 0 },
-		replies: [{ content: String, created_time: Number, user: { type: Schema.Types.ObjectId, ref: 'User' } }],
+		reply_account: { type: Number, default: 0 },
 	});
 
 	return mongoose.model('Topic', TopicSchema);
