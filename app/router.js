@@ -42,4 +42,5 @@ module.exports = app => {
   // 3.user
   router.get('/user/:id', controller.user.home);
   router.get('/user/:id/topics', controller.user.topics);
+  router.get('/user/:id/replies', controller.user.replies);
 };

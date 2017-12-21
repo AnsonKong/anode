@@ -5,6 +5,7 @@ module.exports = app => {
 		let userDoc;
 		if (user.provider) {
 			ctx.logger.debug('verify by OAuth:' + user.provider);
+			ctx.logger.debug(user);
 			// OAuth
 			const authConditions = {
 				uid: user.id,
@@ -13,13 +14,19 @@ module.exports = app => {
 			// 查找授权文档
 			let authDoc = await ctx.model.Authorization.findOne(authConditions);
 			// 查找用户文档
-			if (authDoc) userDoc = await ctx.model.User.findOne({ _id: authDoc.user_id });
-			else {
+			if (authDoc) {
+				userDoc = await ctx.model.User.findById(authDoc.user);
+			} else {
 				// 创建匿名用户文档
-				const email = user.profile._json.email;
-				userDoc = await ctx.service.user.signup(email);
+				const conditions = {
+					username: user.name,
+					email: user.profile._json.email,
+					avatar: user.photo,
+					github: user.profile.profileUrl,
+				};
+				userDoc = await ctx.service.user.signup(conditions);
 				// 创建授权文档
-				authConditions["user"] = userDoc._id;
+				authConditions["user"] = userDoc.id;
 				authDoc = await ctx.model.Authorization.create(authConditions);
 			}
 		} else {

@@ -53,12 +53,8 @@ class UserController extends Controller {
 	async home() {
 		const userId = this.ctx.params.id;
 		const user = await this.ctx.model.User.findById(userId);
-		// 最近创建的5个Topic
-		const topics = await this.ctx.model.Topic.find({ user: userId }).sort({ created_time: -1 }).limit(5).populate('user');
-		// 最近回复的5个Topic
-		const replyTopicIds = await this.ctx.model.Reply.distinct('topic', { user: userId });
-		const replyTopics = await this.ctx.model.Topic.find({ _id: { $in: replyTopicIds } }).sort({ created_time: -1 }).limit(5).populate('user');
-		this.ctx.logger.debug(replyTopics);
+		const topics = await this.ctx.service.topic.getTopics(userId, 5);
+		const replyTopics = await this.ctx.service.topic.getReplyTopics(userId, 5);
 
 		await this.ctx.render('user/home.tpl', { user, topics, replyTopics });
 	}
@@ -67,9 +63,18 @@ class UserController extends Controller {
 	async topics() {
 		const userId = this.ctx.params.id;
 		const user = await this.ctx.model.User.findById(userId);
-		const topics = await this.ctx.model.Topic.find({ user: userId }).populate('user').sort({ created_time: -1 });
+		const topics = await this.ctx.service.topic.getTopics(userId);
 
 		await this.ctx.render('user/topics.tpl', { user, topics });
+	}
+
+	// get /user/:id/replies
+	async replies() {
+		const userId = this.ctx.params.id;
+		const user = await this.ctx.model.User.findById(userId);
+		const topics = await this.ctx.service.topic.getReplyTopics(userId);
+
+		await this.ctx.render('user/replies.tpl', { user, topics });
 	}
 }
 

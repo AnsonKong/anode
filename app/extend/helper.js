@@ -9,6 +9,10 @@ exports.decodeBase64 = (encoded) => {
 	return encoded ? Buffer.from(encoded, 'base64').toString() : '';
 };
 
+exports.parseMarkdown = (content) => {
+	return require('marked')(content);
+};
+
 exports.fromNow = (timestamps) => {
 	return moment.unix(timestamps).startOf('second').fromNow();
 }

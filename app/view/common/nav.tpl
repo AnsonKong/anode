@@ -15,7 +15,7 @@
 		  欢迎回来，
 		</span>
     	<li class="nav-item">
-            <a class="nav-link" href="/user/{{ ctx.user._id }}">{{ ctx.user.email }}</a>
+            <a class="nav-link" href="/user/{{ ctx.user.id }}">{{ ctx.user.username }}</a>
         </li>
         <li class="nav-item">
     		<a class="nav-link" href="/topic/create">发布话题</a>
