@@ -10,7 +10,7 @@ class UserController extends Controller {
 	async signup() {
 		const email = this.ctx.request.body.username;
 		const password = this.ctx.request.body.password;
-		const newUser = await this.ctx.service.user.signup(email, password);
+		const newUser = await this.ctx.service.user.signup({ email, password });
 		if (newUser) {
 			// 自动登录并跳转到主页
 			this.ctx.login(newUser);
@@ -76,6 +76,27 @@ class UserController extends Controller {
 
 		await this.ctx.render('user/replies.tpl', { user, topics });
 	}
+
+	// get /setting
+	async setting() {
+		await this.ctx.render('user/setting.tpl', { user: this.ctx.user });
+	}
+
+	// post /setting
+	async updateSetting() {
+		const body = this.ctx.request.body;
+		const conditions = {
+			username: body.username,
+			website: body.website,
+			location: body.location,
+			weibo: body.weibo,
+			github: body.github,
+			signature: body.signature,
+		}
+		await this.ctx.model.User.findByIdAndUpdate(this.ctx.user.id, conditions);
+		this.ctx.redirect(`/user/${this.ctx.user.id}`)
+	}
+
 }
 
 module.exports = UserController;

@@ -39,8 +39,10 @@ module.exports = app => {
   router.post('/reply/:id/edit', controller.reply.update);
   router.get('/reply/:id/del', controller.reply.del);
 
-  // 3.user
+  // 4.user
   router.get('/user/:id', controller.user.home);
   router.get('/user/:id/topics', controller.user.topics);
   router.get('/user/:id/replies', controller.user.replies);
+  router.get('/setting', controller.user.setting);
+  router.post('/setting', controller.user.updateSetting);
 };

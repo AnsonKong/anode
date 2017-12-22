@@ -5,7 +5,7 @@ module.exports = app => {
 		let userDoc;
 		if (user.provider) {
 			ctx.logger.debug('verify by OAuth:' + user.provider);
-			ctx.logger.debug(user);
+			// ctx.logger.debug(user);
 			// OAuth
 			const authConditions = {
 				uid: user.id,

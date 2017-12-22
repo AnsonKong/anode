@@ -1,5 +1,5 @@
 <ul class="list-group">
-	{% macro init(list, helper, ctx) %}
+	{% macro init(list, helper, ctx, canEdit = false) %}
 		{% for item in list %}
 			<li class="list-group-item list-group-item-action border-left-0 border-right-0 border-bottom-1 rounded-0">
 				{% set topic = item %}
@@ -12,7 +12,7 @@
 					</div>
 					<!-- right -->
 					<div class="col-auto d-flex align-items-center">
-							{% if topic.user.id == ctx.user.id %}
+							{% if canEdit and topic.user.id == ctx.user.id %}
 							<i class="far fa-edit interactive_btn mx-2" title="编辑" onclick="onEditTopic('{{ topic.id }}')"></i>
 							<i class="far fa-trash-alt interactive_btn ml-2" title="删除" onclick="onDelTopic('{{ topic.id }}')"></i>
 							{% endif %}

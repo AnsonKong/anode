@@ -8,6 +8,10 @@ module.exports = app => {
 		avatar: { type: String },
 		created_time: { type: Number },
 		github: { type: String },
+		website: { type: String },
+		location: { type: String },
+		weibo: { type: String },
+		signature: { type: String },
 	});
 
 	return mongoose.model('User', UserSchema);

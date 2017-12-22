@@ -11,18 +11,16 @@
 		</style>
 	</head>
 	<body style="background-color: #e1e1e1">
-		<div class="d-flex flex-column">
-			{% include './nav.tpl' %}
-
-			{% block content %}{% endblock %}
-
+		<div class="d-flex align-items-start flex-column h-100">
+			<div class="w-100 mb-3">
+				{% include './nav.tpl' %}
+				{% block content %}{% endblock %}
+				{% block customTail %}{% endblock %}
+			</div>
 			{% include './bootstrap.js.tpl' %}
-
-			{% block customTail %}{% endblock %}
-			<div class="mt-auto bg-white" style="height: 100px;">
-	
+			<div class="w-100 bg-white mt-auto" style="height: 100px;">
+				
 			</div>
 		</div>
-		
 	</body>
 </html>

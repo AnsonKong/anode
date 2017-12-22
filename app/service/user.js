@@ -15,6 +15,7 @@ class UserService extends Service {
 			conditions.password = key.toString('hex');
 			conditions.salt = salt;
 		}
+		if (!conditions.username) conditions.username = conditions.email;
 		conditions.created_time = moment().unix();
 		const newUser = await this.ctx.model.User.create(conditions);
 		return newUser;

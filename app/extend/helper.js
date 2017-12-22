@@ -15,16 +15,16 @@ exports.parseMarkdown = (content) => {
 
 exports.fromNow = (timestamps) => {
 	return moment.unix(timestamps).startOf('second').fromNow();
-}
+};
 
 exports.parseAvatar = function(avatar) {
 	return avatar || this.githubAvatar();
-}
+};
 
 exports.githubAvatar = () => {
 	return '/public/img/zhihu-default-avatar.jpg';
 	// return `https://identicons.github.com/${name}.png`;
-}
+};
 
 exports.parseCategory = (num) => {
 	let result = 'unknown';
@@ -40,4 +40,9 @@ exports.parseCategory = (num) => {
 			break;
 	}
 	return result;
-}
+};
+
+exports.parseTextWrap = (content, helper) => {
+	const arr = content.split('\r\n');
+	return arr.join('<br>');
+};
