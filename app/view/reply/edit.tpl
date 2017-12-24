@@ -4,11 +4,6 @@
 	{% include '../common/lepture.editor.tpl' %}
 {% endblock %}
 {% block content %}
-	<style type="text/css">
-		.CodeMirror {
-		  height: 320px;
-		}
-	</style>
 	{% import '../common/panel.tpl' as panel %}
 	{% set module %}
 	<div class="pl-3 pr-3 pt-3 pb-1">

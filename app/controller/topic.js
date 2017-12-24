@@ -5,7 +5,7 @@ moment.locale('zh-cn');
 class TopicController extends Controller {
 	// get /topic/create
 	async new() {
-		await this.ctx.render('/topic/edit.tpl', { title: '发布话题' });
+		await this.ctx.render('/topic/edit.tpl', { title: '发布话题', btnLabel: '发布' });
 	}
 
 	// post /topic/create
@@ -49,7 +49,7 @@ class TopicController extends Controller {
 		const topicId = this.ctx.params.id;
 		const topic = await this.ctx.model.Topic.findById(topicId);
 		if (topic) {
-			await this.ctx.render('/topic/edit.tpl', { topic, title: '编辑话题' });
+			await this.ctx.render('/topic/edit.tpl', { topic, title: '编辑话题', btnLabel: '提交'});
 		} else {
 			this.ctx.redirect('/');
 		}

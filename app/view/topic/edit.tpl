@@ -2,13 +2,25 @@
 {% block title %}{{ title }}{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture.editor.tpl' %}
+	<style type="text/css">
+.CodeMirror {
+  height: 320px;
+}
+.CodeMirror:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+}
+.CodeMirror:-moz-full-screen {
+  width: 100%;
+  height: 100%;
+}
+.CodeMirror:full-screen {
+  width: 100%;
+  height: 100%;
+}
+	</style>
 {% endblock %}
 {% block content %}
-	<style type="text/css">
-		.CodeMirror {
-		  height: 320px;
-		}
-	</style>
 	{% import '../common/panel.tpl' as panel %}
 	{% set module %}
 	<div class="pl-3 pr-3 pt-3 pb-1">
@@ -32,7 +44,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-		    <a class="btn btn-primary" onclick="$('#myForm').submit()" href="#">发布</a>
+		    <a class="btn btn-primary" onclick="$('#myForm').submit()" href="#">{{ btnLabel }}</a>
 		  </div>
 		</form>
 	</div>

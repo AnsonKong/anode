@@ -11,6 +11,18 @@
 		.CodeMirror {
 		  height: 160px;
 		}
+		.CodeMirror:-webkit-full-screen {
+		  width: 100%;
+		  height: 100%;
+		}
+		.CodeMirror:-moz-full-screen {
+		  width: 100%;
+		  height: 100%;
+		}
+		.CodeMirror:full-screen {
+		  width: 100%;
+		  height: 100%;
+		}
 	</style>
 {% endblock %}
 {% block content %}
@@ -62,14 +74,15 @@
 							<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditReply('{{ item.id }}')"></i>
 							<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelReply('{{ item.id }}')"></i>
 							{% endif %}
-							<i class="fas fa-reply interactive_btn mx-1" title="回复"></i>
+							<i class="fas fa-reply interactive_btn mx-1" title="回复" onclick="onUserReply('{{ item.id }}', '{{ item.user.username }}')"></i>
 						</div>
 					</div>
 					<div class="pl-2">
 						{{ helper.parseMarkdown(helper.decodeBase64(item.content)) | safe }}
 					</div>
+					<div id="userReplyContainer_{{ item.id }}" class="pl-2">
+					</div>
 				</div>
-
 			</div>
 		</li>
 		{% endfor %}
@@ -86,7 +99,7 @@
 	<div class="border-0 p-2">
 		<form id="myForm" method="post" action="/topic/{{ ctx.params.id }}/reply">
 			<div class="form-group">
-				<textarea name="content"></textarea>
+				<textarea id="myReplyTextArea" name="content"></textarea>
 			</div>
 			<div class="form-group">
 		    <a class="btn btn-primary" onclick="$('#myForm').submit()" href="#">回复</a>
@@ -99,7 +112,8 @@
 {% block customTail %}
 	<script type="text/javascript">
 		var editor = new Editor({
-			status: false
+			element: $('#myReplyTextArea')[0],
+			status: false,
 		});
 		editor.render();
 	</script>
