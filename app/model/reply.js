@@ -6,6 +6,7 @@ module.exports = app => {
 		created_time: Number, 
 		topic: { type: Schema.Types.ObjectId, ref: 'Topic' },
 		user: { type: Schema.Types.ObjectId, ref: 'User' },
+		likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 	});
 
 	return mongoose.model('Reply', ReplySchema);

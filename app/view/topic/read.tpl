@@ -46,7 +46,7 @@
 				</div>
 				<!-- 第二列 -->
 				<div class="col pl-0 d-flex flex-column">
-					<div class="d-flex justify-content-between">
+					<div class="d-flex">
 						<span class="mr-auto">
 							<small><b><a class="text-dark dumbText" href="/user/{{ item.user.id }}">{{ item.user.username }}</a></b></small>
 							<small><a href="#{{ item.id }}">{{ loop.index }}楼•{{ helper.fromNow(item.created_time) }}</a></small>
@@ -55,12 +55,15 @@
 							{% endif %}
 						</span>
 						<!-- 最右侧工具 -->
-						<i class="far fa-thumbs-up interactive_btn mx-1" title="喜欢"></i>
-						{% if item.user.id == ctx.user.id %}
-						<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditReply('{{ ctx.params.id }}','{{ item._id }}')"></i>
-						<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelReply('{{ ctx.params.id }}', '{{ item._id }}')"></i>
-						{% endif %}
-						<i class="fas fa-reply interactive_btn mx-1" title="回复"></i>
+						<div class="d-flex align-items-center">
+							<i class="{{ 'far' if item.likes.indexOf(ctx.user.id) == -1 else 'fas' }} fa-thumbs-up interactive_btn mx-1" title="喜欢" onclick="onLikeReply('{{ item.id }}')"></i>
+							<span id="like_text_{{ item.id }}" class="{{ 'd-none' if item.likes.length == 0 else '' }}">{{ item.likes.length }}</span>
+							{% if item.user.id == ctx.user.id %}
+							<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditReply('{{ item.id }}')"></i>
+							<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelReply('{{ item.id }}')"></i>
+							{% endif %}
+							<i class="fas fa-reply interactive_btn mx-1" title="回复"></i>
+						</div>
 					</div>
 					<div class="pl-2">
 						{{ helper.parseMarkdown(helper.decodeBase64(item.content)) | safe }}

@@ -9,14 +9,31 @@ function onDelTopic(id) {
 	}
 }
 
-function onEditReply(topicId, replyId) {
-	window.location.href = `/reply/${replyId}/edit?topicId=${topicId}`;
+function onLikeReply(id) {
+	const i = event.target;
+	$(i).toggleClass('far fas');
+
+	const likeText = $(`#like_text_${id}`);
+	let likesCount = parseInt(likeText.text());
+	let newCount = likesCount + ($(i).hasClass('fas') ? 1 : -1);
+	if (newCount) likeText.removeClass('d-none');
+	likeText.text(newCount);
+
+	$.post(`/reply/${id}/like?_csrf=${getCsrf()}`);
 }
 
-function onDelReply(topicId, replyId) {
+function getCsrf() {
+  var keyValue = document.cookie.match('(^|;) ?csrfToken=([^;]*)(;|$)');
+  return keyValue ? keyValue[2] : null;
+}
+
+function onEditReply(id) {
+	window.location.href = `/reply/${id}/edit`;
+}
+
+function onDelReply(id) {
 	const result = confirm('确定要删除此回复吗？');
 	if (result) {
-		const r = encodeURIComponent(window.location.href);
-		window.location.href = `/reply/${replyId}/del?topicId=${topicId}&redirect_uri=` + r;
+		window.location.href = `/reply/${id}/del`;
 	}
 }

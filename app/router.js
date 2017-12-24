@@ -38,6 +38,7 @@ module.exports = app => {
   router.get('/reply/:id/edit', controller.reply.edit);
   router.post('/reply/:id/edit', controller.reply.update);
   router.get('/reply/:id/del', controller.reply.del);
+  router.post('/reply/:id/like', controller.reply.like);
 
   // 4.user
   router.get('/user/:id', controller.user.home);
@@ -45,4 +46,7 @@ module.exports = app => {
   router.get('/user/:id/replies', controller.user.replies);
   router.get('/setting', controller.user.setting);
   router.post('/setting', controller.user.updateSetting);
+
+  // 5.upload
+  router.post('/upload', controller.upload.upload);
 };

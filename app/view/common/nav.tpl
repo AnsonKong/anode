@@ -15,8 +15,11 @@
         	<span class="navbar-text">
     		  欢迎回来，
     		</span>
-        	<li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="/user/{{ ctx.user.id }}">{{ ctx.user.username }}</a>
+            </li>
+        	<li class="nav-item">
+                <a class="nav-link" href="/user/{{ ctx.user.id }}"><img class="nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
             </li>
             <li class="nav-item">
         		<a class="nav-link" href="/topic/create">发布话题</a>

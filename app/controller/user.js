@@ -1,4 +1,5 @@
 const Controller = require('egg').Controller;
+const pageAmount = 10;
 
 class UserController extends Controller {
 	// get /signup
@@ -59,22 +60,38 @@ class UserController extends Controller {
 		await this.ctx.render('user/home.tpl', { user, topics, replyTopics });
 	}
 
-	// get /user/:id/topics
+	// get /user/:id/topics?page=1
 	async topics() {
 		const userId = this.ctx.params.id;
 		const user = await this.ctx.model.User.findById(userId);
-		const topics = await this.ctx.service.topic.getTopics(userId);
 
-		await this.ctx.render('user/topics.tpl', { user, topics });
+		const currentPage = parseInt(this.ctx.query.page) || 1;
+		const totalAmount = await this.ctx.model.Topic.count({ user: userId });
+		const totalPage = Math.ceil(totalAmount / pageAmount);
+		const topics = await this.ctx.service.topic.getTopics(userId, pageAmount, pageAmount * (currentPage - 1));
+		const pagination = {
+			currentPage,
+			totalPage,
+		};
+		const title = user.username + '创建的话题';
+		await this.ctx.render('user/topics.tpl', { user, topics, pagination, title, panelTitle: title });
 	}
 
-	// get /user/:id/replies
+	// get /user/:id/replies?page=1
 	async replies() {
 		const userId = this.ctx.params.id;
 		const user = await this.ctx.model.User.findById(userId);
-		const topics = await this.ctx.service.topic.getReplyTopics(userId);
 
-		await this.ctx.render('user/replies.tpl', { user, topics });
+		const currentPage = parseInt(this.ctx.query.page) || 1;
+		const totalAmount = await this.ctx.model.Topic.count({ user: userId });
+		const totalPage = Math.ceil(totalAmount / pageAmount);
+		const topics = await this.ctx.service.topic.getReplyTopics(userId, pageAmount, pageAmount * (currentPage - 1));
+		const pagination = {
+			currentPage,
+			totalPage,
+		};
+		const title = user.username + '参与的话题';
+		await this.ctx.render('user/topics.tpl', { user, topics, pagination, title, panelTitle: title });
 	}
 
 	// get /setting
@@ -85,6 +102,7 @@ class UserController extends Controller {
 	// post /setting
 	async updateSetting() {
 		const body = this.ctx.request.body;
+
 		const conditions = {
 			username: body.username,
 			website: body.website,

@@ -30,5 +30,14 @@ module.exports = appInfo => {
     secret: '07609073261b5ed948d3927a7fe52e02de74308d'
   };
 
+  config.multipart = {
+    fileSize: '1mb',
+    whitelist: [
+      '.png',
+      '.jpg',
+      '.jpeg',
+    ],
+  };
+
   return config;
 };

@@ -8,6 +8,10 @@
 			html, body {
 				height: 100%;
 			}
+			.nav-avatar {
+				width: 20px;
+				height: 20px;
+			}
 		</style>
 	</head>
 	<body style="background-color: #e1e1e1">

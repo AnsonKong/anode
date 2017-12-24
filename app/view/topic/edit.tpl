@@ -1,5 +1,5 @@
 {% extends "../common/common.tpl" %}
-{% block title %}编辑话题{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture.editor.tpl' %}
 {% endblock %}
@@ -37,7 +37,7 @@
 		</form>
 	</div>
 	{% endset %}
-	{{ panel.init('编辑话题', module) }}
+	{{ panel.init(title, module) }}
 {% endblock %}
 {% block customTail %}
 	<script type="text/javascript">

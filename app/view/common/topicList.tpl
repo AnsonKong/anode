@@ -19,7 +19,7 @@
 							{% if item.last_reply %}
 							<a class="ml-3" href="/topic/{{ item.id }}#{{ item.last_reply.id }}"><img class="replyAvatar rounded" src="{{ helper.parseAvatar(item.last_reply.user.avatar) }}"></a>
 							{% endif %}
-							<small class="text-muted text-right ml-3">{{ helper.fromNow((item.last_reply if item.last_reply else item).created_time) }}</small>
+							<small class="text-muted text-right ml-3" style="width: 60px;">{{ helper.fromNow((item.last_reply if item.last_reply else item).created_time) }}</small>
 					</div>
 				</div>
 			</li>

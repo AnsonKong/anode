@@ -30,6 +30,27 @@ class ReplyController extends Controller {
 		this.ctx.redirect(`/topic/${reply.topic}`);
 	}
 
+	// post /reply/:id/like
+	async like() {
+		const replyId = this.ctx.params.id;
+		const userId = this.ctx.user.id;
+		// 更新Reply
+		const reply = await this.ctx.model.Reply.findById(replyId);
+		let action = 'fail';
+		if (reply) {
+			const index = reply.likes.indexOf(userId);
+			if (index != -1) {
+				reply.likes.splice(index, 1);
+				action = 'down';
+			} else {
+				reply.likes.push(userId);
+				action = 'up';
+			}
+			await reply.save();	
+		}
+		this.ctx.body = { "success": true, "action": action };
+	}
+
 }
 
 module.exports = ReplyController;
