@@ -9,9 +9,9 @@ class UserController extends Controller {
 
 	// post /signup
 	async signup() {
-		const email = this.ctx.request.body.username;
+		const username = this.ctx.request.body.username;
 		const password = this.ctx.request.body.password;
-		const newUser = await this.ctx.service.user.signup({ email, password });
+		const newUser = await this.ctx.service.user.signup({ username, password });
 		if (newUser) {
 			// 自动登录并跳转到主页
 			this.ctx.login(newUser);
@@ -107,9 +107,9 @@ class UserController extends Controller {
 	// post /setting
 	async updateSetting() {
 		const body = this.ctx.request.body;
-
+		const newUsername = body.username;
 		const conditions = {
-			username: body.username,
+			username: newUsername,
 			website: body.website,
 			location: body.location,
 			weibo: body.weibo,
@@ -117,9 +117,36 @@ class UserController extends Controller {
 			signature: body.signature,
 		}
 		await this.ctx.model.User.findByIdAndUpdate(this.ctx.user.id, conditions);
-		this.ctx.redirect(`/user/${this.ctx.user.id}`)
+		this.ctx.redirect(`/user/${newUsername}`);
 	}
 
+	// get /setting
+	async messages() {
+		const result = await this.ctx.model.User.findById(this.ctx.user.id).populate('messages');
+		const allMessages = result.messages;
+		const newMessages = [];
+		const oldMessages = [];
+		let msgDoc;
+		let replyDoc;
+		let topicDoc;
+		for(let i = 0;i < allMessages.length;i++) {
+			msgDoc = allMessages[i];
+			await this.ctx.model.Message.populate(msgDoc, 'sender');
+			switch (msgDoc.type) {
+				case '0':
+					topicDoc = await this.ctx.model.Topic.findById(msgDoc.data);
+					msgDoc.topic = topicDoc;
+					break;
+				case '1':
+					replyDoc = await this.ctx.model.Reply.findById(msgDoc.data).populate('topic');
+					msgDoc.reply = replyDoc;
+					break;
+			}
+			if (msgDoc.read) oldMessages.push(msgDoc);
+			else newMessages.push(msgDoc);
+		}
+		await this.ctx.render('user/messages.tpl', { oldMessages, newMessages });
+	}
 }
 
 module.exports = UserController;

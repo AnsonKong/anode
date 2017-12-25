@@ -112,7 +112,7 @@ class TopicController extends Controller {
 					data: topicId,
 				}
 				newMessageDoc = await this.ctx.model.Message.create(newMessage);
-				topicUser.messages.push(newMessageDoc.id);
+				topicUser.messages.unshift(newMessageDoc.id);
 				await topicUser.save();
 			}
 			// END
@@ -134,7 +134,7 @@ class TopicController extends Controller {
 						data: newReplyDoc.id,
 					}
 					newMessageDoc = await this.ctx.model.Message.create(newMessage);
-					parentReplyDoc.user.messages.push(newMessageDoc.id);
+					parentReplyDoc.user.messages.unshift(newMessageDoc.id);
 					await parentReplyDoc.user.save();
 				}
 			}

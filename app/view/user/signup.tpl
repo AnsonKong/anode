@@ -4,8 +4,8 @@
 <div class="container">
 	<form id="myForm" class="mt-2" method="post" action="/signup">
 		<div class="form-group">
-			<label>电子邮箱</label>
-			<input class="form-control" type="email" name="username" placeholder="Email">
+			<label>用户名</label>
+			<input class="form-control" type="text" name="username" placeholder="Username">
 		</div>
 		<div class="form-group">
 			<label>密码</label>

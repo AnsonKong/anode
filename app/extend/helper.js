@@ -49,3 +49,12 @@ exports.parseTextWrap = (content, helper) => {
 	const arr = content.split('\r\n');
 	return arr.join('<br>');
 };
+
+exports.getNewMessagesLength = (messages) => {
+	let count = 0;
+	for(let i = 0;i < messages.length;i++) {
+		let item = messages[i];
+		if (!item.read) count++;
+	}
+	return count;
+};

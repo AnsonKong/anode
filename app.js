@@ -42,7 +42,7 @@ module.exports = app => {
 	});
 
 	app.passport.deserializeUser(async (ctx, user) => {
-		const userDoc = ctx.model.User.findOne({ _id: user });
+		const userDoc = await ctx.model.User.findOne({ _id: user }).populate('messages');
 		return userDoc;
 	});
 };

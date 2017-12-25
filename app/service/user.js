@@ -15,15 +15,14 @@ class UserService extends Service {
 			conditions.password = key.toString('hex');
 			conditions.salt = salt;
 		}
-		if (!conditions.username) conditions.username = conditions.email;
 		conditions.created_time = moment().unix();
 		const newUser = await this.ctx.model.User.create(conditions);
 		return newUser;
 	}
 
-	async signin(email, password) {
+	async signin(username, password) {
 		const ctx = this.ctx;
-		const user = await ctx.model.User.findOne({ email });
+		const user = await ctx.model.User.findOne({ username });
 		if (user) {
 			const attemptKey = crypto.pbkdf2Sync(password, user.salt, 100000, 512, 'sha512');
 			const attemptPassword = attemptKey.toString('hex');

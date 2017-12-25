@@ -21,9 +21,9 @@
         	<li class="nav-item">
                 <a class="nav-link" href="/user/{{ ctx.user.username }}"><img class="nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
             </li>
-            {% if ctx.user.messages.length %}
+            {% if helper.getNewMessagesLength(ctx.user.messages) %}
             <li class="nav-item">
-                <a class="nav-link" href="/messages">未读消息 <span class="badge badge-danger">{{ ctx.user.messages.length }}</span></a>
+                <a class="nav-link" href="/messages">未读消息 <span class="badge badge-danger">{{ helper.getNewMessagesLength(ctx.user.messages) }}</span></a>
             </li>
             {% endif %}
             <li class="nav-item">

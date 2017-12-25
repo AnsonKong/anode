@@ -45,6 +45,7 @@ module.exports = app => {
   router.get('/user/:username/topics', controller.user.topics);
   router.get('/user/:username/replies', controller.user.replies);
   router.get('/setting', controller.user.setting);
+  router.get('/messages', controller.user.messages);
   router.post('/setting', controller.user.updateSetting);
 
   // 5.upload
