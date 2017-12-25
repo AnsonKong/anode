@@ -6,7 +6,7 @@
 				<div class="row">
 					<!-- left -->
 					<div class="col-auto mr-auto d-flex align-items-center">
-						<a href="/user/{{ topic.user.id }}"><img class="replyAvatar rounded" src="{{ helper.parseAvatar(topic.user.avatar) }}"></a>
+						<a href="/user/{{ topic.user.username }}"><img class="replyAvatar rounded" src="{{ helper.parseAvatar(topic.user.avatar) }}"></a>
 						<small class="text-center" style="width: 80px;">{{ topic.reply_account }} / {{ topic.view_account }}</small>
 						<a href="/topic/{{ topic.id }}">{{ helper.decodeBase64(topic.title) }}</a>
 					</div>

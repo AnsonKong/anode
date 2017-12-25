@@ -27,7 +27,7 @@
 			    	{% endif %}
 			    </li>
 			    {% endfor %}
-			    <li class="page-item {{ 'disabled' if pagination.currentPage == pagination.totalPage else '' }}">
+			    <li class="page-item {{ 'disabled' if (not pagination.totalPage or pagination.currentPage == pagination.totalPage) else '' }}">
 			      <a class="page-link" href="{{ ctx.path }}?page={{ pagination.totalPage }}" aria-label="Next">
 			        <span aria-hidden="true">&raquo;</span>
 			        <span class="sr-only">Next</span>

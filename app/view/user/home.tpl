@@ -26,7 +26,7 @@
 					<i class="fas fa-home interactive_btn mx-auto"></i>
 				</div>
 				<a class="text-muted dumbText" target="_blank" href="{{ user.website }}">
-					<small>{{ user.website }}</small>
+					<small>{{ helper.escape(user.website) }}</small>
 				</a>
 			</div>
 			{% endif %}
@@ -35,7 +35,7 @@
 				<div class="d-inline-flex icon-container">
 					<i class="fas fa-map-marker-alt interactive_btn mx-auto"></i>
 				</div>
-				<small class="text-muted">{{ user.location }}</small>
+				<small class="text-muted">{{ helper.escape(user.location) }}</small>
 			</div>
 			{% endif %}
 			{% if user.github %}
@@ -44,7 +44,7 @@
 					<i class="fab fa-github interactive_btn mx-auto"></i>
 				</div>
 				<a class="text-muted dumbText" target="_blank" href="{{ user.github }}">
-					<small>@{{ user.username }}</small>
+					<small>@{{ helper.escape(user.username) }}</small>
 				</a>
 			</div>
 			{% endif %}
@@ -54,7 +54,7 @@
 					<i class="fab fa-weibo interactive_btn mx-auto"></i>
 				</div>
 				<a class="text-muted dumbText" target="_blank" href="{{ user.weibo }}">
-					<small>{{ user.weibo }}</small>
+					<small>{{ helper.escape(user.weibo) }}</small>
 				</a>
 			</div>
 			{% endif %}
@@ -72,7 +72,7 @@
 		</div>
 	{% endset %}
 	{{ briefPanel.init('主页', briefModule) }}
-	{% set canEdit = user.id == ctx.user.id %}
+	{% set canEdit = (user.id == ctx.user.id) %}
 	<!-- 最近创建的话题 -->
 	{% import '../common/panel.tpl' as createdPanel %}
 	{% set createdModule %}
@@ -81,7 +81,7 @@
     <div class="p-2">
 			<small>
 	    	{% if topics.length %}
-					<a class="text-muted" href="/user/{{ user.id }}/topics">查看更多&gt;&gt;</a>
+					<a class="text-muted" href="/user/{{ user.username }}/topics">查看更多&gt;&gt;</a>
 				{% else %}
 					无话题
 				{% endif %}
@@ -98,7 +98,7 @@
     <div class="p-2">
 			<small>
 	    	{% if replyTopics.length %}
-					<a class="text-muted" href="/user/{{ user.id }}/replies">查看更多&gt;&gt;</a>
+					<a class="text-muted" href="/user/{{ user.username }}/replies">查看更多&gt;&gt;</a>
 				{% else %}
 					无话题
 				{% endif %}

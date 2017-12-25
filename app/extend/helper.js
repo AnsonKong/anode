@@ -10,7 +10,10 @@ exports.decodeBase64 = (encoded) => {
 };
 
 exports.parseMarkdown = (content) => {
-	return require('marked')(content);
+	let markdown = require('marked')(content);
+	const reg = new RegExp(/@(.+?)\b/, 'g');
+	const result = markdown.replace(reg, '<a href="/user/$1" target="_blank">@$1</a> ');
+	return result;
 };
 
 exports.fromNow = (timestamps) => {

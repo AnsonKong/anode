@@ -1,6 +1,7 @@
 module.exports = app => {
 	const mongoose = app.mongoose;
-	const UserSchema = new mongoose.Schema({
+	const Schema = mongoose.Schema;
+	const UserSchema = new Schema({
 		username: { type: String, default: 'unkown' },
 		email: { type: String },
 		password: { type: String },
@@ -12,6 +13,7 @@ module.exports = app => {
 		location: { type: String },
 		weibo: { type: String },
 		signature: { type: String },
+		messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }],
 	});
 
 	return mongoose.model('User', UserSchema);

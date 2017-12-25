@@ -38,31 +38,52 @@ function onDelReply(id) {
 	}
 }
 let replyUserWrapper;
+let replyUserFormElement;
+let replyUserParentElement;
 let replyUserEditor;
-function onUserReply(replyId, username) {
+function onUserReply(parentReplyId, topicId, username) {
 	if (!replyUserEditor) {
-		replyUserWrapper = $('<div/>');
+		replyUserWrapper = $('<form/>');
+		replyUserFormElement = replyUserWrapper[0];
+		replyUserFormElement.method = 'post';
 		// 1.添加textarea
-		const textareaWrapper = $('<div/>');
-		textareaWrapper.css('height', '160px');
 		const newTextarea = $('<textarea>');
-		textareaWrapper.append(newTextarea);
-		replyUserWrapper.append(textareaWrapper);
+		replyUserWrapper.append(newTextarea);
+		replyUserTextareaElement = newTextarea[0];
+		replyUserTextareaElement.name = 'content';
 		// 2.添加按钮
 		const replyUserBtn = $('<button/>');
-		// TO-DO: add btn listener
+		replyUserWrapper.append(replyUserBtn);
 		replyUserBtn.addClass('btn btn-primary');
 		replyUserBtn.css('cursor', 'pointer');
 		replyUserBtn.text('回复');
-		replyUserWrapper.append(replyUserBtn);
-		// 3.初始化editor
+		// 3.添加隐藏parent元素
+		const replyUserParent = $('<input/>');
+		replyUserWrapper.append(replyUserParent);
+		replyUserParentElement = replyUserParent[0];
+		replyUserParentElement.type = 'hidden';
+		replyUserParentElement.name = 'parent';
+		// 4.添加_csrf
+		const replyUserCSRF = $('<input/>');
+		replyUserWrapper.append(replyUserCSRF);
+		replyUserCSRFElement = replyUserCSRF[0];
+		replyUserCSRFElement.type = 'hidden';
+		replyUserCSRFElement.name = '_csrf';
+		replyUserCSRFElement.value = getCsrf();
+		// 5.初始化editor
 		replyUserEditor = new Editor({
-			element: newTextarea[0],
+			element: replyUserTextareaElement,
 			status: false,
 		});
 		editor.render();
 	}
-	const container = $('#userReplyContainer_' + replyId);
+
+	// 更新form.action
+	replyUserFormElement.action = `/topic/${topicId}/reply`;
+	// 更新parent
+	replyUserParentElement.value = parentReplyId;
+
+	const container = $('#userReplyContainer_' + parentReplyId);
 	container.append(replyUserWrapper);
 	// 填充要回复的用户
 	replyUserEditor.codemirror.doc.setValue(`@${username} `);

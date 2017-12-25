@@ -85,7 +85,12 @@ class TopicController extends Controller {
 	// post /topic/:id/reply
 	async reply() {
 		const topicId = this.ctx.params.id;
-		const topicDoc = await this.ctx.model.Topic.findById(topicId);
+		const topicDoc = await this.ctx.model.Topic.findById(topicId).populate('user');
+		let newReplyDoc;
+		let sender;
+		let receiver;
+		let newMessage;
+		let newMessageDoc;
 		if (topicDoc) {
 			const body = this.ctx.request.body;
 			const newReply = {
@@ -94,12 +99,49 @@ class TopicController extends Controller {
 				topic: topicId,
 				user: this.ctx.user.id,
 			};
+			// 添加“主题被回复”提示消息START
+			sender = this.ctx.user.id;
+			const topicUser = await this.ctx.model.User.findById(topicDoc.user.id);
+			receiver = topicUser.id;
+			if (sender != receiver) {
+				newMessage = {
+					created_time: moment().unix(),
+					sender,
+					receiver,
+					type: '0',
+					data: topicId,
+				}
+				newMessageDoc = await this.ctx.model.Message.create(newMessage);
+				topicUser.messages.push(newMessageDoc.id);
+				await topicUser.save();
+			}
+			// END
+			if (body.parent) {
+				newReply.parent = body.parent;
+			}
 			// 创建Reply文档
-			await this.ctx.model.Reply.create(newReply);
+			newReplyDoc = await this.ctx.model.Reply.create(newReply);
+			if (body.parent) {
+				// 添加“回复被提到”提示消息 START
+				const parentReplyDoc = await this.ctx.model.Reply.findById(body.parent).populate('user');
+				receiver = parentReplyDoc.user.id;
+				if (sender != receiver) {
+					newMessage = {
+						created_time: moment().unix(),
+						sender,
+						receiver,
+						type: '1',
+						data: newReplyDoc.id,
+					}
+					newMessageDoc = await this.ctx.model.Message.create(newMessage);
+					parentReplyDoc.user.messages.push(newMessageDoc.id);
+					await parentReplyDoc.user.save();
+				}
+			}
 			// 添加Topic回复数
 			await topicDoc.update({ reply_account: topicDoc.reply_account + 1 });
 		}
-		this.ctx.redirect('/topic/' + topicId);
+		this.ctx.redirect(`/topic/${topicId}#${newReplyDoc.id}`);
 	}
 
 }

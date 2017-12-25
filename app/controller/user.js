@@ -50,20 +50,24 @@ class UserController extends Controller {
 		this.ctx.redirect('/');
 	}
 
-	// get /user/:id
+	// get /user/:username
 	async home() {
-		const userId = this.ctx.params.id;
-		const user = await this.ctx.model.User.findById(userId);
+		const username = this.ctx.params.username;
+		const user = await this.ctx.model.User.findOne({ username });
+		const userId = user.id;
+
+		// const user = await this.ctx.model.User.findById(userId);
 		const topics = await this.ctx.service.topic.getTopics(userId, 5);
 		const replyTopics = await this.ctx.service.topic.getReplyTopics(userId, 5);
 
 		await this.ctx.render('user/home.tpl', { user, topics, replyTopics });
 	}
 
-	// get /user/:id/topics?page=1
+	// get /user/:username/topics?page=1
 	async topics() {
-		const userId = this.ctx.params.id;
-		const user = await this.ctx.model.User.findById(userId);
+		const username = this.ctx.params.username;
+		const user = await this.ctx.model.User.findOne({ username });
+		const userId = user.id;
 
 		const currentPage = parseInt(this.ctx.query.page) || 1;
 		const totalAmount = await this.ctx.model.Topic.count({ user: userId });
@@ -77,13 +81,14 @@ class UserController extends Controller {
 		await this.ctx.render('user/topics.tpl', { user, topics, pagination, title, panelTitle: title });
 	}
 
-	// get /user/:id/replies?page=1
+	// get /user/:username/replies?page=1
 	async replies() {
-		const userId = this.ctx.params.id;
-		const user = await this.ctx.model.User.findById(userId);
+		const username = this.ctx.params.username;
+		const user = await this.ctx.model.User.findOne({ username });
+		const userId = user.id;
 
 		const currentPage = parseInt(this.ctx.query.page) || 1;
-		const totalAmount = await this.ctx.model.Topic.count({ user: userId });
+		const totalAmount = await this.ctx.service.topic.getReplyTopicsCount(userId);
 		const totalPage = Math.ceil(totalAmount / pageAmount);
 		const topics = await this.ctx.service.topic.getReplyTopics(userId, pageAmount, pageAmount * (currentPage - 1));
 		const pagination = {

@@ -41,9 +41,9 @@ module.exports = app => {
   router.post('/reply/:id/like', controller.reply.like);
 
   // 4.user
-  router.get('/user/:id', controller.user.home);
-  router.get('/user/:id/topics', controller.user.topics);
-  router.get('/user/:id/replies', controller.user.replies);
+  router.get('/user/:username', controller.user.home);
+  router.get('/user/:username/topics', controller.user.topics);
+  router.get('/user/:username/replies', controller.user.replies);
   router.get('/setting', controller.user.setting);
   router.post('/setting', controller.user.updateSetting);
 

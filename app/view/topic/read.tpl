@@ -31,7 +31,7 @@
 		<div id="topicHead" class="p-2 pt-4">
 			<h4><b>{{ helper.decodeBase64(topic.title) }}</b></h4>
 	  	<small class="text-muted">发布于 {{ helper.fromNow(topic.created_time) }}</small>
-	  	<small class="text-muted">作者 <a class="text-muted" href="/user/{{ topic.user.id }}">{{ topic.user.username }}</a></small>
+	  	<small class="text-muted">作者 <a class="text-muted" href="/user/{{ topic.user.username }}">{{ topic.user.username }}</a></small>
 	  	<small class="text-muted">{{ topic.view_account }} 次浏览</small>
 	  	<small class="text-muted">来自 {{ helper.parseCategory(topic.category) }}</small>
 			{% if topic.user.id == ctx.user.id %}
@@ -52,7 +52,7 @@
 			<div class="row">
 				<!-- 头像 -->
 				<div class="col-auto">
-					<a href="/user/{{ item.user.id }}">
+					<a href="/user/{{ item.user.username }}">
 						<img class="replyAvatar rounded" src="{{ helper.parseAvatar(item.user.avatar) }}">
 					</a>
 				</div>
@@ -60,7 +60,7 @@
 				<div class="col pl-0 d-flex flex-column">
 					<div class="d-flex">
 						<span class="mr-auto">
-							<small><b><a class="text-dark dumbText" href="/user/{{ item.user.id }}">{{ item.user.username }}</a></b></small>
+							<small><b><a class="text-dark dumbText" href="/user/{{ item.user.username }}">{{ item.user.username }}</a></b></small>
 							<small><a href="#{{ item.id }}">{{ loop.index }}楼•{{ helper.fromNow(item.created_time) }}</a></small>
 							{% if item.user.id === topic.user.id %}
 								<small class="d-inline p-1 text-white bg-success">作者</small>
@@ -74,7 +74,7 @@
 							<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditReply('{{ item.id }}')"></i>
 							<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelReply('{{ item.id }}')"></i>
 							{% endif %}
-							<i class="fas fa-reply interactive_btn mx-1" title="回复" onclick="onUserReply('{{ item.id }}', '{{ item.user.username }}')"></i>
+							<i class="fas fa-reply interactive_btn mx-1" title="回复" onclick="onUserReply('{{ item.id }}', '{{ topic.id }}', '{{ item.user.username }}')"></i>
 						</div>
 					</div>
 					<div class="pl-2">

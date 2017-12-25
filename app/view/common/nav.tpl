@@ -16,11 +16,16 @@
     		  欢迎回来，
     		</span>
             <li class="nav-item">
-                <a class="nav-link" href="/user/{{ ctx.user.id }}">{{ ctx.user.username }}</a>
+                <a class="nav-link" href="/user/{{ ctx.user.username }}">{{ ctx.user.username }}</a>
             </li>
         	<li class="nav-item">
-                <a class="nav-link" href="/user/{{ ctx.user.id }}"><img class="nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
+                <a class="nav-link" href="/user/{{ ctx.user.username }}"><img class="nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
             </li>
+            {% if ctx.user.messages.length %}
+            <li class="nav-item">
+                <a class="nav-link" href="/messages">未读消息 <span class="badge badge-danger">{{ ctx.user.messages.length }}</span></a>
+            </li>
+            {% endif %}
             <li class="nav-item">
         		<a class="nav-link" href="/topic/create">发布话题</a>
         	</li>

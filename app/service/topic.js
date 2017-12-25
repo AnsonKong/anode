@@ -22,6 +22,11 @@ class TopicService extends Service {
 		return await this._fillLastReply(replyTopics);
 	}
 
+	async getReplyTopicsCount(userId) {
+		const replyTopicIds = await this.ctx.model.Reply.distinct('topic', { user: userId });
+		return replyTopicIds.length;
+	}
+
 	async _fillLastReply(topics) {
 		for(let i = 0;i < topics.length;i++) {
 			let tempReplyTopic = topics[i];
