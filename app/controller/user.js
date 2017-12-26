@@ -131,17 +131,9 @@ class UserController extends Controller {
 		let topicDoc;
 		for(let i = 0;i < allMessages.length;i++) {
 			msgDoc = allMessages[i];
+			// 实例化sender
 			await this.ctx.model.Message.populate(msgDoc, 'sender');
-			switch (msgDoc.type) {
-				case '0':
-					topicDoc = await this.ctx.model.Topic.findById(msgDoc.data);
-					msgDoc.topic = topicDoc;
-					break;
-				case '1':
-					replyDoc = await this.ctx.model.Reply.findById(msgDoc.data).populate('topic');
-					msgDoc.reply = replyDoc;
-					break;
-			}
+			msgDoc.reply = await this.ctx.model.Reply.findById(msgDoc.data).populate('topic');
 			if (msgDoc.read) oldMessages.push(msgDoc);
 			else newMessages.push(msgDoc);
 		}

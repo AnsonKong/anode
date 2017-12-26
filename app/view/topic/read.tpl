@@ -43,7 +43,7 @@
 		<div class="p-3">{{ helper.parseMarkdown(helper.decodeBase64(topic.content)) | safe }}</div>
 	</div>
 	<!-- 回复面板 -->
-	{% import '../common/panel.tpl' as repliesPanel %}
+	{% import '../common/panel.tpl' as panel %}
 	{% set repliesModule %}
 	<ul id="topicReplies" class="list-group">
 		{% if replies.length %}
@@ -91,10 +91,9 @@
 		{% endif %}
 	</ul>
 	{% endset %}
-	{{ repliesPanel.init(replies.length + ' 回复', repliesModule) }}
+	{{ panel.init(replies.length + ' 回复', repliesModule) }}
 
 	<!-- 添加回复面板 -->
-	{% import '../common/panel.tpl' as newReplyPanel %}
 	{% set newReplyModule %}
 	<div class="border-0 p-2">
 		<form id="myForm" method="post" action="/topic/{{ ctx.params.id }}/reply">
@@ -107,7 +106,7 @@
 		</form>
 	</div>
 	{% endset %}
-	{{ newReplyPanel.init('添加回复', newReplyModule) }}
+	{{ panel.init('添加回复', newReplyModule) }}
 {% endblock %}
 {% block customTail %}
 	<script type="text/javascript">

@@ -10,7 +10,7 @@
 {% endblock %}
 {% block content %}
 	<!-- 简介 -->
-	{% import '../common/panel.tpl' as briefPanel %}
+	{% import '../common/panel.tpl' as panel %}
 	{% set briefModule %}
 		<div class="d-flex flex-column p-3">
 			<div class="mb-2">
@@ -71,10 +71,9 @@
 			</div>
 		</div>
 	{% endset %}
-	{{ briefPanel.init('主页', briefModule) }}
+	{{ panel.init('主页', briefModule) }}
 	{% set canEdit = (user.id == ctx.user.id) %}
 	<!-- 最近创建的话题 -->
-	{% import '../common/panel.tpl' as createdPanel %}
 	{% set createdModule %}
     {% from '../common/topicList.tpl' import init as initCreated %}
     {{ initCreated(topics, helper, ctx, canEdit) }}
@@ -88,10 +87,9 @@
 			</small>
 		</div>
 	{% endset %}
-	{{ createdPanel.init('最近创建的话题', createdModule) }}
+	{{ panel.init('最近创建的话题', createdModule) }}
 
 	<!-- 最近参与的话题 -->
-	{% import '../common/panel.tpl' as repliedPanel %}
 	{% set repliedModule %}
     {% from '../common/topicList.tpl' import init as initReplied %}
     {{ initReplied(replyTopics, helper, ctx, canEdit) }}
@@ -105,6 +103,6 @@
 			</small>
 		</div>
 	{% endset %}
-	{{ repliedPanel.init('最近参与的话题', repliedModule) }}
+	{{ panel.init('最近参与的话题', repliedModule) }}
 
 {% endblock %}

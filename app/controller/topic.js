@@ -92,6 +92,7 @@ class TopicController extends Controller {
 		let newMessage;
 		let newMessageDoc;
 		if (topicDoc) {
+			// 1.创建Reply文档
 			const body = this.ctx.request.body;
 			const newReply = {
 				content: this.ctx.helper.encodeBase64(body.content),
@@ -99,7 +100,11 @@ class TopicController extends Controller {
 				topic: topicId,
 				user: this.ctx.user.id,
 			};
-			// 添加“主题被回复”提示消息START
+			if (body.parent) {
+				newReply.parent = body.parent;
+			}
+			newReplyDoc = await this.ctx.model.Reply.create(newReply);
+			// 2.添加“主题被回复”提示消息
 			sender = this.ctx.user.id;
 			const topicUser = await this.ctx.model.User.findById(topicDoc.user.id);
 			receiver = topicUser.id;
@@ -109,20 +114,14 @@ class TopicController extends Controller {
 					sender,
 					receiver,
 					type: '0',
-					data: topicId,
+					data: newReplyDoc.id,
 				}
 				newMessageDoc = await this.ctx.model.Message.create(newMessage);
 				topicUser.messages.unshift(newMessageDoc.id);
 				await topicUser.save();
 			}
-			// END
+			// 3.添加“回复被提到”提示消息
 			if (body.parent) {
-				newReply.parent = body.parent;
-			}
-			// 创建Reply文档
-			newReplyDoc = await this.ctx.model.Reply.create(newReply);
-			if (body.parent) {
-				// 添加“回复被提到”提示消息 START
 				const parentReplyDoc = await this.ctx.model.Reply.findById(body.parent).populate('user');
 				receiver = parentReplyDoc.user.id;
 				if (sender != receiver) {
