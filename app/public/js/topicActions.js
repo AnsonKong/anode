@@ -23,7 +23,7 @@ function onLikeReply(id) {
 }
 
 function getCsrf() {
-  var keyValue = document.cookie.match('(^|;) ?csrfToken=([^;]*)(;|$)');
+  let keyValue = document.cookie.match('(^|;) ?csrfToken=([^;]*)(;|$)');
   return keyValue ? keyValue[2] : null;
 }
 
@@ -37,6 +37,7 @@ function onDelReply(id) {
 		window.location.href = `/reply/${id}/del`;
 	}
 }
+
 let replyUserWrapper;
 let replyUserFormElement;
 let replyUserParentElement;

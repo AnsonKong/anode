@@ -21,11 +21,14 @@
         	<li class="nav-item">
                 <a class="nav-link" href="/user/{{ ctx.user.username }}"><img class="nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
             </li>
-            {% if helper.getNewMessagesLength(ctx.user.messages) %}
+            
             <li class="nav-item">
-                <a class="nav-link" href="/messages">未读消息 <span class="badge badge-danger">{{ helper.getNewMessagesLength(ctx.user.messages) }}</span></a>
+                <a class="nav-link" href="/messages">未读消息
+                    {% if helper.getNewMessagesLength(ctx.user.messages) %}
+                     <span class="badge badge-danger">{{ helper.getNewMessagesLength(ctx.user.messages) }}</span>
+                    {% endif %}
+                </a>
             </li>
-            {% endif %}
             <li class="nav-item">
         		<a class="nav-link" href="/topic/create">发布话题</a>
         	</li>

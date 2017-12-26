@@ -25,7 +25,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label>用户名</label>
-						<input class="form-control" value="{{ user.username }}" type="text" name="username">
+						<input class="form-control" readonly value="{{ user.username }}" type="text">
 					</div>
 					<div class="form-group">
 						<label>电子邮件</label>

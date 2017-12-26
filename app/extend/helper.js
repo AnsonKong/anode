@@ -58,3 +58,8 @@ exports.getNewMessagesLength = (messages) => {
 	}
 	return count;
 };
+
+exports.buildJSONResponse = (code, msg, data) => {
+	const json = { code, msg, data };
+	return JSON.stringify(json);
+};

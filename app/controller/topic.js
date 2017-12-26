@@ -25,11 +25,19 @@ class TopicController extends Controller {
 		this.ctx.redirect(`/topic/${newTopicDoc.id}`);
 	}
 
-	// get /topic/:id
+	// get /topic/:id?msg=xxx
 	async read() {
 		const topicId = this.ctx.params.id;
 		const topic = await this.ctx.model.Topic.findById(topicId).populate('user');
 		if (topic) {
+			// 设置msg为已读
+			const msgId = this.ctx.request.query.msg;
+			if (msgId) {
+				// 设置消息为已读状态
+				await this.ctx.model.Message.findByIdAndUpdate(msgId, { read: true });
+				// 更新user.messages实例
+				await this.ctx.model.User.populate(this.ctx.user, 'messages');
+			}
 			// 更新Topic的阅读次数
 			await topic.update({ view_account: topic.view_account + 1 });
 			// 获取Topic的回复
@@ -64,7 +72,7 @@ class TopicController extends Controller {
 			// 删除Topic文档对应的Reply文档
 			await this.ctx.model.Reply.deleteMany({ topic: topicDoc.id });
 		}
-		this.ctx.redirect(`/user/${topicDoc.user}`);
+		this.ctx.redirect(`/user/${this.ctx.user.username}`);
 	}
 
 	// post /topic/:id/edit

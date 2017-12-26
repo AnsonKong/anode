@@ -10,14 +10,21 @@ class UserController extends Controller {
 	// post /signup
 	async signup() {
 		const username = this.ctx.request.body.username;
-		const password = this.ctx.request.body.password;
-		const newUser = await this.ctx.service.user.signup({ username, password });
-		if (newUser) {
-			// 自动登录并跳转到主页
-			this.ctx.login(newUser);
-			this.ctx.redirect('/');
+		const existUserDoc = await this.ctx.model.User.findOne({ username });
+		let alertMsg = '注册失败';
+		if (existUserDoc) {
+			alertMsg = '用户名已存在';
+		} else {
+			const password = this.ctx.request.body.password;
+			const newUser = await this.ctx.service.user.signup({ username, password });
+			if (newUser) {
+				// 自动登录并跳转到主页
+				this.ctx.login(newUser);
+				this.ctx.redirect('/');
+			}
 		}
-		else this.ctx.body = '注册失败';
+		
+		await this.ctx.render('user/signup.tpl', { alertMsg });
 	}
 
 	// get /login
@@ -47,7 +54,8 @@ class UserController extends Controller {
 	// get /signout
 	async signout() {
 		this.ctx.logout();
-		this.ctx.redirect('/');
+		// this.ctx.redirect('/');
+		await this.ctx.render('/index.tpl', { alertMsg: '您已成功退出' });
 	}
 
 	// get /user/:username
@@ -107,9 +115,7 @@ class UserController extends Controller {
 	// post /setting
 	async updateSetting() {
 		const body = this.ctx.request.body;
-		const newUsername = body.username;
 		const conditions = {
-			username: newUsername,
 			website: body.website,
 			location: body.location,
 			weibo: body.weibo,
@@ -117,7 +123,7 @@ class UserController extends Controller {
 			signature: body.signature,
 		}
 		await this.ctx.model.User.findByIdAndUpdate(this.ctx.user.id, conditions);
-		this.ctx.redirect(`/user/${newUsername}`);
+		this.ctx.redirect(`/user/${this.ctx.user.username}`);
 	}
 
 	// get /setting

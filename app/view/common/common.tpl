@@ -18,6 +18,14 @@
 		<div class="d-flex flex-column align-items-between" style="min-height: 100%;">
 			<div class="w-100 mb-3">
 				{% include './nav.tpl' %}
+				{% if alertMsg %}
+				<div class="container alert alert-warning alert-dismissible fade show" role="alert">
+				  {{ alertMsg }}
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				{% endif %}
 				{% block content %}{% endblock %}
 			</div>
 			{% include './bootstrap.js.tpl' %}

@@ -2,6 +2,7 @@
 {% block title %}编辑回复{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture.editor.tpl' %}
+	<script type="text/javascript" src="/public/check-form.js"></script>
 {% endblock %}
 {% block content %}
 	{% import '../common/panel.tpl' as panel %}
