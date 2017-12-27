@@ -21,10 +21,10 @@ class UserController extends Controller {
 				// 自动登录并跳转到主页
 				this.ctx.login(newUser);
 				this.ctx.redirect('/');
+				return;
 			}
 		}
-		
-		await this.ctx.render('user/signup.tpl', { alertMsg });
+		this.ctx.service.router.redirect('/signup', alertMsg);
 	}
 
 	// get /login
@@ -54,8 +54,7 @@ class UserController extends Controller {
 	// get /signout
 	async signout() {
 		this.ctx.logout();
-		// this.ctx.redirect('/');
-		await this.ctx.render('/index.tpl', { alertMsg: '您已成功退出' });
+		this.ctx.service.router.redirect('/', '您已成功退出');
 	}
 
 	// get /user/:username

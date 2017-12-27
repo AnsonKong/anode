@@ -1,10 +1,8 @@
 function checkForm(formId, textareaId) {
 	let form = document.getElementById(formId);
-	console.log(textareaId)
 	if (textareaId) {
 		let tt = document.getElementById(textareaId);
-		console.log('set inner')
-		tt.innerHtml = (editor.codemirror.getValue());
+		tt.value = (editor.codemirror.getValue());
 	}
   if (form.checkValidity() === false) {
     event.preventDefault();

@@ -14,7 +14,7 @@ module.exports = app => {
 
   const options = {
   	successRedirect: '/',
-  	failureRedirect: '/signin/fail'
+  	// failureRedirect: '/signin/fail'
   };
 
   // passport-local
@@ -26,8 +26,8 @@ module.exports = app => {
   router.get('/signout', controller.user.signout);
 
   // 2.topic
-  router.get('/topic/create', controller.topic.new);
-  router.post('/topic/create', controller.topic.create);
+  router.get('/topic/create', app.middlewares.isSignined(), controller.topic.new);
+  router.post('/topic/create', app.middlewares.isSignined(), controller.topic.create);
   router.get('/topic/:id', controller.topic.read);
   router.get('/topic/:id/edit', controller.topic.edit);
   router.get('/topic/:id/del', controller.topic.del);

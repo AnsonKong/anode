@@ -1,9 +1,16 @@
 module.exports = (options, app) => {
 	return async function isSignined(ctx, next) {
-		if (ctx.user) {
-			ctx.redirect('/');
-			return;
+		let path;
+		let alertMsg;
+		if (!ctx.user && ctx.request.path !== '/signin') {
+			path = '/signin';
+			alertMsg = '您尚未登录，请先登录。';
 		}
-		await next();
+		if (ctx.user && ctx.request.path === '/signin') {
+			path = '/';
+			alertMsg = '请勿重复登录。';
+		}
+		if (path) ctx.service.router.redirect(path, alertMsg);
+		else await next();
 	};
 };

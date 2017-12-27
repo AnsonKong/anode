@@ -3,10 +3,10 @@ const assert = require('assert');
 module.exports = app => {
 	app.passport.verify(async (ctx, user) => {
 		let userDoc;
+		let alertMsg = '登录失败。'
 		if (user.provider) {
 			ctx.logger.debug('verify by OAuth:' + user.provider);
-			// ctx.logger.debug(user);
-			// OAuth
+			//1. OAuth by Github
 			const authConditions = {
 				uid: user.id,
 				provider: user.provider,
@@ -31,10 +31,15 @@ module.exports = app => {
 			}
 		} else {
 			ctx.logger.debug('verify by Local');
-			// Local
+			//2. Local
 			userDoc = await ctx.service.user.signin(user.name, user.pass);
+			if (!userDoc) alertMsg = '用户名或密码不正确。';
 		}
-		return userDoc;
+		if (userDoc) return userDoc;
+		else {
+			ctx.service.router.redirect('/', alertMsg);
+			return;
+		}
 	});
 
 	app.passport.serializeUser(async (ctx, user) => {
