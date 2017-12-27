@@ -10,11 +10,11 @@ module.exports = app => {
   router.get('/signup', controller.user.new);
   router.post('/signup', controller.user.signup);
 
-  router.get('/signin', app.middlewares.isSignined(), controller.user.old);
+  router.get('/signin', controller.user.old);
 
   const options = {
   	successRedirect: '/',
-  	// failureRedirect: '/signin/fail'
+  	failureRedirect: '/signin'
   };
 
   // passport-local
@@ -29,25 +29,25 @@ module.exports = app => {
   router.get('/topic/create', app.middlewares.isSignined(), controller.topic.new);
   router.post('/topic/create', app.middlewares.isSignined(), controller.topic.create);
   router.get('/topic/:id', controller.topic.read);
-  router.get('/topic/:id/edit', controller.topic.edit);
-  router.get('/topic/:id/del', controller.topic.del);
-  router.post('/topic/:id/edit', controller.topic.update);
-  router.post('/topic/:id/reply', controller.topic.reply);
+  router.get('/topic/:id/edit', app.middlewares.isSignined(), controller.topic.edit);
+  router.get('/topic/:id/del', app.middlewares.isSignined(), controller.topic.del);
+  router.post('/topic/:id/edit', app.middlewares.isSignined(), controller.topic.update);
+  router.post('/topic/:id/reply', app.middlewares.isSignined(), controller.topic.reply);
 
   // 3.reply
-  router.get('/reply/:id/edit', controller.reply.edit);
-  router.post('/reply/:id/edit', controller.reply.update);
-  router.get('/reply/:id/del', controller.reply.del);
-  router.post('/reply/:id/like', controller.reply.like);
+  router.get('/reply/:id/edit', app.middlewares.isSignined(), controller.reply.edit);
+  router.post('/reply/:id/edit', app.middlewares.isSignined(), controller.reply.update);
+  router.get('/reply/:id/del', app.middlewares.isSignined(), controller.reply.del);
+  router.post('/reply/:id/like', app.middlewares.isSignined(), controller.reply.like);
 
   // 4.user
   router.get('/user/:username', controller.user.home);
   router.get('/user/:username/topics', controller.user.topics);
   router.get('/user/:username/replies', controller.user.replies);
-  router.get('/setting', controller.user.setting);
-  router.get('/messages', controller.user.messages);
-  router.post('/setting', controller.user.updateSetting);
+  router.get('/setting', app.middlewares.isSignined(), controller.user.setting);
+  router.get('/messages', app.middlewares.isSignined(), controller.user.messages);
+  router.post('/setting', app.middlewares.isSignined(), controller.user.updateSetting);
 
   // 5.upload
-  router.post('/upload', controller.upload.upload);
+  router.post('/upload', app.middlewares.isSignined(), controller.upload.upload);
 };

@@ -20,7 +20,7 @@
 				{% include './nav.tpl' %}
 				{% if alertMsg %}
 				<div class="container alert alert-warning alert-dismissible fade show" role="alert">
-				  {{ alertMsg }}
+				  {{ alertMsg.msg }}
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				    <span aria-hidden="true">&times;</span>
 				  </button>

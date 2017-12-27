@@ -19,7 +19,7 @@ module.exports = app => {
 			} else {
 				// 创建匿名用户文档
 				const conditions = {
-					username: user.name,
+					username: `${user.name}(G)`,
 					email: user.profile._json.email,
 					avatar: user.photo,
 					github: user.profile.profileUrl,
@@ -35,11 +35,8 @@ module.exports = app => {
 			userDoc = await ctx.service.user.signin(user.name, user.pass);
 			if (!userDoc) alertMsg = '用户名或密码不正确。';
 		}
-		if (userDoc) return userDoc;
-		else {
-			ctx.service.router.redirect('/', alertMsg);
-			return;
-		}
+		if (!userDoc) ctx.service.router.storeAlertMsg(alertMsg);
+		return userDoc;
 	});
 
 	app.passport.serializeUser(async (ctx, user) => {

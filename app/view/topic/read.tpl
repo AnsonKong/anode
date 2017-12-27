@@ -2,6 +2,7 @@
 {% block title %}{{ title }}{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture.editor.tpl' %}
+	<script type="text/javascript" src="/public/js/check-form.js"></script>
 	{% include '../common/font-awesome.tpl' %}
 	{% include '../common/topic-management.tpl' %}
 	<style type="text/css">
@@ -96,12 +97,15 @@
 	<!-- 添加回复面板 -->
 	{% set newReplyModule %}
 	<div class="border-0 p-2">
-		<form id="myForm" method="post" action="/topic/{{ ctx.params.id }}/reply">
+		<form id="myForm" method="post" action="/topic/{{ ctx.params.id }}/reply" novalidate>
 			<div class="form-group">
-				<textarea id="myReplyTextArea" name="content"></textarea>
+				<textarea id="myTextarea" class="form-control" name="content" required></textarea>
+				<div class="invalid-feedback">
+					请正确填写回复内容，要求字数1字以上。
+				</div>
 			</div>
 			<div class="form-group">
-		    <a class="btn btn-primary" onclick="$('#myForm').submit()" href="#">回复</a>
+		    <button class="btn btn-primary" style="cursor: pointer;" onclick="checkForm('myForm', 'myTextarea')" type="submit">回复</button>
 		  </div>
 		</form>
 	</div>
@@ -111,7 +115,7 @@
 {% block customTail %}
 	<script type="text/javascript">
 		var editor = new Editor({
-			element: $('#myReplyTextArea')[0],
+			element: $('#myTextarea')[0],
 			status: false,
 		});
 		editor.render();

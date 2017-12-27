@@ -1,14 +1,16 @@
-function checkForm(formId, textareaId) {
+function checkForm(formId, textareaId, targetEditor) {
 	let form = document.getElementById(formId);
 	if (textareaId) {
 		let tt = document.getElementById(textareaId);
-		tt.value = (editor.codemirror.getValue());
+		if (!targetEditor) targetEditor = editor;
+		tt.value = (targetEditor.codemirror.getValue());
 	}
   if (form.checkValidity() === false) {
     event.preventDefault();
     event.stopPropagation();
-  } else {
-  	// if (textareaId) $(`#textareaId`).text('');
-  }
-  form.classList.add('was-validated');
+    form.classList.add('was-validated');
+    return false;
+  } 
+  
+  return true;
 }

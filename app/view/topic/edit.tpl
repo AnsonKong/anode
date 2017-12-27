@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-		<button class="btn btn-primary" style="cursor: pointer;" onclick="checkForm('myForm', 'myTextarea')" type="submit">{{btnLabel}}</button>
+				<button class="btn btn-primary" style="cursor: pointer;" onclick="checkForm('myForm', 'myTextarea')" type="submit">{{btnLabel}}</button>
 		  </div>
 		</form>
 	</div>

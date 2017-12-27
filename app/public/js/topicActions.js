@@ -44,32 +44,37 @@ let replyUserParentElement;
 let replyUserEditor;
 function onUserReply(parentReplyId, topicId, username) {
 	if (!replyUserEditor) {
-		replyUserWrapper = $('<form/>');
+		replyUserWrapper = $('<form id="newForm" method="post" novalidate/>');
 		replyUserFormElement = replyUserWrapper[0];
-		replyUserFormElement.method = 'post';
+		// 2.form-group
+		const formGroup = $('<div class="form-group"></div>');
 		// 1.添加textarea
-		const newTextarea = $('<textarea>');
-		replyUserWrapper.append(newTextarea);
+		const newTextarea = $('<textarea id="newTextarea" class="form-control" name="content" required>');
+		formGroup.append(newTextarea);
 		replyUserTextareaElement = newTextarea[0];
-		replyUserTextareaElement.name = 'content';
+		// 2.textarea错误提示
+		const tip = $('<div class="invalid-feedback">请正确填写回复内容，要求字数1字以上。</div>');
+		formGroup.append(tip);
+		replyUserWrapper.append(formGroup);
 		// 2.添加按钮
-		const replyUserBtn = $('<button/>');
+		const replyUserBtn = $('<button class="btn btn-primary" style="cursor: pointer;" type="submit">回复</button>');
 		replyUserWrapper.append(replyUserBtn);
-		replyUserBtn.addClass('btn btn-primary');
-		replyUserBtn.css('cursor', 'pointer');
-		replyUserBtn.text('回复');
+		replyUserBtn.click(function() {
+			let result = checkForm('newForm', 'newTextarea', replyUserEditor);
+			console.log(result)
+			if (!result) {
+				event.preventDefault();
+    		event.stopPropagation();
+			}
+		});
 		// 3.添加隐藏parent元素
-		const replyUserParent = $('<input/>');
+		const replyUserParent = $('<input type="hidden" name="parent"/>');
 		replyUserWrapper.append(replyUserParent);
 		replyUserParentElement = replyUserParent[0];
-		replyUserParentElement.type = 'hidden';
-		replyUserParentElement.name = 'parent';
 		// 4.添加_csrf
-		const replyUserCSRF = $('<input/>');
+		const replyUserCSRF = $('<input type="hidden" name="_csrf"/>');
 		replyUserWrapper.append(replyUserCSRF);
 		replyUserCSRFElement = replyUserCSRF[0];
-		replyUserCSRFElement.type = 'hidden';
-		replyUserCSRFElement.name = '_csrf';
 		replyUserCSRFElement.value = getCsrf();
 		// 5.初始化editor
 		replyUserEditor = new Editor({

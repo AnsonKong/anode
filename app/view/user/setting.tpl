@@ -29,7 +29,7 @@
 					</div>
 					<div class="form-group">
 						<label>电子邮件</label>
-						<input class="form-control" readonly value="{{ user.email }}" type="text">
+						<input class="form-control" value="{{ user.email }}" type="text" name="email">
 					</div>
 					<div class="form-group">
 						<label>个人网站</label>

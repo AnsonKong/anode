@@ -10,7 +10,8 @@ module.exports = (options, app) => {
 			path = '/';
 			alertMsg = '请勿重复登录。';
 		}
-		if (path) ctx.service.router.redirect(path, alertMsg);
+		ctx.service.router.storeAlertMsg(alertMsg);
+		if (path) ctx.redirect(path);
 		else await next();
 	};
 };

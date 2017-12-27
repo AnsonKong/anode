@@ -24,7 +24,8 @@ class UserController extends Controller {
 				return;
 			}
 		}
-		this.ctx.service.router.redirect('/signup', alertMsg);
+		this.ctx.service.router.storeAlertMsg(alertMsg);
+		this.ctx.redirect('/signup');
 	}
 
 	// get /login
@@ -54,7 +55,8 @@ class UserController extends Controller {
 	// get /signout
 	async signout() {
 		this.ctx.logout();
-		this.ctx.service.router.redirect('/', '您已成功退出');
+		this.ctx.service.router.storeAlertMsg('您已成功退出');
+		this.ctx.redirect('/');
 	}
 
 	// get /user/:username
@@ -115,6 +117,7 @@ class UserController extends Controller {
 	async updateSetting() {
 		const body = this.ctx.request.body;
 		const conditions = {
+			email: body.email,
 			website: body.website,
 			location: body.location,
 			weibo: body.weibo,
