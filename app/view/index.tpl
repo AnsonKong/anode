@@ -1,2 +1,2 @@
 {% extends "./common/common.tpl" %}
-{% block title %}ANode主页{% endblock %}
+{% block title %}首页{% endblock %}

@@ -1,5 +1,6 @@
 const moment = require('moment');
 moment.locale('zh-cn');
+const reg = /@(.+?)(\b)/g;
 
 exports.encodeBase64 = (src) => {
 	return src ? Buffer.from(src).toString('base64') : '';
@@ -10,10 +11,17 @@ exports.decodeBase64 = (encoded) => {
 };
 
 exports.parseMarkdown = (content) => {
-	let markdown = require('marked')(content);
-	const reg = new RegExp(/@(.+?)(?=[ <])/, 'g');
-	const result = markdown.replace(reg, '<a href="/user/$1" target="_blank">@$1</a> ');
+	const markdown = require('marked')(content);
+	const result = markdown.replace(reg, '<a href="/user/$1" target="_blank">@$1</a>$2');
 	return result;
+};
+
+exports.parseAtUsers = (content) => {
+	const obj = content.match(reg);
+	for(let i in obj) {
+		obj[i] = obj[i].replace('@', '');
+	}
+	return new Set(obj);
 };
 
 exports.fromNow = (timestamps) => {

@@ -1,5 +1,5 @@
 {% extends "../common/common.tpl" %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{{ helper.decodeBase64(topic.title) }}{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture.editor.tpl' %}
 	<script type="text/javascript" src="/public/js/check-form.js"></script>

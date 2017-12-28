@@ -129,22 +129,7 @@ class TopicController extends Controller {
 				await topicUser.save();
 			}
 			// 3.添加“回复被提到”提示消息
-			if (body.parent) {
-				const parentReplyDoc = await this.ctx.model.Reply.findById(body.parent).populate('user');
-				receiver = parentReplyDoc.user.id;
-				if (sender != receiver) {
-					newMessage = {
-						created_time: moment().unix(),
-						sender,
-						receiver,
-						type: '1',
-						data: newReplyDoc.id,
-					}
-					newMessageDoc = await this.ctx.model.Message.create(newMessage);
-					parentReplyDoc.user.messages.unshift(newMessageDoc.id);
-					await parentReplyDoc.user.save();
-				}
-			}
+			await this.ctx.service.reply.checkAtUsers(body.content, newReplyDoc.id, sender);
 			// 添加Topic回复数
 			await topicDoc.update({ reply_account: topicDoc.reply_account + 1 });
 		}

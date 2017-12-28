@@ -1,5 +1,5 @@
 {% extends "../common/common.tpl" %}
-{% block title %}用户设置{% endblock %}
+{% block title %}设置{% endblock %}
 {% block customHead %}
 	<script type="text/javascript" src="/public/js/upload-actions.js"></script>
 	<style type="text/css">

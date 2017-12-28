@@ -1,5 +1,5 @@
 module.exports = (options, app) => {
-	return async function isSignined(ctx, next) {
+	return async (ctx, next) => {
 		let path;
 		let alertMsg;
 		if (!ctx.user && ctx.request.path !== '/signin') {

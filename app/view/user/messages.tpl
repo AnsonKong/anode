@@ -1,5 +1,5 @@
 {% extends "../common/common.tpl" %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}未读消息{% endblock %}
 {% block customHead %}
 	{% include '../common/topic-management.tpl' %}
 {% endblock %}

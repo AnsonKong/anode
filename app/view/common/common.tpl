@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{% block title %}{% endblock %}</title>
+		<title>{% block title %}{% endblock %} - ANode技术社区</title>
 		{% include './bootstrap.css.tpl' %}
 		{% block customHead %}{% endblock %}
 		<style type="text/css">

@@ -5,7 +5,10 @@ function onEditTopic(id) {
 function onDelTopic(id) {
 	const result = confirm('确定要删除此话题吗？');
 	if (result) {
-		window.location.href = `/topic/${id}/del`;
+		// window.location.href = `/topic/${id}/del`;
+		$.post(`/topic/${id}/del`, { _csrf: getCsrf() }, () => {
+			window.location.href = '/home';
+		});
 	}
 }
 

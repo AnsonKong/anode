@@ -1,5 +1,5 @@
 {% extends "../common/common.tpl" %}
-{% block title %}用户主页{% endblock %}
+{% block title %}{{ user.username }}的主页{% endblock %}
 {% block customHead %}
 	{% include '../common/topic-management.tpl' %}
 	<style type="text/css">

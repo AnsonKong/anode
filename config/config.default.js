@@ -7,7 +7,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1513127576177_3743';
 
   // add your config here
-  config.middleware = ['pre'];
+  config.middleware = ['pre', 'notfoundHandler'];
 
   config.logger = {
     consoleLevel: 'DEBUG'
