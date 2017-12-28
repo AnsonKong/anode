@@ -1,6 +1,11 @@
 const moment = require('moment');
 moment.locale('zh-cn');
-const reg = /@(.+?)(\b)/g;
+// 若@前方有可见字符，则在前方加上空格
+const reg1 = /(\S)(@)/g;
+// 若最后的@是以可见字符结尾，则在最后加上空格
+const reg2 = /(@\S+)$/g;
+// 以@开头，以不可见字符或<结尾，进行匹配
+const reg3 = /@(\S+?)(\s|<)/g;
 
 exports.encodeBase64 = (src) => {
 	return src ? Buffer.from(src).toString('base64') : '';
@@ -12,14 +17,19 @@ exports.decodeBase64 = (encoded) => {
 
 exports.parseMarkdown = (content) => {
 	const markdown = require('marked')(content);
-	const result = markdown.replace(reg, '<a href="/user/$1" target="_blank">@$1</a>$2');
+	let newStr = markdown.replace(reg1, '$1 $2');
+	newStr = newStr.replace(reg2, '$1 ');
+	const result = newStr.replace(reg3, '<a href="/user/$1" target="_blank">@$1</a>$2');
 	return result;
 };
 
 exports.parseAtUsers = (content) => {
-	const obj = content.match(reg);
+	let newStr = content.replace(reg1, '$1 $2');
+	newStr = newStr.replace(reg2, '$1 ');
+	const obj = newStr.match(reg3);
 	for(let i in obj) {
 		obj[i] = obj[i].replace('@', '');
+		obj[i] = obj[i].replace(' ', '');
 	}
 	return new Set(obj);
 };
