@@ -1,6 +1,7 @@
 const Service = require('egg').Service;
 
 class TopicService extends Service {
+	// 基于conditions条件，获取最近创建的话题
 	async getTopics(conditions, limit = -1, offset = 0) {
 		let query = this.ctx.model.Topic.find(conditions).sort({ created_time: -1 }).populate('user');
 		if (offset) query.skip(offset);
@@ -10,7 +11,7 @@ class TopicService extends Service {
 		return await this._fillLastReply(topics);
 	}
 
-	// 获取用户回复了的
+	// 获取指定用户最近回复的话题（去重）
 	async getReplyTopics(userId, limit = -1, offset = 0) {
 		const replyTopicIds = await this.getReplyTopicIds(userId);
 		const ids = [];
