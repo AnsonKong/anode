@@ -31,8 +31,9 @@ module.exports = app => {
   r.get('/topic/:id', m.isTopicValid(), c.topic.read);
   r.get('/topic/:id/edit', m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.edit);
   r.post('/topic/:id/edit',m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.update);
-  r.post('/topic/:id/del',m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.del);
   r.post('/topic/:id/reply',m.isSignined(), m.isTopicValid(), c.topic.reply);
+  r.post('/topic/del',m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.del);
+  r.post('/topic/collect',m.isSignined(), m.isTopicValid(), c.topic.collect);
 
   // 3.reply
   r.get('/reply/:id/edit', m.isSignined(), m.isReplyValid({ checkIsOwner: true }), c.reply.edit);

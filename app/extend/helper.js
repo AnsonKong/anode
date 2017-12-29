@@ -47,16 +47,16 @@ exports.githubAvatar = () => {
 	// return `https://identicons.github.com/${name}.png`;
 };
 
-exports.parseCategory = (num) => {
+exports.parseCategory = (topicDoc) => {
 	let result = 'unknown';
-	switch(num) {
-		case '0':
+	switch(topicDoc.category) {
+		case 'share':
 			result = '分享';
 			break;
-		case '1':
+		case 'ask':
 			result = '问答';
 			break;
-		case '2':
+		case 'job':
 			result = '招聘';
 			break;
 	}
@@ -80,4 +80,25 @@ exports.getNewMessagesLength = (messages) => {
 exports.buildJSONResponse = (code, msg, data) => {
 	const json = { code, msg, data };
 	return JSON.stringify(json);
+};
+
+exports.parseCategoryConditionsByTab = (tab) => {
+	const result = {};
+	switch (tab) {
+		case 'all':
+			result.top = false;
+			break;
+		case 'top':
+			result.top = true;
+			break;
+		case 'good':
+			result.top = false;
+			result.good = true;
+			break;
+		default:
+			result.category = tab;
+			result.top = false;
+			result.good = false;
+	}
+	return result;
 };

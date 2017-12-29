@@ -10,6 +10,8 @@ module.exports = app => {
 		last_modified_time: { type: Number },
 		view_account: { type: Number, default: 0 },
 		reply_account: { type: Number, default: 0 },
+		top: { type: Boolean, default: false },
+		good: { type: Boolean, default: false },
 	});
 
 	return mongoose.model('Topic', TopicSchema);

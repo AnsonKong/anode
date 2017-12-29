@@ -1,14 +1,21 @@
+{% macro init(list, helper, ctx, canEdit = false, showBorderLeft = false) %}
 <ul class="list-group">
-	{% macro init(list, helper, ctx, canEdit = false) %}
 		{% for item in list %}
-			<li class="list-group-item list-group-item-action border-left-0 border-right-0 border-bottom-1 rounded-0">
+			<li class="list-group-item list-group-item-action border-top-0 border-left-{{'1' if showBorderLeft else '0'}} border-right-0 border-bottom-1 rounded-0 m-0">
 				{% set topic = item %}
 				<div class="row">
 					<!-- left -->
 					<div class="col-auto mr-auto d-flex align-items-center">
 						<a href="/user/{{ topic.user.username }}"><img class="replyAvatar rounded" src="{{ helper.parseAvatar(topic.user.avatar) }}"></a>
 						<small class="text-center" style="width: 80px;">{{ topic.reply_account }} / {{ topic.view_account }}</small>
-						<a href="/topic/{{ topic.id }}">{{ helper.decodeBase64(topic.title) }}</a>
+						{% if item.top %}
+							<div class="d-inline bg-success text-white p-1 mr-1" style="font-size: 12px">置顶</div>
+						{% endif %}
+						{% if item.good %}
+							<div class="d-inline bg-success text-white p-1 mr-1" style="font-size: 12px">精华</div>
+						{% endif %}
+						<div class="d-inline bg-dark text-white p-1" style="font-size: 12px">{{ helper.parseCategory(item) }}</div>
+						<a class="ml-2" href="/topic/{{ topic.id }}">{{ helper.decodeBase64(topic.title) }}</a>
 					</div>
 					<!-- right -->
 					<div class="col-auto d-flex align-items-center">
@@ -24,5 +31,5 @@
 				</div>
 			</li>
 		{% endfor %}
-	{% endmacro %}
 </ul>
+{% endmacro %}

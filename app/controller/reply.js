@@ -27,7 +27,10 @@ class ReplyController extends Controller {
 		const body = this.ctx.request.body;
 		// 更新Reply
 		const reply = await this.ctx.model.Reply.findByIdAndUpdate(replyId, { content: this.ctx.helper.encodeBase64(body.content) });
-		this.ctx.redirect(`/topic/${reply.topic}`);
+		// 添加“回复被提到”提示消息
+		const sender = this.ctx.user.id;
+		await this.ctx.service.reply.checkAtUsers(body.content, reply.id, sender);
+		this.ctx.redirect(`/topic/${reply.topic}#${reply.id}`);
 	}
 
 	// post /reply/:id/like

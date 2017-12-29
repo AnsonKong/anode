@@ -29,16 +29,28 @@
 {% block content %}
 	<div class="container rounded-top bg-light mt-3 p-0">
 		<!-- 话题面板 -->
-		<div id="topicHead" class="p-2 pt-4">
-			<h4><b>{{ helper.decodeBase64(topic.title) }}</b></h4>
-	  	<small class="text-muted">发布于 {{ helper.fromNow(topic.created_time) }}</small>
-	  	<small class="text-muted">作者 <a class="text-muted" href="/user/{{ topic.user.username }}">{{ topic.user.username }}</a></small>
-	  	<small class="text-muted">{{ topic.view_account }} 次浏览</small>
-	  	<small class="text-muted">来自 {{ helper.parseCategory(topic.category) }}</small>
-			{% if topic.user.id == ctx.user.id %}
-			<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditTopic('{{ ctx.params.id }}')"></i>
-			<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelTopic('{{ ctx.params.id }}')"></i>
+		<div id="topicHead" class="px-2 pt-4 pb-0">
+			{% if topic.top %}
+				<div class="d-inline bg-success text-white p-1" style="font-size: 12px">置顶</div>
 			{% endif %}
+			{% if topic.good %}
+				<div class="d-inline bg-success text-white p-1" style="font-size: 12px">精华</div>
+			{% endif %}
+			<h4 class="my-2"><b>{{ helper.decodeBase64(topic.title) }}</b></h4>
+			<div class="d-flex align-items-end">
+		  	<small class="text-muted">发布于 {{ helper.fromNow(topic.created_time) }}</small>
+		  	<small class="text-muted">作者 <a class="text-muted" href="/user/{{ topic.user.username }}">{{ topic.user.username }}</a></small>
+		  	<small class="text-muted">{{ topic.view_account }} 次浏览</small>
+		  	<small class="text-muted">来自 {{ helper.parseCategory(topic) }}</small>
+				{% if topic.user.id == ctx.user.id %}
+				<i class="far fa-edit interactive_btn ml-2" title="编辑" onclick="onEditTopic('{{ ctx.params.id }}')"></i>
+				<i class="far fa-trash-alt interactive_btn ml-2" title="删除" onclick="onDelTopic('{{ ctx.params.id }}')"></i>
+				{% endif %}
+				{% if ctx.user and topic.user.id != ctx.user.id %}
+					{% set isCollected = (ctx.user.collections.indexOf(topic.id) != -1) %}
+					<button id="myCollectBtn" style="cursor: pointer;" class="ml-auto btn {{'btn-muted' if isCollected else 'btn-primary'}} btn-sm" onclick="onCollectTopic('{{ ctx.params.id }}')">{{'取消收藏' if isCollected else '收藏'}}</button>
+				{% endif %}
+			</div>
 		</div>
 		<hr class="my-2">
 		<div class="p-3">{{ helper.parseMarkdown(helper.decodeBase64(topic.content)) | safe }}</div>

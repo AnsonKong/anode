@@ -29,9 +29,9 @@
 			<div class="form-group">
 				<label>版块：</label>
 				<select class="form-control" name="category" required>
-		      <option {% if topic.category === '0' %}selected{% endif %} value="0">分享</option>
-		      <option {% if topic.category === '1' %}selected{% endif %} value="1">问答</option>
-		      <option {% if topic.category === '2' %}selected{% endif %} value="2">招聘</option>
+		      <option {% if topic.category === '0' %}selected{% endif %} value="share">分享</option>
+		      <option {% if topic.category === '1' %}selected{% endif %} value="ask">问答</option>
+		      <option {% if topic.category === '2' %}selected{% endif %} value="job">招聘</option>
 		    </select>
 			</div>
 			<div class="form-group">

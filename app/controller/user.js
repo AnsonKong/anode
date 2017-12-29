@@ -50,7 +50,7 @@ class UserController extends Controller {
 		const username = this.ctx.params.username;
 		const user = await this.ctx.model.User.findOne({ username });
 		const userId = user.id;
-		const topics = await this.ctx.service.topic.getTopics(userId, 5);
+		const topics = await this.ctx.service.topic.getTopics({ user: userId }, 5);
 		const replyTopics = await this.ctx.service.topic.getReplyTopics(userId, 5);
 		await this.ctx.render('user/home.tpl', { user, topics, replyTopics });
 	}
@@ -63,7 +63,7 @@ class UserController extends Controller {
 		const currentPage = parseInt(this.ctx.query.page) || 1;
 		const totalAmount = await this.ctx.model.Topic.count({ user: userId });
 		const totalPage = Math.ceil(totalAmount / pageAmount);
-		const topics = await this.ctx.service.topic.getTopics(userId, pageAmount, pageAmount * (currentPage - 1));
+		const topics = await this.ctx.service.topic.getTopics({ user: userId }, pageAmount, pageAmount * (currentPage - 1));
 		const pagination = {
 			currentPage,
 			totalPage,

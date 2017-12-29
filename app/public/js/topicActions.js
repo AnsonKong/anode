@@ -5,11 +5,18 @@ function onEditTopic(id) {
 function onDelTopic(id) {
 	const result = confirm('确定要删除此话题吗？');
 	if (result) {
-		// window.location.href = `/topic/${id}/del`;
-		$.post(`/topic/${id}/del`, { _csrf: getCsrf() }, () => {
+		$.post(`/topic/del`, { id, _csrf: getCsrf() }, () => {
 			window.location.href = '/home';
 		});
 	}
+}
+
+function onCollectTopic(id) {
+	$.post(`/topic/collect`, { id, _csrf: getCsrf() }, () => {
+		const btn = $('#myCollectBtn');
+		btn.toggleClass('btn-muted btn-primary ');
+		btn.text(btn.hasClass('btn-muted') ? '取消收藏' : '收藏');
+	});
 }
 
 function onLikeReply(id) {

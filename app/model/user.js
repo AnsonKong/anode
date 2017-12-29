@@ -14,6 +14,7 @@ module.exports = app => {
 		weibo: { type: String },
 		signature: { type: String },
 		messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }],
+		collections: [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
 	});
 
 	return mongoose.model('User', UserSchema);

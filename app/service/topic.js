@@ -1,9 +1,9 @@
 const Service = require('egg').Service;
 
 class TopicService extends Service {
-	async getTopics(userId, limit = -1, offset = 0) {
+	async getTopics(conditions, limit = -1, offset = 0) {
 		// 最近创建的5个Topic
-		let query = this.ctx.model.Topic.find({ user: userId }).sort({ created_time: -1 }).populate('user');
+		let query = this.ctx.model.Topic.find(conditions).sort({ created_time: -1 }).populate('user');
 		if (offset) query.skip(offset);
 		if (limit != -1) query.limit(limit);
 		const topics = await query;
