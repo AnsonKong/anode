@@ -37,7 +37,7 @@
 			<div class="form-group">
 				<label>标题：</label>
 				<input class="form-control" value="{{ helper.decodeBase64(topic.title) }}" type="text" name="title" placeholder="标题字数10字以上"
-					required pattern="\S{10,}">
+					required pattern=".{10,}">
 				<div class="invalid-feedback">
 					请正确填写主题标题，要求字数10字以上。
 				</div>

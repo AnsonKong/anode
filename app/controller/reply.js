@@ -1,17 +1,19 @@
 const Controller = require('egg').Controller;
 
 class ReplyController extends Controller {
-	// get /reply/:id/del
+	// get /reply/del
 	async del() {
-		const replyId = this.ctx.params.id;
+		const replyId = this.ctx.request.body.id;
+		let code = -1;
 		// 删除Reply文档
 		const reply = await this.ctx.model.Reply.findByIdAndRemove(replyId);
 		if (reply) {
 			// 更新Topic的回复数
 			const topic = await this.ctx.model.Topic.findById(reply.topic);
 			await topic.update({ reply_account: topic.reply_account - 1});
+			code = 0;
 		}
-		this.ctx.redirect(`/topic/${reply.topic}`);
+		this.ctx.body = { code };
 	}
 
 	// get /reply/:id/edit
@@ -33,13 +35,14 @@ class ReplyController extends Controller {
 		this.ctx.redirect(`/topic/${reply.topic}#${reply.id}`);
 	}
 
-	// post /reply/:id/like
+	// post /reply/like
 	async like() {
-		const replyId = this.ctx.params.id;
+		const replyId = this.ctx.request.body.id;
 		const userId = this.ctx.user.id;
 		// 更新Reply
 		const reply = await this.ctx.model.Reply.findById(replyId);
-		let action = 'fail';
+		let code = -1;
+		let action;
 		if (reply) {
 			const index = reply.likes.indexOf(userId);
 			if (index != -1) {
@@ -50,10 +53,10 @@ class ReplyController extends Controller {
 				action = 'up';
 			}
 			await reply.save();	
+			code = 0;
 		}
-		this.ctx.body = { "success": true, "action": action };
+		this.ctx.body = { code, action };
 	}
-
 }
 
 module.exports = ReplyController;

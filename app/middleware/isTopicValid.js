@@ -1,6 +1,6 @@
 module.exports = (options, app) => {
 	return async (ctx, next) => {
-		const topicId = ctx.params.id || ctx.body.id;
+		const topicId = ctx.params.id || ctx.request.body.id;
 		let topic;
 		let alertMsg;
 		try {

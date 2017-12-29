@@ -1,5 +1,5 @@
 const Controller = require('egg').Controller;
-const pageAmount = 10;
+const pageAmount = 2;
 
 class UserController extends Controller {
 	// get /signup
@@ -61,6 +61,7 @@ class UserController extends Controller {
 		const user = await this.ctx.model.User.findOne({ username });
 		const userId = user.id;
 		const currentPage = parseInt(this.ctx.query.page) || 1;
+
 		const totalAmount = await this.ctx.model.Topic.count({ user: userId });
 		const totalPage = Math.ceil(totalAmount / pageAmount);
 		const topics = await this.ctx.service.topic.getTopics({ user: userId }, pageAmount, pageAmount * (currentPage - 1));
@@ -68,7 +69,7 @@ class UserController extends Controller {
 			currentPage,
 			totalPage,
 		};
-		const title = user.username + '创建的话题';
+		const title = user.username + ' 创建的话题';
 		await this.ctx.render('user/topics.tpl', { user, topics, pagination, title, panelTitle: title });
 	}
 
@@ -77,16 +78,36 @@ class UserController extends Controller {
 		const username = this.ctx.params.username;
 		const user = await this.ctx.model.User.findOne({ username });
 		const userId = user.id;
-
 		const currentPage = parseInt(this.ctx.query.page) || 1;
-		const totalAmount = await this.ctx.service.topic.getReplyTopicsCount(userId);
+
+		const replyTopicIds = await this.ctx.service.topic.getReplyTopicIds(userId);
+		const totalAmount = replyTopicIds.length;
+		
 		const totalPage = Math.ceil(totalAmount / pageAmount);
 		const topics = await this.ctx.service.topic.getReplyTopics(userId, pageAmount, pageAmount * (currentPage - 1));
 		const pagination = {
 			currentPage,
 			totalPage,
 		};
-		const title = user.username + '参与的话题';
+		const title = user.username + ' 参与的话题';
+		await this.ctx.render('user/topics.tpl', { user, topics, pagination, title, panelTitle: title });
+	}
+
+	// get /user/:username/collections?page=1
+	async collections() {
+		const username = this.ctx.params.username;
+		const user = await this.ctx.model.User.findOne({ username });
+		const userId = user.id;
+		const currentPage = parseInt(this.ctx.query.page) || 1;
+
+		const totalAmount = user.collections.length;
+		const totalPage = Math.ceil(totalAmount / pageAmount);
+		const topics = await this.ctx.service.topic.getTopics({ _id: { $in: user.collections } }, pageAmount, pageAmount * (currentPage - 1));
+		const pagination = {
+			currentPage,
+			totalPage,
+		};
+		const title = user.username + ' 收藏的话题';
 		await this.ctx.render('user/topics.tpl', { user, topics, pagination, title, panelTitle: title });
 	}
 
@@ -110,7 +131,7 @@ class UserController extends Controller {
 		this.ctx.redirect(`/user/${this.ctx.user.username}`);
 	}
 
-	// get /setting
+	// get /messages
 	async messages() {
 		const result = await this.ctx.model.User.findById(this.ctx.user.id).populate('messages');
 		const allMessages = result.messages;
@@ -129,6 +150,7 @@ class UserController extends Controller {
 		}
 		await this.ctx.render('user/messages.tpl', { oldMessages, newMessages });
 	}
+
 }
 
 module.exports = UserController;

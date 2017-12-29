@@ -32,19 +32,20 @@ module.exports = app => {
   r.get('/topic/:id/edit', m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.edit);
   r.post('/topic/:id/edit',m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.update);
   r.post('/topic/:id/reply',m.isSignined(), m.isTopicValid(), c.topic.reply);
-  r.post('/topic/del',m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.del);
+  r.post('/topic/:id/del',m.isSignined(), m.isTopicValid({ checkIsOwner: true }), c.topic.del);
   r.post('/topic/collect',m.isSignined(), m.isTopicValid(), c.topic.collect);
 
   // 3.reply
   r.get('/reply/:id/edit', m.isSignined(), m.isReplyValid({ checkIsOwner: true }), c.reply.edit);
   r.post('/reply/:id/edit', m.isSignined(), m.isReplyValid({ checkIsOwner: true }), c.reply.update);
-  r.get('/reply/:id/del', m.isSignined(), m.isReplyValid({ checkIsOwner: true }), c.reply.del);
-  r.post('/reply/:id/like', m.isSignined(), m.isReplyValid(), c.reply.like);
+  r.post('/reply/del', m.isSignined(), m.isReplyValid({ checkIsOwner: true }), c.reply.del);
+  r.post('/reply/like', m.isSignined(), m.isReplyValid(), c.reply.like);
 
   // 4.user
   r.get('/user/:username', m.isUserValid(), c.user.home);
   r.get('/user/:username/topics', m.isUserValid(), c.user.topics);
   r.get('/user/:username/replies', m.isUserValid(), c.user.replies);
+  r.get('/user/:username/collections', m.isUserValid(), c.user.collections);
   r.get('/setting', m.isSignined(), c.user.setting);
   r.get('/messages', m.isSignined(), c.user.messages);
   r.post('/setting', m.isSignined(), c.user.updateSetting);

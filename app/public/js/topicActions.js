@@ -3,33 +3,50 @@ function onEditTopic(id) {
 }
 
 function onDelTopic(id) {
-	const result = confirm('确定要删除此话题吗？');
-	if (result) {
-		$.post(`/topic/del`, { id, _csrf: getCsrf() }, () => {
-			window.location.href = '/home';
+	if (confirm('确定要删除此话题吗？')) {
+		$.post(`/topic/${id}/del`, { _csrf: getCsrf() }, (result) => {
+			if (result.code == 0) window.location.href = '/home';
 		});
 	}
 }
 
 function onCollectTopic(id) {
-	$.post(`/topic/collect`, { id, _csrf: getCsrf() }, () => {
-		const btn = $('#myCollectBtn');
-		btn.toggleClass('btn-muted btn-primary ');
-		btn.text(btn.hasClass('btn-muted') ? '取消收藏' : '收藏');
+	$.post('/topic/collect', { id, _csrf: getCsrf() }, (result) => {
+		if (result.code == 0) {
+			const btn = $('#myCollectBtn');
+			if (result.action == 'add') {
+				btn.addClass('btn-muted');
+				btn.removeClass('btn-primary');
+				btn.text('取消收藏');
+			} else {
+				btn.addClass('btn-primary');
+				btn.removeClass('btn-muted');
+				btn.text('收藏');
+			}
+		}
 	});
 }
 
 function onLikeReply(id) {
-	const i = event.target;
-	$(i).toggleClass('far fas');
-
+	const btn = $(event.target);
 	const likeText = $(`#like_text_${id}`);
-	let likesCount = parseInt(likeText.text());
-	let newCount = likesCount + ($(i).hasClass('fas') ? 1 : -1);
-	if (newCount) likeText.removeClass('d-none');
-	likeText.text(newCount);
+	$.post('/reply/like', { id, _csrf: getCsrf() }, (result) => {
+		if (result.code == 0) {
+			likeText.removeClass('d-none');
 
-	$.post(`/reply/${id}/like?_csrf=${getCsrf()}`);
+			let likesCount = parseInt(likeText.text());
+			if (result.action == 'up') {
+				btn.addClass('fas');
+				btn.removeClass('far');
+				likesCount++;
+			} else {
+				btn.addClass('far');
+				btn.removeClass('fas');
+				likesCount--;
+			}
+			likeText.text(likesCount);
+		}
+	});
 }
 
 function getCsrf() {
@@ -41,10 +58,11 @@ function onEditReply(id) {
 	window.location.href = `/reply/${id}/edit`;
 }
 
-function onDelReply(id) {
-	const result = confirm('确定要删除此回复吗？');
-	if (result) {
-		window.location.href = `/reply/${id}/del`;
+function onDelReply(id, topicId) {
+	if (confirm('确定要删除此回复吗？')) {
+		$.post('/reply/del', { id, _csrf: getCsrf() }, (result) => {
+			if (result.code == 0) window.location.href = `/topic/${topicId}`;
+		});
 	}
 }
 

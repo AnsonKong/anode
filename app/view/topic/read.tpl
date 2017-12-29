@@ -81,13 +81,15 @@
 						</span>
 						<!-- 最右侧工具 -->
 						<div class="d-flex align-items-center">
+							{% if ctx.user %}
 							<i class="{{ 'far' if item.likes.indexOf(ctx.user.id) == -1 else 'fas' }} fa-thumbs-up interactive_btn mx-1" title="喜欢" onclick="onLikeReply('{{ item.id }}')"></i>
-							<span id="like_text_{{ item.id }}" class="{{ 'd-none' if item.likes.length == 0 else '' }}">{{ item.likes.length }}</span>
-							{% if item.user.id == ctx.user.id %}
-							<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditReply('{{ item.id }}')"></i>
-							<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelReply('{{ item.id }}')"></i>
+								<span id="like_text_{{ item.id }}" class="{{ 'd-none' if item.likes.length == 0 else '' }}">{{ item.likes.length }}</span>
+								{% if item.user.id == ctx.user.id %}
+								<i class="far fa-edit interactive_btn mx-1" title="编辑" onclick="onEditReply('{{ item.id }}')"></i>
+								<i class="far fa-trash-alt interactive_btn mx-1" title="删除" onclick="onDelReply('{{ item.id }}', '{{ topic.id }}')"></i>
+								{% endif %}
+								<i class="fas fa-reply interactive_btn mx-1" title="回复" onclick="onUserReply('{{ item.id }}', '{{ topic.id }}', '{{ item.user.username }}')"></i>
 							{% endif %}
-							<i class="fas fa-reply interactive_btn mx-1" title="回复" onclick="onUserReply('{{ item.id }}', '{{ topic.id }}', '{{ item.user.username }}')"></i>
 						</div>
 					</div>
 					<div class="pl-2">

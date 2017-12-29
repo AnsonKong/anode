@@ -20,6 +20,16 @@
 				<i class="far fa-edit interactive_btn ml-2" onclick="window.location.href='/setting'" title="编辑"></i>
 				{% endif %}
 			</div>
+			{% if user.collections.length %}
+			<div>
+				<div class="d-inline-flex icon-container">
+					<i class="fas fa-star interactive_btn mx-auto"></i>
+				</div>
+				<a class="text-muted dumbText" target="_blank" href="/user/{{ user.username }}/collections">
+					<small>{{ user.collections.length }}个话题收藏</small>
+				</a>
+			</div>
+			{% endif %}
 			{% if user.website %}
 			<div>
 				<div class="d-inline-flex icon-container">

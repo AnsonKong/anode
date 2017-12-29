@@ -63,23 +63,39 @@ class TopicController extends Controller {
 		}
 	}
 
-	// post /topic/del
+	// post /topic/:id/del
 	async del() {
-		const topicId = this.ctx.body.id;
+		const topicId = this.ctx.params.id;
+		let code = -1;
 		// 删除Topic文档
 		const topicDoc = await this.ctx.model.Topic.findByIdAndRemove(topicId);
 		if (topicDoc) {
 			// 删除Topic文档对应的Reply文档
 			await this.ctx.model.Reply.deleteMany({ topic: topicDoc.id });
+			code = 0;
 		}
-		this.ctx.redirect(`/user/${this.ctx.user.username}`);
+		this.ctx.body = { code };
+		// this.ctx.redirect(`/user/${this.ctx.user.username}`);
 	}
 
 	// post /topic/collect
 	async collect() {
-		const topicId = this.ctx.body.id;
-		console.log('topicId:' + topicId)
-		this.ctx.body = { "success": true };
+		const topicId = this.ctx.request.body.id;
+		let code = -1;
+		let action;
+		const c = this.ctx.user.collections;
+		if (c.indexOf(topicId) == -1) {
+			c.push(topicId);
+			action = 'add';
+		} else {
+			const i = c.indexOf(topicId);
+			c.splice(i, 1);
+			action = 'del';
+		}
+		await this.ctx.user.save();
+		code = 0;
+
+		this.ctx.body = { code, action };
 	}
 
 	// post /topic/:id/edit

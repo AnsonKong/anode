@@ -1,6 +1,6 @@
 module.exports = (options, app) => {
 	return async (ctx, next) => {
-		const replyId = ctx.params.id;
+		const replyId = ctx.params.id || ctx.request.body.id;
 		let reply;
 		let alertMsg;
 		try {
