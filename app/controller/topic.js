@@ -19,6 +19,7 @@ class TopicController extends Controller {
 			user: this.ctx.user.id,
 			created_time,
 			last_modified_time: created_time,
+			last_woken_time: created_time,
 		};
 		// 创建Topic文档
 		const newTopicDoc = await this.ctx.model.Topic.create(conditions);
@@ -122,26 +123,30 @@ class TopicController extends Controller {
 		let receiver;
 		let newMessage;
 		let newMessageDoc;
+		const thisTime = moment().unix();
 		if (topicDoc) {
 			// 1.创建Reply文档
 			const body = this.ctx.request.body;
 			const newReply = {
 				content: this.ctx.helper.encodeBase64(body.content),
-				created_time: moment().unix(),
+				created_time: thisTime,
 				topic: topicId,
 				user: this.ctx.user.id,
 			};
+			// 2.更新Topic.last_woken_time
+			await topicDoc.update({ last_woken_time: thisTime });
+
 			if (body.parent) {
 				newReply.parent = body.parent;
 			}
 			newReplyDoc = await this.ctx.model.Reply.create(newReply);
-			// 2.添加“主题被回复”提示消息
+			// 3.添加“主题被回复”提示消息
 			sender = this.ctx.user.id;
 			const topicUser = await this.ctx.model.User.findById(topicDoc.user.id);
 			receiver = topicUser.id;
 			if (sender != receiver) {
 				newMessage = {
-					created_time: moment().unix(),
+					created_time: thisTime,
 					sender,
 					receiver,
 					type: '0',

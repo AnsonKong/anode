@@ -81,7 +81,10 @@
 			</div>
 		</div>
 	{% endset %}
-	{{ panel.init('主页', briefModule) }}
+	<!-- 1 -->
+	<div class="my-3">
+		{{ panel.init('主页', briefModule) }}
+	</div>
 	{% set canEdit = (user.id == ctx.user.id) %}
 	<!-- 最近创建的话题 -->
 	{% set createdModule %}
@@ -97,7 +100,10 @@
 			</small>
 		</div>
 	{% endset %}
-	{{ panel.init('最近创建的话题', createdModule) }}
+	<!-- 2 -->
+	<div class="my-3">
+		{{ panel.init('最近创建的话题', createdModule) }}
+	</div>
 
 	<!-- 最近参与的话题 -->
 	{% set repliedModule %}
@@ -113,6 +119,9 @@
 			</small>
 		</div>
 	{% endset %}
-	{{ panel.init('最近参与的话题', repliedModule) }}
+	<!-- 3 -->
+	<div class="my-3">
+		{{ panel.init('最近参与的话题', repliedModule) }}
+	</div>
 
 {% endblock %}

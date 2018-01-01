@@ -36,7 +36,7 @@
 			{% if topic.good %}
 				<div class="d-inline bg-success text-white p-1" style="font-size: 12px">精华</div>
 			{% endif %}
-			<h4 class="my-2"><b>{{ helper.decodeBase64(topic.title) }}</b></h4>
+			<h4 class="my-2" style="word-break: break-word;"><b>{{ helper.decodeBase64(topic.title) }}</b></h4>
 			<div class="d-flex align-items-end">
 		  	<small class="text-muted">发布于 {{ helper.fromNow(topic.created_time) }}</small>
 		  	<small class="text-muted">作者 <a class="text-muted" href="/user/{{ topic.user.username }}">{{ topic.user.username }}</a></small>
@@ -106,7 +106,9 @@
 		{% endif %}
 	</ul>
 	{% endset %}
-	{{ panel.init(replies.length + ' 回复', repliesModule) }}
+	<div class="my-3">
+		{{ panel.init(replies.length + ' 回复', repliesModule) }}
+	</div>
 
 	<!-- 添加回复面板 -->
 	{% set newReplyModule %}

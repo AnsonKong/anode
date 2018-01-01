@@ -16,7 +16,7 @@
 	</head>
 	<body style="background-color: #e1e1e1">
 		<div class="d-flex flex-column align-items-between" style="min-height: 100%;">
-			<div class="w-100 mb-3">
+			<div class="w-100">
 				{% include './nav.tpl' %}
 				{% if alertMsg %}
 				<div class="container alert alert-warning alert-dismissible fade show" role="alert">
@@ -26,7 +26,9 @@
 				  </button>
 				</div>
 				{% endif %}
-				{% block content %}{% endblock %}
+				<div class="my-3">
+					{% block content %}{% endblock %}
+				</div>
 			</div>
 			{% include './bootstrap.js.tpl' %}
 			{% block customTail %}{% endblock %}

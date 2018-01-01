@@ -98,7 +98,18 @@ exports.parseCategoryConditionsByTab = (tab) => {
 		default:
 			result.category = tab;
 			result.top = false;
-			result.good = false;
 	}
 	return result;
 };
+
+exports.addQuery = (ctx, key, value) => {
+	let result = ctx.path;
+	let cloneQuery = Object.create(ctx.query);
+	cloneQuery[key] = value;
+	let first = true;
+	for(let i in cloneQuery) {
+		result += (first ? '?' : '&') + i + '=' + cloneQuery[i];
+		first = false;
+	}
+	return result;
+}

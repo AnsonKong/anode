@@ -6,14 +6,13 @@
 {% block content %}
 	{% import '../common/panel.tpl' as myPanel %}
 	<div class="container px-0">
-		<!-- <div class="d-flex justify-content-end">
-			<a class="btn btn-primary {{ '' if newMessages.length else 'disabled' }}" href="#">全设为已读</a>
-		</div> -->
 		{% set messages = newMessages %}
 		{% set module %}
 	    {% include '../common/messages-list.tpl' %}
 		{% endset %}
-		{{ myPanel.init('新消息', module) }}
+		<div class="my-3">
+			{{ myPanel.init('新消息', module) }}
+		</div>
 
 		{% set messages = oldMessages %}
 		{% set module %}

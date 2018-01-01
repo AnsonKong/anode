@@ -34,17 +34,14 @@ function onLikeReply(id) {
 		if (result.code == 0) {
 			likeText.removeClass('d-none');
 
-			let likesCount = parseInt(likeText.text());
 			if (result.action == 'up') {
 				btn.addClass('fas');
 				btn.removeClass('far');
-				likesCount++;
 			} else {
 				btn.addClass('far');
 				btn.removeClass('fas');
-				likesCount--;
 			}
-			likeText.text(likesCount);
+			likeText.text(result.data);
 		}
 	});
 }

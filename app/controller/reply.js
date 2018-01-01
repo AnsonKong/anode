@@ -55,7 +55,7 @@ class ReplyController extends Controller {
 			await reply.save();	
 			code = 0;
 		}
-		this.ctx.body = { code, action };
+		this.ctx.body = { code, action, data: reply.likes.length };
 	}
 }
 
