@@ -21,7 +21,7 @@
 						<a title="{{ helper.decodeBase64(topic.title) }}" href="/topic/{{ topic.id }}">{{ helper.decodeBase64(topic.title) }}</a>
 					</div>
 					<!-- right -->
-					<div class="d-flex align-items-center">
+					<div class="d-none d-lg-flex align-items-center">
 						{% if canEdit and topic.user.id == ctx.user.id %}
 						<i class="far fa-edit interactive_btn mx-2" title="编辑" onclick="onEditTopic('{{ topic.id }}')"></i>
 						<i class="far fa-trash-alt interactive_btn ml-2" title="删除" onclick="onDelTopic('{{ topic.id }}')"></i>
