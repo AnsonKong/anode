@@ -82,9 +82,7 @@
 		</div>
 	{% endset %}
 	<!-- 1 -->
-	<div class="my-3">
-		{{ panel.init('主页', briefModule) }}
-	</div>
+	{{ panel.init('主页', briefModule) }}
 	{% set canEdit = (user.id == ctx.user.id) %}
 	<!-- 最近创建的话题 -->
 	{% set createdModule %}
@@ -120,7 +118,7 @@
 		</div>
 	{% endset %}
 	<!-- 3 -->
-	<div class="my-3">
+	<div>
 		{{ panel.init('最近参与的话题', repliedModule) }}
 	</div>
 

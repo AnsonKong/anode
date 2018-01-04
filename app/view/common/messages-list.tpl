@@ -5,11 +5,16 @@
       {% set topicUrl = '/topic/' + item.reply.topic.id + '?msg=' + item.id + '#' + item.reply.id %}
       {% set topicTitle = helper.decodeBase64(item.reply.topic.title) %}
         <li class="list-group-item border-left-0 border-right-0 border-bottom-1 rounded-0">
-      {% if item.type == '0' %}
-          <a href="{{senderUrl}}" target="_blank">{{ item.sender.username }}</a>回复了你的话题<a href="{{topicUrl}}" target="_blank">{{topicTitle}}</a>
-      {% else %}
-    			<a href="{{senderUrl}}" target="_blank">{{ item.sender.username }}</a>在话题<a href="{{topicUrl}}" target="_blank">{{topicTitle}}</a>中的回复<a href="{{topicUrl}}" target="_blank">提到了你</a>
-    	{% endif %}
+      	<div class="d-flex flex-row">
+	      	{% if item.type == '0' %}
+	      		<span class="text-nowrap"><a href="{{senderUrl}}" target="_blank">{{ item.sender.username }}</a>回复了你的话题</span>
+	      		<a class="text-truncate" href="{{topicUrl}}" target="_blank">{{topicTitle}}</a>
+	      	{% else %}
+	      		<span class="text-nowrap"><a href="{{senderUrl}}" target="_blank">{{ item.sender.username }}</a>在话题</span>
+	      		<a class="text-truncate" href="{{topicUrl}}" target="_blank">{{topicTitle}}</a>
+	      		<span class="text-nowrap">中的回复<a href="{{topicUrl}}" target="_blank">提到了你</a></span>
+	    		{% endif %}
+      	</div>
     		</li>
   	{% endfor %}
   {% else %}

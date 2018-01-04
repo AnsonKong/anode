@@ -3,6 +3,23 @@
 {% block customHead %}
 	{% include '../common/lepture.editor.tpl' %}
 	<script type="text/javascript" src="/public/js/check-form.js"></script>
+	<style type="text/css">
+		.CodeMirror {
+		  height: 320px;
+		}
+		.CodeMirror:-webkit-full-screen {
+		  width: 100%;
+		  height: 100%;
+		}
+		.CodeMirror:-moz-full-screen {
+		  width: 100%;
+		  height: 100%;
+		}
+		.CodeMirror:full-screen {
+		  width: 100%;
+		  height: 100%;
+		}
+	</style>
 {% endblock %}
 {% block content %}
 	{% import '../common/panel.tpl' as panel %}

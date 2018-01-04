@@ -21,7 +21,7 @@
 			{% include './nav.tpl' %}
 			<!-- alert -->
 			{% if alertMsg %}
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div class="alert alert-warning alert-dismissible fade show m-0" role="alert">
 			  {{ alertMsg.msg }}
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
@@ -29,7 +29,7 @@
 			</div>
 			{% endif %}
 			<!-- content -->
-			<div class="container-fluid px-0 px-lg-3 my-lg-3">
+			<div class="container px-0 px-lg-3 my-lg-3">
 				{% block content %}{% endblock %}
 				{% block customTail %}{% endblock %}
 			</div>

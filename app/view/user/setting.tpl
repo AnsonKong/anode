@@ -55,7 +55,7 @@
 						<a class="btn btn-primary" onclick="$('#myForm').submit()" href="#">提交</a>
 					</div>
 				</div>
-				<div class="col-auto form-group">
+				<div class="col-auto form-group d-none d-lg-block">
 					<label class="d-block">头像</label>
 					<img id="myAvatar" class="profile-avatar rounded d-block" src="{{ helper.parseAvatar(user.avatar) }}">
 					<input id="myInputFile" type="file" accept="image/png,image/jpeg" class="form-control-file" onchange="uploadAvatar($('#myAvatar')[0]);">

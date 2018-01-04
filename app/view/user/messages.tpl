@@ -5,12 +5,11 @@
 {% endblock %}
 {% block content %}
 	{% import '../common/panel.tpl' as myPanel %}
-	<div class="container px-0">
 		{% set messages = newMessages %}
 		{% set module %}
 	    {% include '../common/messages-list.tpl' %}
 		{% endset %}
-		<div class="my-3">
+		<div class="mb-3">
 			{{ myPanel.init('新消息', module) }}
 		</div>
 
@@ -19,5 +18,4 @@
 	    {% include '../common/messages-list.tpl' %}
 		{% endset %}
 		{{ myPanel.init('旧消息', module) }}
-	</div>
 {% endblock %}
