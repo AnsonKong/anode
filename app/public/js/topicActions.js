@@ -122,4 +122,6 @@ function onUserReply(parentReplyId, topicId, username) {
 	replyUserEditor.codemirror.doc.setCursor(999, 999);
 	// 获取焦点
 	replyUserEditor.codemirror.doc.cm.focus();
+
+	console.log('click me')
 }

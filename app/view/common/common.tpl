@@ -28,14 +28,14 @@
 			  </button>
 			</div>
 			{% endif %}
+			{% include './bootstrap.js.tpl' %}
 			<!-- content -->
-			<div class="container px-0 px-lg-3 my-lg-3">
+			<div class="container px-0 my-lg-3">
 				{% block content %}{% endblock %}
 				{% block customTail %}{% endblock %}
 			</div>
 			<!-- footer -->
 			<div class="d-none d-lg-block mt-auto bg-dark" style="height: 100px;"></div>
-			{% include './bootstrap.js.tpl' %}
 		</div>
 	</body>
 </html>
