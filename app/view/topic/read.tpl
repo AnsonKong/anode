@@ -24,10 +24,17 @@
 		  width: 100%;
 		  height: 100%;
 		}
+		.at-item:hover{
+			color: white;
+			background-color: rgb(51, 102, 255);
+		}
 	</style>
 {% endblock %}
 {% block content %}
 	<div class="container rounded-top bg-light p-0">
+		<!-- 回复历史悬浮 -->
+		<ul id="replies-history-list" class="list-group" style="position: absolute; z-index: 100; max-width: 300px; min-width: 130px;  display: none;">
+		</ul>
 		<!-- 话题面板 -->
 		<div id="topicHead" class="px-2 pt-3 pb-0">
 			{% if topic.top %}
@@ -36,7 +43,7 @@
 			{% if topic.good %}
 			<div class="d-inline bg-success text-white p-1" style="font-size: 12px">精华</div>
 			{% endif %}
-			<h4 class="my-2" style="word-break: break-word;"><b>{{ helper.decodeBase64(topic.title) }}</b></h4>
+			<h4 class="my-2"><b>{{ helper.decodeBase64(topic.title) }}</b></h4>
 			<div class="d-flex flex-column flex-lg-row">
 				<div>
 			  	<small class="text-muted">发布于 {{ helper.fromNow(topic.created_time) }}</small>
@@ -65,19 +72,20 @@
 	<ul id="topicReplies" class="list-group">
 		{% if replies.length %}
 		{% for item in replies %}
-		<li id="{{ item.id }}" class="list-group-item border-left-0 border-right-0 border-top-1 border-bottom-0 rounded-0 p-2">
+		<li id="{{ item.id }}" {{ ('parent-id=' + item.parent) if item.parent else '' }}  class="list-group-item border-left-0 border-right-0 border-top-1 border-bottom-0 rounded-0 p-2">
 			<div class="row">
-				<!-- 头像 -->
+				<!-- col 1 -->
 				<div class="col-auto">
-					<a href="/user/{{ item.user.username }}">
+					<a class="reply-avatar-container" href="/user/{{ item.user.username }}">
 						<img class="replyAvatar rounded" src="{{ helper.parseAvatar(item.user.avatar) }}">
 					</a>
 				</div>
-				<!-- 第二列 -->
+				<!-- col 2 -->
 				<div class="col pl-0 d-flex flex-column">
+					<!-- row 1 -->
 					<div class="d-flex">
 						<span class="mr-auto">
-							<small><b><a class="text-dark dumbText" href="/user/{{ item.user.username }}">{{ item.user.username }}</a></b></small>
+							<small><b><a class="reply-username text-dark dumbText" href="/user/{{ item.user.username }}">{{ item.user.username }}</a></b></small>
 							<small><a href="#{{ item.id }}">{{ loop.index }}楼•{{ helper.fromNow(item.created_time) }}</a></small>
 							{% if item.user.id === topic.user.id %}
 								<small class="d-inline p-1 text-white bg-success">作者</small>
@@ -96,7 +104,8 @@
 							{% endif %}
 						</div>
 					</div>
-					<div class="pl-2">
+					<!-- row 2 -->
+					<div class="reply-content pl-2">
 						{{ helper.parseMarkdown(helper.decodeBase64(item.content)) | safe }}
 					</div>
 					<div id="userReplyContainer_{{ item.id }}" class="pl-2">
@@ -133,11 +142,23 @@
 	{{ panel.init('添加回复', newReplyModule) }}
 {% endblock %}
 {% block customTail %}
+	<script type="text/javascript" src="/public/js/at-usernames-popup.js"></script>
+	<script type="text/javascript" src="/public/js/topic-read-replies-history.js"></script>
 	<script type="text/javascript">
-		var editor = new Editor({
+		const editor = new Editor({
 			element: $('#myTextarea')[0],
 			status: false,
 		});
 		editor.render();
+
+		let replyUsernamesArr = $('.reply-username');
+		let replyUsernamesSet = new Set();
+		for(let i = 0;i < replyUsernamesArr.length;i++) {
+			replyUsernamesSet.add(replyUsernamesArr[i].innerHTML);
+		}
+
+		replyUsernamesSet = new Set(['abc', 'cba', 'Anson', 'Byran', 'Jack', 'starbucks', 'joe', 'kate', 'smith', 'baby'])
+
+		new AtUsersPopup(editor.codemirror, replyUsernamesSet);
 	</script>
 {% endblock %}

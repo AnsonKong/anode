@@ -8,6 +8,7 @@
 		<style type="text/css">
 			html, body {
 				height: 100%;
+				word-break: break-word;
 			}
 			.nav-avatar {
 				width: 20px;

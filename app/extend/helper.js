@@ -19,7 +19,7 @@ exports.parseMarkdown = (content) => {
 	const markdown = require('marked')(content);
 	let newStr = markdown.replace(reg1, '$1 $2');
 	newStr = newStr.replace(reg2, '$1 ');
-	const result = newStr.replace(reg3, '<a href="/user/$1" target="_blank">@$1</a>$2');
+	const result = newStr.replace(reg3, '<a class="replies-history-btn" href="/user/$1" target="_blank">@$1</a>$2');
 	return result;
 };
 
