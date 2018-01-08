@@ -8,7 +8,10 @@ class AtUsersPopup {
     this._wrapper = this._display.wrapper;
 
     this._usernames = usernamesSet;
+    this._list = null;
+    this._items = null;
     this._activate = false;
+    this._isPopuped = false;
     this._index = 0;
     this._total = 0;
     this._atCursor = null;
@@ -19,6 +22,17 @@ class AtUsersPopup {
 
     this._initList();
     this._initListeners();
+  }
+  /** 激活侦听 */
+  activate() {
+  	this._activate = true;
+  	this._codemirror.on('change', this._onChange);
+  }
+  /** 撤销侦听 */
+  deactivate() {
+  	this._hide();
+  	this._activate = false;
+  	this._codemirror.off('change', this._onChange);
   }
 
   _parseConfig() {
@@ -49,45 +63,58 @@ class AtUsersPopup {
 		const username = $(nodes[this._index]).text();
 		this._hide();
 		this._doc.replaceRange(`${username} `, this._atCursor, this._doc.getCursor());
+		this._codemirror.focus();
 	}
 
   _initListeners() {
-  	this._codemirror.on('change', (i, changeObj) => {
-  		const addText = changeObj.text;
-  		console.log(changeObj)
-			if (addText.length == 1) {
-				const singleChar = addText[0];
-				if (singleChar == '@') {
-					this._atCursor = this._doc.getCursor();
-					this._show();
-					this._searchKeyword('');
-					this._updatePosition();
-					return;
-				} else if(this._activate) {
-					const currentKeyword = this._doc.getRange(this._atCursor, this._doc.getCursor());
-					if (currentKeyword && this._searchKeyword(currentKeyword)) {
-						this._updatePosition();
-						return;
-					}
-				}
-			}
-			this._hide();
-  	});
+  	this._onChange = this._onChange.bind(this);
+  	this._onKeydown = this._onKeydown.bind(this);
+  	this._onHide = this._onHide.bind(this);
+  	this._onCursorActivity = this._onCursorActivity.bind(this);
+  }
 
-  	this._codemirror.on('keydown', (i) => {
-			if (!this._activate) return;
-			switch(event.keyCode) {
-				case 13:
-				case 38:
-				case 40:
-					event.preventDefault();
-					event.stopPropagation();
-					if (event.keyCode == 13) this._enterItem();
-					else if (event.keyCode == 38) this._prevItem();
-					else if (event.keyCode == 40) this._nextItem();
-					break;
+  _onChange(i, changeObj) {
+		if (changeObj.text.toString() == '@') {
+			this._atCursor = this._doc.getCursor();
+			this._show();
+		}
+  }
+
+  _onCursorActivity() {
+  	const currentCursor = this._doc.getCursor();
+  	if(currentCursor.line > this._atCursor.line || (currentCursor.line == this._atCursor.line && currentCursor.ch >= this._atCursor.ch)) {
+  		const k = this._doc.getRange(this._atCursor, this._doc.getCursor());
+			if (this._searchKeyword(k)) {
+				this._updatePosition();
+				return;
 			}
-		});
+  	}
+  	this._hide();
+  }
+
+  _onHide() {
+  	this._hide();
+  }
+
+  _onKeydown(i) {
+		switch(event.keyCode) {
+			// Enter
+			case 13:
+			// ArrowUp
+			case 38:
+			// ArrowDown
+			case 40:
+				event.preventDefault();
+				event.stopPropagation();
+				if (event.keyCode == 13) this._enterItem();
+				else if (event.keyCode == 38) this._prevItem();
+				else if (event.keyCode == 40) this._nextItem();
+				break;
+			// Esc
+			case 27:
+				this._hide();
+				break;
+		}
   }
 
   _searchKeyword(keyword){
@@ -110,7 +137,11 @@ class AtUsersPopup {
 			});
 			// 组件UI
 			for(let i = 0;i < matched.length;i++) {
-				let newLi = $(`<a href="#" class="list-group-item list-group-item-action at-item" style="line-height: 1;">${matched[i]}</a>`);
+				let newLi = this._items[i];
+				let reg = new RegExp(`(${keyword})`, 'gi');
+				let currentName = matched[i];
+				currentName = currentName.replace(reg, '<b>$1</b>');
+				newLi.html(currentName);
 				this._list.append(newLi);
 			}
 			this._total = matched.length;
@@ -122,19 +153,29 @@ class AtUsersPopup {
 
   _updatePosition() {
 		const lineH = this._display.cachedTextHeight;
-		this._list.css('left', $(this._cursor).css('left'));
-		this._list.css('top', (this._atCursor.line * lineH + lineH / 2) + 'px');
+		this._list.css('left', this._cursor.offsetLeft);
+		this._list.css('top', (this._wrapper.offsetTop + this._cursor.offsetTop - this._doc.scrollTop + lineH / 2));
 	}
 
 	_show() {
-		$(this._wrapper).append(this._list);
+		$(this._wrapper.offsetParent).append(this._list);
 		this._list.show();
-		this._activate = true;
+		this._isPopuped = true;
+
+		this._codemirror.on('keydown', this._onKeydown);
+		this._codemirror.on('blur', this._onHide);
+		this._codemirror.on('scroll', this._onHide);
+		this._codemirror.on('cursorActivity', this._onCursorActivity);
 	}
 
 	_hide() {
 		this._list.hide();
-		this._activate = false;
+		this._isPopuped = false;
+
+		this._codemirror.off('keydown', this._onKeydown);
+		this._codemirror.off('blur', this._onHide);
+		this._codemirror.off('scroll', this._onHide);
+		this._codemirror.off('cursorActivity', this._onCursorActivity);
 	}
 
   _initList() {
@@ -145,5 +186,28 @@ class AtUsersPopup {
   	this._list.css('max-width', '300px');
   	this._list.css('min-width', '130px');
   	this._list.css('display', 'none');
+  	this._list.mousedown((e) => {
+  		e.preventDefault();
+  		e.stopPropagation();
+  	});
+		this._list.click((e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			const node = e.target;
+			const nodes = this._list.get(0).childNodes;
+			for(var entry of nodes.entries()) {
+				if(node == entry[1]) {
+					this._selectItem(entry[0]);
+					this._enterItem();
+					break;
+				}
+			}
+		});
+  	// 子项
+  	this._items = [];
+  	for(let i = 0;i < this._limit;i++) {
+  		let newLi = $(`<a href="#" class="list-group-item list-group-item-action" style="line-height: 0.5;">unknown</a>`);
+			this._items.push(newLi);
+  	}
   }
 }

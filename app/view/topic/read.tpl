@@ -127,7 +127,7 @@
 	{% set newReplyModule %}
 	<div class="border-0 p-2">
 		<form id="myForm" method="post" action="/topic/{{ ctx.params.id }}/reply" novalidate>
-			<div class="form-group">
+			<div class="form-group" style="position: relative;">
 				<textarea id="myTextarea" class="form-control" name="content" required></textarea>
 				<div class="invalid-feedback">
 					请正确填写回复内容，要求字数1字以上。
@@ -157,8 +157,9 @@
 			replyUsernamesSet.add(replyUsernamesArr[i].innerHTML);
 		}
 
-		replyUsernamesSet = new Set(['abc', 'cba', 'Anson', 'Byran', 'Jack', 'starbucks', 'joe', 'kate', 'smith', 'baby'])
+		replyUsernamesSet = new Set(['abc', 'cba', 'AnsonA', 'Byran', 'Jack', 'starbucks', 'joe', 'kate', 'smith', 'baby'])
 
-		new AtUsersPopup(editor.codemirror, replyUsernamesSet);
+		const at = new AtUsersPopup(editor.codemirror, replyUsernamesSet);
+		at.activate();
 	</script>
 {% endblock %}

@@ -1,5 +1,16 @@
 const moment = require('moment');
+const marked = require('marked')
 moment.locale('zh-cn');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: true,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false
+});
 // 若@前方有可见字符，则在前方加上空格
 const reg1 = /(\S)(@)/g;
 // 若最后的@是以可见字符结尾，则在最后加上空格
@@ -16,7 +27,9 @@ exports.decodeBase64 = (encoded) => {
 };
 
 exports.parseMarkdown = (content) => {
-	const markdown = require('marked')(content);
+	console.log(content)
+	const markdown = marked(content);
+	console.log(markdown)
 	let newStr = markdown.replace(reg1, '$1 $2');
 	newStr = newStr.replace(reg2, '$1 ');
 	const result = newStr.replace(reg3, '<a class="replies-history-btn" href="/user/$1" target="_blank">@$1</a>$2');
