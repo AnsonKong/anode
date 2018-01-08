@@ -27,9 +27,7 @@ exports.decodeBase64 = (encoded) => {
 };
 
 exports.parseMarkdown = (content) => {
-	console.log(content)
 	const markdown = marked(content);
-	console.log(markdown)
 	let newStr = markdown.replace(reg1, '$1 $2');
 	newStr = newStr.replace(reg2, '$1 ');
 	const result = newStr.replace(reg3, '<a class="replies-history-btn" href="/user/$1" target="_blank">@$1</a>$2');
