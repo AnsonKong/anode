@@ -142,7 +142,8 @@
 	{{ panel.init('添加回复', newReplyModule) }}
 {% endblock %}
 {% block customTail %}
-	<script type="text/javascript" src="/public/js/at-usernames-popup.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/css/editor-char-triggering-list.css">
+	<script type="text/javascript" src="/public/js/editor-char-triggering-list.js"></script>
 	<script type="text/javascript" src="/public/js/topic-read-replies-history.js"></script>
 	<script type="text/javascript">
 		const editor = new Editor({
@@ -152,14 +153,17 @@
 		editor.render();
 
 		let replyUsernamesArr = $('.reply-username');
-		let replyUsernamesSet = new Set();
-		for(let i = 0;i < replyUsernamesArr.length;i++) {
-			replyUsernamesSet.add(replyUsernamesArr[i].innerHTML);
+		let replyUsernamesSet;
+		if (replyUsernamesArr.length) {
+			replyUsernamesSet = new Set();
+			for(let i = 0;i < replyUsernamesArr.length;i++) {
+				replyUsernamesSet.add(replyUsernamesArr[i].innerHTML);
+			}
 		}
-
-		replyUsernamesSet = new Set(['abc', 'cba', 'AnsonA', 'Byran', 'Jack', 'starbucks', 'joe', 'kate', 'smith', 'baby'])
-
-		const at = new AtUsersPopup(editor.codemirror, replyUsernamesSet);
-		at.activate();
+		replyUsernamesSet = new Set(['123', 'kkk', 'ccc', 'anson', 'GWQE'])
+		if (replyUsernamesSet) {
+			const triggerList = new EditorCharTriggeringList(editor.codemirror, replyUsernamesSet);
+			triggerList.activate();
+		}
 	</script>
 {% endblock %}

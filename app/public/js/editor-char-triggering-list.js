@@ -1,21 +1,32 @@
-/** 需先加载Bootstrap */
-class AtUsersPopup {
-	constructor(codemirror, usernamesSet, configuration = null) {
+/** jQuery required */
+class EditorCharTriggeringList {
+	constructor(codemirror, itemsSet, configuration = null) {
     this._codemirror = codemirror;
     this._doc = this._codemirror.doc;
     this._display = this._codemirror.display;
     this._cursor = this._display.cursor;
     this._wrapper = this._display.wrapper;
 
-    this._usernames = usernamesSet;
+    this._itemsSet = itemsSet;
+    // <div>
     this._list = null;
+    // [<a>, <a>]
     this._items = null;
     this._activate = false;
-    this._isPopuped = false;
+    this._isTriggered = false;
+    // index of selected item
     this._index = 0;
+    // total number of matched items
     this._total = 0;
-    this._atCursor = null;
-    this._limit = 5;
+    this._triggerCursor = null;
+
+    // configurable
+    this._limit = -1;
+    this._triggerChar = null;
+    this._listCssObj = null;
+    this._itemCssObj = null;
+    this._listClasses = null;
+    this._itemClasses = null;
 
     this._configuration = configuration;
     this._parseConfig();
@@ -36,7 +47,13 @@ class AtUsersPopup {
   }
 
   _parseConfig() {
-
+  	const c = this._configuration || {};
+  	this._limit = c.hasOwnProperty('limit') ? c.limit : 5;
+  	this._triggerChar = c.hasOwnProperty('triggerChar') ? c.triggerChar : '@';
+  	this._listCssObj = c.hasOwnProperty('listCssObj') ? c.listCssObj : null;
+  	this._itemCssObj = c.hasOwnProperty('itemCssObj') ? c.itemCssObj : null;
+  	this._listClasses = c.hasOwnProperty('listClasses') ? c.listClasses : null;
+  	this._itemClasses = c.hasOwnProperty('itemClasses') ? c.itemClasses : null;
   }
 
   _nextItem() {
@@ -53,16 +70,16 @@ class AtUsersPopup {
 
 	_selectItem(i) {
 		const nodes = this._list.get(0).childNodes;
-		$(nodes[this._index]).removeClass('active');
+		$(nodes[this._index]).removeClass('trigger-item-active');
 		this._index = i;
-		$(nodes[this._index]).addClass('active');
+		$(nodes[this._index]).addClass('trigger-item-active');
 	}
 
 	_enterItem(){
 		const nodes = this._list.get(0).childNodes;
 		const username = $(nodes[this._index]).text();
 		this._hide();
-		this._doc.replaceRange(`${username} `, this._atCursor, this._doc.getCursor());
+		this._doc.replaceRange(`${username} `, this._triggerCursor, this._doc.getCursor());
 		this._codemirror.focus();
 	}
 
@@ -74,16 +91,16 @@ class AtUsersPopup {
   }
 
   _onChange(i, changeObj) {
-		if (changeObj.text.toString() == '@') {
-			this._atCursor = this._doc.getCursor();
+		if (changeObj.text.toString() == this._triggerChar) {
+			this._triggerCursor = this._doc.getCursor();
 			this._show();
 		}
   }
 
   _onCursorActivity() {
   	const currentCursor = this._doc.getCursor();
-  	if(currentCursor.line > this._atCursor.line || (currentCursor.line == this._atCursor.line && currentCursor.ch >= this._atCursor.ch)) {
-  		const k = this._doc.getRange(this._atCursor, this._doc.getCursor());
+  	if(currentCursor.line > this._triggerCursor.line || (currentCursor.line == this._triggerCursor.line && currentCursor.ch >= this._triggerCursor.ch)) {
+  		const k = this._doc.getRange(this._triggerCursor, this._doc.getCursor());
 			if (this._searchKeyword(k)) {
 				this._updatePosition();
 				return;
@@ -120,7 +137,7 @@ class AtUsersPopup {
   _searchKeyword(keyword){
 		keyword = keyword.toLowerCase();
 		const matched = [];
-		const values = this._usernames.values();
+		const values = this._itemsSet.values();
 		// 获取匹配的字符串
 		for (let n of values) {
 		  if (n.toLowerCase().indexOf(keyword) != -1 && matched.length < this._limit) {
@@ -153,14 +170,16 @@ class AtUsersPopup {
 
   _updatePosition() {
 		const lineH = this._display.cachedTextHeight;
-		this._list.css('left', this._cursor.offsetLeft);
+		this._list.css('left', $(this._cursor).css('left'));
 		this._list.css('top', (this._wrapper.offsetTop + this._cursor.offsetTop - this._doc.scrollTop + lineH / 2));
 	}
 
 	_show() {
+		if (this._isTriggered) return;
+
 		$(this._wrapper.offsetParent).append(this._list);
 		this._list.show();
-		this._isPopuped = true;
+		this._isTriggered = true;
 
 		this._codemirror.on('keydown', this._onKeydown);
 		this._codemirror.on('blur', this._onHide);
@@ -170,7 +189,7 @@ class AtUsersPopup {
 
 	_hide() {
 		this._list.hide();
-		this._isPopuped = false;
+		this._isTriggered = false;
 
 		this._codemirror.off('keydown', this._onKeydown);
 		this._codemirror.off('blur', this._onHide);
@@ -179,13 +198,9 @@ class AtUsersPopup {
 	}
 
   _initList() {
-  	this._list = $('<div></div>');
-  	this._list.addClass('list-group');
-  	this._list.css('position', 'absolute');
-  	this._list.css('z-index', 101);
-  	this._list.css('max-width', '300px');
-  	this._list.css('min-width', '130px');
-  	this._list.css('display', 'none');
+  	this._list = $('<ul></ul>');
+  	this._list.addClass('trigger-list');
+
   	this._list.mousedown((e) => {
   		e.preventDefault();
   		e.stopPropagation();
@@ -206,7 +221,8 @@ class AtUsersPopup {
   	// 子项
   	this._items = [];
   	for(let i = 0;i < this._limit;i++) {
-  		let newLi = $(`<a href="#" class="list-group-item list-group-item-action" style="line-height: 0.5;">unknown</a>`);
+  		let newLi = $(`<li>unknown</li>`);
+  		newLi.addClass('trigger-item')
 			this._items.push(newLi);
   	}
   }

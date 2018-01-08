@@ -1,3 +1,3 @@
-<link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
-<script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
-<script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
+<link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+<script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+<script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>

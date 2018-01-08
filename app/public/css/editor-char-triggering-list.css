@@ -1,0 +1,31 @@
+.trigger-list {
+	border: #DDD solid 1px;
+	background-color: white;
+	border-radius: 5px;
+	font-size: 1em;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	display: none;
+	z-index: 100;
+	max-width: 300px;
+	min-width: 130px;
+}
+.trigger-item {
+	list-style: none;
+	border-bottom: #DDD solid 1px;
+	padding: 0.25em 0;
+	cursor: pointer;
+}
+.trigger-item:last-child {
+	border-bottom: none;
+}
+.trigger-item:hover {
+	color: white;
+	background-color: rgb(40, 100, 220);
+}
+.trigger-item-active {
+	color: white;
+	background-color: rgb(51, 102, 255);
+}

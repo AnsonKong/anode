@@ -67,12 +67,13 @@ let replyUserWrapper;
 let replyUserFormElement;
 let replyUserParentElement;
 let replyUserEditor;
+let replyTriggerList;
 function onUserReply(parentReplyId, topicId, username) {
 	if (!replyUserEditor) {
 		replyUserWrapper = $('<form id="newForm" method="post" novalidate/>');
 		replyUserFormElement = replyUserWrapper[0];
 		// 2.form-group
-		const formGroup = $('<div class="form-group"></div>');
+		const formGroup = $('<div class="form-group" style="position: relative;"></div>');
 		// 1.添加textarea
 		const newTextarea = $('<textarea id="newTextarea" class="form-control" name="content" required>');
 		formGroup.append(newTextarea);
@@ -86,7 +87,6 @@ function onUserReply(parentReplyId, topicId, username) {
 		replyUserWrapper.append(replyUserBtn);
 		replyUserBtn.click(function() {
 			let result = checkForm('newForm', 'newTextarea', replyUserEditor);
-			console.log(result)
 			if (!result) {
 				event.preventDefault();
     		event.stopPropagation();
@@ -106,7 +106,12 @@ function onUserReply(parentReplyId, topicId, username) {
 			element: replyUserTextareaElement,
 			status: false,
 		});
-		editor.render();
+		replyUserEditor.render();
+		// 6.添加@
+		if (replyUsernamesSet) {
+			replyTriggerList = new EditorCharTriggeringList(replyUserEditor.codemirror, replyUsernamesSet);
+			replyTriggerList.activate();
+		}
 	}
 
 	// 更新form.action
@@ -122,6 +127,4 @@ function onUserReply(parentReplyId, topicId, username) {
 	replyUserEditor.codemirror.doc.setCursor(999, 999);
 	// 获取焦点
 	replyUserEditor.codemirror.doc.cm.focus();
-
-	console.log('click me')
 }
