@@ -155,6 +155,7 @@ class EditorCharTriggeringList {
 			// 组件UI
 			for(let i = 0;i < matched.length;i++) {
 				let newLi = this._items[i];
+				newLi.removeClass('trigger-item-active');
 				let reg = new RegExp(`(${keyword})`, 'gi');
 				let currentName = matched[i];
 				currentName = currentName.replace(reg, '<b>$1</b>');
