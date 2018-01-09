@@ -38,5 +38,7 @@
 			<!-- footer -->
 			<div class="d-none d-lg-block mt-auto bg-dark" style="height: 100px;"></div>
 		</div>
+		{% block topLayer %}
+		{% endblock %}
 	</body>
 </html>

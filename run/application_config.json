@@ -80,25 +80,25 @@
     "i18n": {
       "defaultLocale": "en_US",
       "dirs": [
-        "E:\\egg-example\\node_modules\\egg-session\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-security\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-jsonp\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-onerror\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-i18n\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-watcher\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-multipart\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-development\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-schedule\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-logrotator\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-static\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-view\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-view-nunjucks\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-mongoose\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-passport\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-passport-github\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg-passport-local\\config\\locales",
-        "E:\\egg-example\\node_modules\\egg\\config\\locales",
-        "E:\\egg-example\\config\\locales"
+        "C:\\nodejs\\egg-example\\node_modules\\egg-session\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-security\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-jsonp\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-onerror\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-i18n\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-watcher\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-multipart\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-development\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-schedule\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-logrotator\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-static\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-view\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-view-nunjucks\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-mongoose\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-passport\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-passport-github\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg-passport-local\\config\\locales",
+        "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\locales",
+        "C:\\nodejs\\egg-example\\config\\locales"
       ],
       "queryField": "locale",
       "cookieField": "locale",
@@ -108,8 +108,8 @@
     "watcher": {
       "type": "development",
       "eventSources": {
-        "default": "E:\\egg-example\\node_modules\\egg-watcher\\lib\\event-sources\\default",
-        "development": "E:\\egg-example\\node_modules\\egg-watcher\\lib\\event-sources\\development"
+        "default": "C:\\nodejs\\egg-example\\node_modules\\egg-watcher\\lib\\event-sources\\default",
+        "development": "C:\\nodejs\\egg-example\\node_modules\\egg-watcher\\lib\\event-sources\\development"
       }
     },
     "multipart": {
@@ -144,7 +144,7 @@
     },
     "static": {
       "prefix": "/public/",
-      "dir": "E:\\egg-example\\app\\public",
+      "dir": "C:\\nodejs\\egg-example\\app\\public",
       "dynamic": true,
       "preload": false,
       "buffer": false,
@@ -153,7 +153,7 @@
     },
     "view": {
       "root": [
-        "E:\\egg-example\\app\\view"
+        "C:\\nodejs\\egg-example\\app\\view"
       ],
       "cache": false,
       "defaultExtension": ".html",
@@ -253,9 +253,9 @@
       "author": "",
       "license": "MIT"
     },
-    "baseDir": "E:\\egg-example",
-    "HOME": "C:\\Users\\Administrator",
-    "rundir": "E:\\egg-example\\run",
+    "baseDir": "C:\\nodejs\\egg-example",
+    "HOME": "C:\\Users\\kongweian",
+    "rundir": "C:\\nodejs\\egg-example\\run",
     "dump": {
       "ignore": "<Set>"
     },
@@ -286,7 +286,7 @@
       "returnRawBody": true
     },
     "logger": {
-      "dir": "E:\\egg-example\\logs\\egg-example",
+      "dir": "C:\\nodejs\\egg-example\\logs\\egg-example",
       "encoding": "utf8",
       "env": "local",
       "level": "INFO",
@@ -394,8 +394,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-session",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-session",
       "version": "3.0.0"
     },
     "security": {
@@ -407,9 +407,9 @@
         "session"
       ],
       "env": [],
-      "from": "E:\\egg-example\\config\\plugin.js",
+      "from": "C:\\nodejs\\egg-example\\config\\plugin.js",
       "csrf": false,
-      "path": "E:\\egg-example\\node_modules\\egg-security",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-security",
       "version": "2.0.0"
     },
     "jsonp": {
@@ -421,8 +421,8 @@
         "security"
       ],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-jsonp",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-jsonp",
       "version": "2.0.0"
     },
     "onerror": {
@@ -434,8 +434,8 @@
         "jsonp"
       ],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-onerror",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-onerror",
       "version": "2.0.0"
     },
     "i18n": {
@@ -445,8 +445,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-i18n",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-i18n",
       "version": "2.0.0"
     },
     "watcher": {
@@ -456,8 +456,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-watcher",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-watcher",
       "version": "3.0.0"
     },
     "multipart": {
@@ -467,8 +467,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-multipart",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-multipart",
       "version": "2.0.0"
     },
     "development": {
@@ -482,8 +482,8 @@
       "env": [
         "local"
       ],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-development",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-development",
       "version": "2.0.0"
     },
     "schedule": {
@@ -493,8 +493,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-schedule",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-schedule",
       "version": "3.1.1"
     },
     "logrotator": {
@@ -506,8 +506,8 @@
       ],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-logrotator",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-logrotator",
       "version": "3.0.1"
     },
     "static": {
@@ -517,8 +517,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-static",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-static",
       "version": "2.0.0"
     },
     "view": {
@@ -528,8 +528,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\node_modules\\egg\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-view",
+      "from": "C:\\nodejs\\egg-example\\node_modules\\egg\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-view",
       "version": "2.0.0"
     },
     "nunjucks": {
@@ -542,8 +542,8 @@
       ],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-view-nunjucks",
+      "from": "C:\\nodejs\\egg-example\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-view-nunjucks",
       "version": "2.1.4"
     },
     "mongoose": {
@@ -553,8 +553,8 @@
       "dependencies": [],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-mongoose",
+      "from": "C:\\nodejs\\egg-example\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-mongoose",
       "version": "2.1.1"
     },
     "passport": {
@@ -566,8 +566,8 @@
       ],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-passport",
+      "from": "C:\\nodejs\\egg-example\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-passport",
       "version": "2.0.0"
     },
     "passportGithub": {
@@ -579,8 +579,8 @@
       ],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-passport-github",
+      "from": "C:\\nodejs\\egg-example\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-passport-github",
       "version": "1.0.0"
     },
     "passportLocal": {
@@ -592,8 +592,8 @@
       ],
       "optionalDependencies": [],
       "env": [],
-      "from": "E:\\egg-example\\config\\plugin.js",
-      "path": "E:\\egg-example\\node_modules\\egg-passport-local",
+      "from": "C:\\nodejs\\egg-example\\config\\plugin.js",
+      "path": "C:\\nodejs\\egg-example\\node_modules\\egg-passport-local",
       "version": "1.1.0"
     }
   }

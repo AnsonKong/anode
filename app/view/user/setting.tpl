@@ -58,11 +58,44 @@
 				<div class="col-auto form-group d-none d-lg-block">
 					<label class="d-block">头像</label>
 					<img id="myAvatar" class="profile-avatar rounded d-block" src="{{ helper.parseAvatar(user.avatar) }}">
-					<input id="myInputFile" type="file" accept="image/png,image/jpeg" class="form-control-file" onchange="uploadAvatar($('#myAvatar')[0]);">
+					<input id="myInputFile" type="file" accept="image/*" class="form-control-file" onchange="uploadAvatar($('#myAvatar')[0]);">
 					<label class="btn btn-primary w-100 mt-2" for="myInputFile" style="cursor: pointer;">上传并更新头像</label>
+					<div id="myAvatarTip" class="text-danger invisible">图片大小不得大于1MB。</div>
 				</div>
 			</form>
 		</div>
 	{% endset %}
 	{{ settingPanel.init('设置', settingModule) }}
+{% endblock %}
+
+{% block topLayer %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">裁剪您的新头像</h5>
+        <button type="button" class="close" style="cursor: pointer;" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body justify-content-center d-flex">
+        <img id="myCrop" src="/public/avatar/8e3c8b8e3afcd209f41eaf1bcdcc8482.jpg">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" style="cursor: pointer;">保存头像</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block customTail %}
+	<script type="text/javascript" src="/public/js/jquery.Jcrop.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/css/jquery.Jcrop.min.css">
+	<style type="text/css">
+		.jcrop-keymgr {
+		  opacity: 0;
+		}
+	</style>
 {% endblock %}

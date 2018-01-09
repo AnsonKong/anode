@@ -160,7 +160,6 @@
 				replyUsernamesSet.add(replyUsernamesArr[i].innerHTML);
 			}
 		}
-		replyUsernamesSet = new Set(['123', 'kkk', 'ccc', 'anson', 'GWQE'])
 		if (replyUsernamesSet) {
 			const triggerList = new EditorCharTriggeringList(editor.codemirror, replyUsernamesSet);
 			triggerList.activate();
