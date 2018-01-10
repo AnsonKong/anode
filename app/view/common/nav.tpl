@@ -16,7 +16,7 @@
                 <a class="nav-link" href="/user/{{ ctx.user.username }}">{{ ctx.user.username }}</a>
             </li>
             <li class="nav-item mr-2 mr-lg-0">
-                <a class="nav-link" href="/user/{{ ctx.user.username }}"><img class="nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
+                <a class="nav-link" href="/user/{{ ctx.user.username }}"><img class="my-avatar nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
             </li>
             
             <li class="nav-item mr-2 mr-lg-0">

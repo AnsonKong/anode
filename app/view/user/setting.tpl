@@ -57,8 +57,8 @@
 				</div>
 				<div class="col-auto form-group d-none d-lg-block">
 					<label class="d-block">头像</label>
-					<img id="myAvatar" class="profile-avatar rounded d-block" src="{{ helper.parseAvatar(user.avatar) }}">
-					<input id="myInputFile" type="file" accept="image/*" class="form-control-file" onchange="uploadAvatar($('#myAvatar')[0]);">
+					<img class="my-avatar profile-avatar rounded d-block" src="{{ helper.parseAvatar(user.avatar) }}">
+					<input id="myInputFile" type="file" accept="image/*" class="form-control-file" onchange="uploadAvatar();">
 					<label class="btn btn-primary w-100 mt-2" for="myInputFile" style="cursor: pointer;">上传并更新头像</label>
 					<div id="myAvatarTip" class="text-danger invisible">图片大小不得大于1MB。</div>
 				</div>
@@ -80,10 +80,10 @@
         </button>
       </div>
       <div class="modal-body justify-content-center d-flex">
-        <img id="myCrop" src="/public/avatar/8e3c8b8e3afcd209f41eaf1bcdcc8482.jpg">
+        <img id="myCrop" src="/public/avatar/8c556de2e437c07c796b756076a392e7.jpg">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" style="cursor: pointer;">保存头像</button>
+        <button type="button" class="btn btn-primary" style="cursor: pointer;" onclick="saveCrop();">保存头像</button>
       </div>
     </div>
   </div>

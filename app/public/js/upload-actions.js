@@ -1,8 +1,7 @@
 const avatarMaxSize = 1024 * 1024;
 const cropMaxSize = 400;
 let jcropApi;
-function uploadAvatar(imgEle) {
-  const formData = new FormData();
+function uploadAvatar() {
   // Attach file
   const size = $('input[type=file]')[0].files[0].size;
   if (size > avatarMaxSize) {
@@ -32,7 +31,22 @@ function uploadAvatar(imgEle) {
       jcropApi.setSelect([cropX, cropY, cropInitSize, cropInitSize]);
     }
   });
-  return;
+}
+
+function saveCrop() {
+  const formData = new FormData();
+  // formData.append('_csrf', getCsrf());
+  const select = jcropApi.tellSelect();
+  if (select.w != 0 && select.h != 0) {
+    const resizeW = $('#myCrop')[0].width;
+    const resizeH = $('#myCrop')[0].height;
+    formData.append('resizeW', resizeW);
+    formData.append('resizeH', resizeH);
+    formData.append('cropX', select.x);
+    formData.append('cropY', select.y);
+    formData.append('cropW', select.w);
+    formData.append('cropH', select.h);
+  }
   formData.append('image', $('input[type=file]')[0].files[0]);
   $.ajax({
     url: '/upload?_csrf=' + getCsrf(),
@@ -41,7 +55,7 @@ function uploadAvatar(imgEle) {
     contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
     processData: false, // NEEDED, DON'T OMIT THIS
     success: function(result) {
-      imgEle.src = result.url;
+      $('.my-avatar').attr('src', result.url);
     },
     error: function(responseStr) {
       alert("error", responseStr);
