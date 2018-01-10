@@ -59,13 +59,24 @@
 					<label class="d-block">头像</label>
 					<img class="my-avatar profile-avatar rounded d-block" src="{{ helper.parseAvatar(user.avatar) }}">
 					<input id="myInputFile" type="file" accept="image/*" class="form-control-file" onchange="uploadAvatar();">
-					<label class="btn btn-primary w-100 mt-2" for="myInputFile" style="cursor: pointer;">上传并更新头像</label>
-					<div id="myAvatarTip" class="text-danger invisible">图片大小不得大于1MB。</div>
+					<label class="btn btn-primary w-100 mt-2" for="myInputFile" style="cursor: pointer;">上传新头像</label>
+					<div class="avatar-fail text-danger" style="display: none;max-width: 200px;"></div>
+					<div class="avatar-success text-success" style="display: none;max-width: 200px;">新头像更新成功。</div>
 				</div>
 			</form>
 		</div>
 	{% endset %}
 	{{ settingPanel.init('设置', settingModule) }}
+{% endblock %}
+
+{% block customTail %}
+	<script type="text/javascript" src="/public/js/jquery.Jcrop.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/css/jquery.Jcrop.min.css">
+	<style type="text/css">
+		.jcrop-keymgr {
+		  opacity: 0;
+		}
+	</style>
 {% endblock %}
 
 {% block topLayer %}
@@ -80,7 +91,7 @@
         </button>
       </div>
       <div class="modal-body justify-content-center d-flex">
-        <img id="myCrop" src="/public/avatar/8c556de2e437c07c796b756076a392e7.jpg">
+        <img id="myCrop">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" style="cursor: pointer;" onclick="saveCrop();">保存头像</button>
@@ -88,14 +99,10 @@
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block customTail %}
-	<script type="text/javascript" src="/public/js/jquery.Jcrop.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/public/css/jquery.Jcrop.min.css">
-	<style type="text/css">
-		.jcrop-keymgr {
-		  opacity: 0;
-		}
-	</style>
+<script type="text/javascript">
+	$('#myModal').on('hidden.bs.modal', function (e) {
+	  $('#myInputFile').val('');
+	  if (jcropApi) jcropApi.destroy();
+	});
+</script>
 {% endblock %}

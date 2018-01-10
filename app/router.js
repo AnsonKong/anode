@@ -53,4 +53,5 @@ module.exports = app => {
 
   // 5.upload
   r.post('/upload', m.isSignined(), c.upload.upload);
+  r.post('/avatar/validate', m.isSignined(), c.upload.validate);
 };
