@@ -15,7 +15,7 @@
     "egg-scripts": "^2.1.0",
     "egg-view-nunjucks": "^2.1.4",
     "gm": "^1.23.1",
-    "marked": "^0.3.7",
+    "marked": "^0.3.12",
     "moment": "^2.20.0",
     "stream-to-array": "^2.3.0",
     "stream-wormhole": "^1.0.3"
