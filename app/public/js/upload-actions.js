@@ -76,7 +76,7 @@ function saveCrop() {
     data.cropH = select.h;
   }
   $.ajax({
-    url: '/upload?_csrf=' + getCsrf(),
+    url: '/avatar/upload?_csrf=' + getCsrf(),
     data,
     method: 'POST',
     success: function(result) {

@@ -52,6 +52,6 @@ module.exports = app => {
   r.get('/home', m.isSignined(), c.user.myHome);
 
   // 5.upload
-  r.post('/upload', m.isSignined(), c.upload.upload);
+  r.post('/avatar/upload', m.isSignined(), c.upload.upload);
   r.post('/avatar/validate', m.isSignined(), c.upload.validate);
 };

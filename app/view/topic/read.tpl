@@ -151,7 +151,7 @@
 			status: false,
 		});
 		editor.render();
-
+		// 计算可回复用户的名字
 		let replyUsernamesArr = $('.reply-username');
 		let replyUsernamesSet;
 		if (replyUsernamesArr.length) {
@@ -165,4 +165,8 @@
 			triggerList.activate();
 		}
 	</script>
+{% endblock %}
+
+{% block topLayer %}
+	{% include '../common/editor.popup.modal.tpl' %}
 {% endblock %}
