@@ -8,60 +8,71 @@ const Controller = require('egg').Controller;
 const awaitWriteStream = require('await-stream-ready').write;
 const toArray = require('stream-to-array');
 const sendToWormhole = require('stream-wormhole');
-const originFolder = '/public/avatar/';
-const cropFolder = '/public/avatar/crop/';
-
+const avatarOriginFolder = '/public/avatar/';
+const avatarCropFolder = '/public/avatar/crop/';
+const topicImgFolder = '/public/topic/img/';
+const Stream = require('stream').Stream;
 // 成功
 const SUCCESS = 0;
-// 尺寸不得大于10000 x 10000
-const ERROR_SIZE = 1;
 // 不知名错误
-const ERROR_UNKNOWN = 2;
+const ERROR_UNKNOWN = 1;
 class UploadAjaxController extends Controller {
-  /** 验证需要裁剪的头像图片的合法性 */
-  async validate() {
-    let readStream = await this.ctx.getFileStream();
-    // 后缀名
-    let extname = path.extname(readStream.filename).toLowerCase();
-    let code;
+  // post /upload/topic/img
+  async topicImg() {
+    const readStream = await this.ctx.getFileStream();
+    const extname = path.extname(readStream.filename).toLowerCase();
+    this.ctx.body = await this.validateStream(readStream, topicImgFolder, extname);
+  }
+  /** 检测文件是否已经存在，不存在则写入并返回路径 */
+  async validateStream(source, publicDir, extname) {
+    let code = ERROR_UNKNOWN;
     let data;
     let msg;
     let buf;
-    try {
-      const parts = await toArray(readStream);
-      buf = Buffer.concat(parts);
-    } catch (err) {
-      await sendToWormhole(readStream);
-      code = ERROR_UNKNOWN;
-      msg = err.toString();
+    let readStream;
+    if (source instanceof Stream) {
+      readStream = source;
+      try {
+        const parts = await toArray(readStream);
+        buf = Buffer.concat(parts);
+      } catch (err) {
+        await sendToWormhole(readStream);
+        msg = err.toString();
+      }
+    } else {
+      buf = source;
     }
 
-    if (!code && buf) {
+    if (buf) {
       try {
         const hash = crypto.createHash('md5');
         hash.update(buf);
         // 根据文件内容生成md5 digest文件摘要作为文件名
         const filename = hash.digest('hex') + extname;
-        // /public路径
-        const publicPath = originFolder + filename;
-        let targetFile = path.join(this.config.baseDir, 'app', publicPath);
-        if (!fs.existsSync(targetFile) && buf) {
-          await fs.writeFileSync(targetFile, buf);
+        let targetFile = path.join(this.config.baseDir, 'app', publicDir, filename);
+        if (!fs.existsSync(targetFile)) {
+          fs.writeFileSync(targetFile, buf);
         }
         code = SUCCESS;
-        data = publicPath;
+        data = publicDir + filename;
       } catch (err) {
-        code = ERROR_UNKNOWN;
         msg = err.toString();
       }
     }
-    this.ctx.body = { code, msg, data };
+    return { code, msg, data };
+  }
+  /** 验证需要裁剪的头像图片的合法性 */
+  // post /upload/avatar/validate
+  async avatarValidate() {
+    const readStream = await this.ctx.getFileStream();
+    const extname = path.extname(readStream.filename).toLowerCase();
+    this.ctx.body = await this.validateStream(readStream, avatarOriginFolder, extname);
   }
   /** 裁剪后的头像上传 */
-  async upload() {
+  // post /upload/avatar/upload
+  async avatarUpload() {
     const rb = this.ctx.request.body;
     const avatarUrl = rb.avatarUrl;
-    // 后缀名
     const extname = path.extname(avatarUrl).toLowerCase();
     // 是否需要裁剪
     const doCrop = rb.hasOwnProperty('cropW');
@@ -103,21 +114,10 @@ class UploadAjaxController extends Controller {
       }
 
       if (buf) {
-        try {
-          const hash = crypto.createHash('md5');
-          hash.update(buf);
-          // 根据文件内容生成md5 digest文件摘要作为文件名
-          const filename = hash.digest('hex') + extname;
-          // /public路径
-          const publicPath = cropFolder + filename;
-          let targetFile = path.join(baseDir, 'app', publicPath);
-          await fs.writeFileSync(targetFile, buf);
-          code = SUCCESS;
-          data = publicPath;
-        } catch (err) {
-          code = ERROR_UNKNOWN;
-          msg = err.toString();
-        }
+        const result = await this.validateStream(buf, avatarCropFolder, extname);
+        code = result.code;
+        msg = result.msg;
+        data = result.data;
       }
     }
     // 写入数据库

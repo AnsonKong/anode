@@ -60,6 +60,11 @@
 {% block customTail %}
 	<script type="text/javascript">
 		var editor = new Editor();
-		editor.render();
+		editor.render(document.getElementById('myTextarea'), { autofocus: true });
+		editor.codemirror.doc.setCursor(9999);
+		editor.codemirror.focus();
 	</script>
+{% endblock %}
+{% block topLayer %}
+	{% include '../common/editor.popup.modal.tpl' %}
 {% endblock %}

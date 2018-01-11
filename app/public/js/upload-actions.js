@@ -15,7 +15,7 @@ function uploadAvatar() {
   const formData = new FormData();
   formData.append('image', $('input[type=file]')[0].files[0]);
   $.ajax({
-    url: '/avatar/validate?_csrf=' + getCsrf(),
+    url: '/upload/avatar/validate?_csrf=' + getCsrf(),
     data: formData,
     method: 'POST',
     contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
@@ -76,7 +76,7 @@ function saveCrop() {
     data.cropH = select.h;
   }
   $.ajax({
-    url: '/avatar/upload?_csrf=' + getCsrf(),
+    url: '/upload/avatar/upload?_csrf=' + getCsrf(),
     data,
     method: 'POST',
     success: function(result) {
@@ -95,9 +95,4 @@ function saveCrop() {
       alert("error", responseStr);
     }
   });
-}
-
-function getCsrf() {
-  const keyValue = document.cookie.match('(^|;) ?csrfToken=([^;]*)(;|$)');
-  return keyValue ? keyValue[2] : null;
 }

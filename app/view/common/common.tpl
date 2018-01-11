@@ -5,16 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% include './bootstrap.css.tpl' %}
 		{% block customHead %}{% endblock %}
-		<style type="text/css">
-			html, body {
-				height: 100%;
-				word-break: break-word;
-			}
-			.nav-avatar {
-				width: 20px;
-				height: 20px;
-			}
-		</style>
+		<script type="text/javascript" src="/public/js/default.js"></script>
+		<link rel="stylesheet" type="text/css" href="/public/css/default.css">
 	</head>
 	<body style="background-color: #e1e1e1">
 		<div class="d-flex flex-column" style="min-height: 100%;">

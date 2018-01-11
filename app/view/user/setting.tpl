@@ -7,14 +7,6 @@
 			width: 200px;
 			height: 200px;
 		}
-		#myInputFile {
-			width: 0.1px;
-			height: 0.1px;
-			opacity: 0;
-			overflow: hidden;
-			position: absolute;
-			z-index: -1;
-		}
 	</style>
 {% endblock %}
 {% block content %}
@@ -58,7 +50,7 @@
 				<div class="col-auto form-group d-none d-lg-block">
 					<label class="d-block">头像</label>
 					<img class="my-avatar profile-avatar rounded d-block" src="{{ helper.parseAvatar(user.avatar) }}">
-					<input id="myInputFile" type="file" accept="image/*" class="form-control-file" onchange="uploadAvatar();">
+					<input id="myInputFile" type="file" accept="image/*" class="form-control-file empty-input-file" onchange="uploadAvatar();">
 					<label class="btn btn-primary w-100 mt-2" for="myInputFile" style="cursor: pointer;">上传新头像</label>
 					<div class="avatar-fail text-danger" style="display: none;max-width: 200px;"></div>
 					<div class="avatar-success text-success" style="display: none;max-width: 200px;">新头像更新成功。</div>

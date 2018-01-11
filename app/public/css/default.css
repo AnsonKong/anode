@@ -1,0 +1,25 @@
+html, body {
+	height: 100%;
+	word-break: break-word;
+}
+.nav-avatar {
+	width: 20px;
+	height: 20px;
+}
+.pointer {
+	cursor: pointer;
+}
+.empty-input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.restrict-content img {
+	max-width: 100%;
+	height: auto;
+	cursor: pointer;
+}

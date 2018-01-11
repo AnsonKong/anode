@@ -18,6 +18,7 @@ const reg2 = /(@\S+)$/g;
 // 以@开头，以不可见字符或<结尾，进行匹配
 const reg3 = /@(\S+?)(\s|<)/g;
 
+const regForA = /target=/;
 exports.encodeBase64 = (src) => {
 	return src ? Buffer.from(src).toString('base64') : '';
 };
@@ -28,7 +29,24 @@ exports.decodeBase64 = (encoded) => {
 
 exports.parseMarkdown = (content) => {
 	const markdown = marked(content);
-	let newStr = markdown.replace(reg1, '$1 $2');
+	// 对链接<a href=""></a>添加target='_blank'
+	let head = '';
+	let tail = markdown;
+	let i = 0;
+	let startIndex = tail.indexOf('<a');
+	while(startIndex !== -1) {
+		let endIndex = tail.indexOf('</a>');
+		if (endIndex === -1) break;
+		head += tail.slice(0, startIndex);
+		let tempStr = tail.substr(startIndex, 2) + ' target="_blank" ' + tail.slice(startIndex + 2, endIndex + 4);
+		// next round
+		head += tempStr;
+		tail = tail.slice(endIndex + 4);
+		startIndex = tail.indexOf('<a ');
+	}
+	const markdownMerged = head + tail;
+	// 对@用户进行转换
+	let newStr = markdownMerged.replace(reg1, '$1 $2');
 	newStr = newStr.replace(reg2, '$1 ');
 	const result = newStr.replace(reg3, '<a class="replies-history-btn" href="/user/$1" target="_blank">@$1</a>$2');
 	return result;

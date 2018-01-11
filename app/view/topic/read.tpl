@@ -64,7 +64,9 @@
 			</div>
 		</div>
 		<hr class="my-2">
-		<div class="p-3">{{ helper.parseMarkdown(helper.decodeBase64(topic.content)) | safe }}</div>
+		<div class="p-3 restrict-content">
+			{{ helper.parseMarkdown(helper.decodeBase64(topic.content)) | safe }}
+		</div>
 	</div>
 	<!-- 回复面板 -->
 	{% import '../common/panel.tpl' as panel %}
@@ -105,7 +107,7 @@
 						</div>
 					</div>
 					<!-- row 2 -->
-					<div class="reply-content pl-2">
+					<div class="reply-content restrict-content pl-2 pt-2">
 						{{ helper.parseMarkdown(helper.decodeBase64(item.content)) | safe }}
 					</div>
 					<div id="userReplyContainer_{{ item.id }}" class="pl-2">
