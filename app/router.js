@@ -55,4 +55,9 @@ module.exports = app => {
   r.post('/upload/avatar/validate', m.isSignined(), c.upload.avatarValidate);
   r.post('/upload/avatar/upload', m.isSignined(), c.upload.avatarUpload);
   r.post('/upload/topic/img', m.isSignined(), c.upload.topicImg);
+
+  // 6.search
+  r.get('/search', c.home.search);
+  r.get('/search/topics', c.home.searchTopics);
+  r.get('/search/users', c.home.searchUsers);
 };

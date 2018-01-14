@@ -46,12 +46,12 @@
 				{% if noReplyTopics.length %}
 				<ul class="list-group">
 					{% for item in noReplyTopics %}
-				  <li class="text-truncate list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 border-bottom-1 rounded-0 m-0" title="{{ helper.decodeBase64(item.title) }}"><a href="/topic/{{ item.id }}">{{ helper.decodeBase64(item.title) }}</a></li>
+				  <li class="text-truncate list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 border-bottom-1 rounded-0 m-0" title="{{ item.title }}"><a href="/topic/{{ item.id }}">{{ item.title }}</a></li>
 				  {% endfor %}
 				</ul>
 				{% else %}
 				<div class="p-3">
-					无话题
+					<small>无话题</small>
 				</div>
 				{% endif %}
 			{% endset %}

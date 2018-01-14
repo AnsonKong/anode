@@ -1,5 +1,9 @@
 const moment = require('moment');
-const marked = require('marked')
+const marked = require('marked');
+const xss = require("xss");
+xss.whiteList.b = ['style'];
+xss.whiteList.a.push('class');
+
 moment.locale('zh-cn');
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -17,8 +21,9 @@ const reg1 = /(\S)(@)/g;
 const reg2 = /(@\S+)$/g;
 // 以@开头，以不可见字符或<结尾，进行匹配
 const reg3 = /@(\S+?)(\s|<)/g;
+// 高亮
+const regHighlight= /target=/;
 
-const regForA = /target=/;
 exports.encodeBase64 = (src) => {
 	return src ? Buffer.from(src).toString('base64') : '';
 };
@@ -141,4 +146,14 @@ exports.addQuery = (ctx, key, value) => {
 		first = false;
 	}
 	return result;
+}
+
+exports.highlight = (src, keyword, helper) => {
+	if (keyword) {
+		const ar = keyword.split(' ');
+		const reg = new RegExp('(' + ar.join('|') + ')', 'gi');
+		src = src.replace(reg, '<b style="color: red;">$1</b>');
+	}
+	src = xss(src);	
+	return src;
 }

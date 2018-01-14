@@ -3,7 +3,7 @@
   	{% for item in messages %}
       {% set senderUrl = '/user/' + item.sender.username %}
       {% set topicUrl = '/topic/' + item.reply.topic.id + '?msg=' + item.id + '#' + item.reply.id %}
-      {% set topicTitle = helper.decodeBase64(item.reply.topic.title) %}
+      {% set topicTitle = item.reply.topic.title %}
         <li class="list-group-item border-left-0 border-right-0 border-bottom-1 rounded-0">
       	<div class="d-flex flex-row">
 	      	{% if item.type == '0' %}

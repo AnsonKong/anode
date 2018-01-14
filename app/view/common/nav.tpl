@@ -2,9 +2,9 @@
     <div class="container justify-content-center d-flex flex-column flex-lg-row">
         <a class="navbar-brand" href="/">ANode</a>
 
-        <form class="form-inline">
-          <input class="form-control mr-2" style="width: auto;" type="search" placeholder="请输入关键字">
-          <a class="btn btn-outline-light" href="#">搜索</a>
+        <form class="form-inline" method="GET" action="/search">
+          <input class="form-control mr-2" style="width: auto;" name="q" type="search" placeholder="请输入关键字">
+          <input class="btn btn-outline-light pointer" type="submit" value="搜索">
         </form>
 
         <ul class="navbar-nav ml-lg-auto flex-row">

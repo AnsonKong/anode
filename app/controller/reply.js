@@ -28,7 +28,7 @@ class ReplyController extends Controller {
 		const replyId = this.ctx.params.id;
 		const body = this.ctx.request.body;
 		// 更新Reply
-		const reply = await this.ctx.model.Reply.findByIdAndUpdate(replyId, { content: this.ctx.helper.encodeBase64(body.content) });
+		const reply = await this.ctx.model.Reply.findByIdAndUpdate(replyId, { content: body.content });
 		// 添加“回复被提到”提示消息
 		const sender = this.ctx.user.id;
 		await this.ctx.service.reply.checkAtUsers(body.content, reply.id, sender);

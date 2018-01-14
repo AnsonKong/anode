@@ -36,7 +36,7 @@
 			</div>
 			<div class="form-group">
 				<label>标题：</label>
-				<input class="form-control" value="{{ helper.decodeBase64(topic.title) }}" type="text" name="title" placeholder="标题字数10字以上"
+				<input class="form-control" value="{{ topic.title }}" type="text" name="title" placeholder="标题字数10字以上"
 					required pattern=".{10,}">
 				<div class="invalid-feedback">
 					请正确填写主题标题，要求字数10字以上。
@@ -44,7 +44,7 @@
 			</div>
 			<div class="form-group">
 				<label>正文：</label>
-				<textarea id="myTextarea" class="form-control" name="content" required>{{ helper.decodeBase64(topic.content) }}</textarea>
+				<textarea id="myTextarea" class="form-control" name="content" required>{{ topic.content }}</textarea>
 				<div class="invalid-feedback">
 					请正确填写主题内容，要求字数1字以上。
 				</div>

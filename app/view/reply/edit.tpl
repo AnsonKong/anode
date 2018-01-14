@@ -27,7 +27,7 @@
 	<div class="pl-3 pr-3 pt-3 pb-1">
 		<form id="myForm" method="post" action="/reply/{{ reply.id }}/edit" novalidate>
 			<div class="form-group">
-				<textarea id="myTextarea" class="form-control" name="content" required>{{ helper.decodeBase64(reply.content) }}</textarea>
+				<textarea id="myTextarea" class="form-control" name="content" required>{{ reply.content }}</textarea>
 				<div class="invalid-feedback">
 					请正确填写回复内容，要求字数1字以上。
 				</div>

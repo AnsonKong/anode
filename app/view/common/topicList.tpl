@@ -1,4 +1,4 @@
-{% macro init(list, helper, ctx, canEdit = false, showBorderLeft = false) %}
+{% macro init(list, helper, ctx, canEdit = false, showBorderLeft = false, keyword = '') %}
 <ul class="list-group">
 	{% for item in list %}
 		<li class="list-group-item list-group-item-action border-top-0 border-left-{{'1' if showBorderLeft else '0'}} border-right-0 border-bottom-1 rounded-0 m-0">
@@ -18,7 +18,9 @@
 					</div>
 					<!-- middle, will count the fixed width -->
 					<div class="col text-truncate mr-auto align-items-center">
-						<a title="{{ helper.decodeBase64(topic.title) }}" href="/topic/{{ topic.id }}">{{ helper.decodeBase64(topic.title) }}</a>
+						<a title="{{ topic.title }}" href="/topic/{{ topic.id }}">
+							{{ helper.highlight(topic.title, keyword, helper) | safe }}
+						</a>
 					</div>
 					<!-- right -->
 					<div class="d-none d-lg-flex align-items-center">

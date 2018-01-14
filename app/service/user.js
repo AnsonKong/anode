@@ -32,6 +32,15 @@ class UserService extends Service {
 			return null;
 		}
 	}
+
+	async getUsers(conditions, sortConditions, limit = -1, offset = 0) {
+		let query = this.ctx.model.User.find(conditions).sort(sortConditions);
+		if (offset) query.skip(offset);
+		if (limit != -1) query.limit(limit);
+		const users = await query;
+
+		return users;
+	}
 }
 
 module.exports = UserService;

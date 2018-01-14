@@ -57,7 +57,7 @@ function buildRepliesHistory(parentIds) {
 		$(aNode).attr('target', '_blank');
 		$(aNode).css('text-decoration', 'none');
 
-		let newLi = $(`<li class="list-group-item">${aNode.outerHTML}${text}<a href="#${parentIds[i]}">↑</a></li>`);
+		let newLi = $(`<li class="list-group-item">${aNode.outerHTML}${filterXSS(text)}<a href="#${parentIds[i]}">↑</a></li>`);
 
 		list.append(newLi);
 	}

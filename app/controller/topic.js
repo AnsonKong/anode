@@ -14,8 +14,8 @@ class TopicController extends Controller {
 		const created_time = moment().unix();
 		const conditions = {
 			category: body.category,
-			title: this.ctx.helper.encodeBase64(body.title),
-			content: this.ctx.helper.encodeBase64(body.content),
+			title: body.title,
+			content: body.content,
 			user: this.ctx.user.id,
 			created_time,
 			last_modified_time: created_time,
@@ -76,7 +76,6 @@ class TopicController extends Controller {
 			code = 0;
 		}
 		this.ctx.body = { code };
-		// this.ctx.redirect(`/user/${this.ctx.user.username}`);
 	}
 
 	// post /topic/collect
@@ -105,8 +104,8 @@ class TopicController extends Controller {
 		const body = this.ctx.request.body;
 		const conditions = {
 			category: body.category,
-			title: this.ctx.helper.encodeBase64(body.title),
-			content: this.ctx.helper.encodeBase64(body.content),
+			title: body.title,
+			content: body.content,
 			last_modified_time: moment().unix(),
 		};
 		// 更新Topic文档
@@ -128,7 +127,7 @@ class TopicController extends Controller {
 			// 1.创建Reply文档
 			const body = this.ctx.request.body;
 			const newReply = {
-				content: this.ctx.helper.encodeBase64(body.content),
+				content: body.content,
 				created_time: thisTime,
 				topic: topicId,
 				user: this.ctx.user.id,

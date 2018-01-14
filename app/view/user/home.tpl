@@ -36,7 +36,7 @@
 					<i class="fas fa-home interactive_btn mx-auto"></i>
 				</div>
 				<a class="text-muted dumbText" target="_blank" href="{{ user.website }}">
-					<small>{{ helper.escape(user.website) }}</small>
+					<small>{{ user.website }}</small>
 				</a>
 			</div>
 			{% endif %}
@@ -45,7 +45,7 @@
 				<div class="d-inline-flex icon-container">
 					<i class="fas fa-map-marker-alt interactive_btn mx-auto"></i>
 				</div>
-				<small class="text-muted">{{ helper.escape(user.location) }}</small>
+				<small class="text-muted">{{ user.location }}</small>
 			</div>
 			{% endif %}
 			{% if user.github %}
@@ -54,7 +54,7 @@
 					<i class="fab fa-github interactive_btn mx-auto"></i>
 				</div>
 				<a class="text-muted dumbText" target="_blank" href="{{ user.github }}">
-					<small>@{{ helper.escape(user.username) }}</small>
+					<small>@{{ user.username }}</small>
 				</a>
 			</div>
 			{% endif %}
@@ -64,7 +64,7 @@
 					<i class="fab fa-weibo interactive_btn mx-auto"></i>
 				</div>
 				<a class="text-muted dumbText" target="_blank" href="{{ user.weibo }}">
-					<small>{{ helper.escape(user.weibo) }}</small>
+					<small>{{ user.weibo }}</small>
 				</a>
 			</div>
 			{% endif %}
@@ -73,7 +73,7 @@
 				<div class="d-inline-flex icon-container pt-1">
 					<i class="fas fa-quote-left interactive_btn mx-auto"></i>
 				</div>
-				<q class="text-muted"><i><small>{{ helper.parseTextWrap(helper.escape(user.signature)) | safe }}</small></i></q>
+				<q class="text-muted"><i><small>{{ user.signature }}</small></i></q>
 			</div>
 			{% endif %}
 			<div class="mt-1">
