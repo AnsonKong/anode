@@ -21,6 +21,10 @@ class TopicController extends Controller {
 			last_modified_time: created_time,
 			last_woken_time: created_time,
 		};
+		if (this.ctx.user.admin) {
+			conditions.top = body.top;
+			conditions.good = body.good;
+		}
 		// 创建Topic文档
 		const newTopicDoc = await this.ctx.model.Topic.create(conditions);
 		this.ctx.redirect(`/topic/${newTopicDoc.id}`);
@@ -98,6 +102,46 @@ class TopicController extends Controller {
 		this.ctx.body = { code, action };
 	}
 
+	// post /topic/top
+	async top() {
+		const topicId = this.ctx.request.body.id;
+		let code = -1;
+		let msg;
+		let data;
+		try {
+			const topicDoc = await this.ctx.model.Topic.findById(topicId);
+			const target = !topicDoc.top;
+			await topicDoc.update({ top: target });
+			code = 0;
+			data = target;
+		} catch(err) {
+			code = -1;
+			msg = err.toString();
+		}
+
+		this.ctx.body = { code, msg, data };
+	}
+
+	// post /topic/good
+	async good() {
+		const topicId = this.ctx.request.body.id;
+		let code = -1;
+		let msg;
+		let data;
+		try {
+			const topicDoc = await this.ctx.model.Topic.findById(topicId);
+			const target = !topicDoc.good;
+			await topicDoc.update({ good: target });
+			code = 0;
+			data = target;
+		} catch(err) {
+			code = -1;
+			msg = err.toString();
+		}
+
+		this.ctx.body = { code, msg, data };
+	}
+
 	// post /topic/:id/edit
 	async update() {
 		const topicId = this.ctx.params.id;
@@ -108,6 +152,10 @@ class TopicController extends Controller {
 			content: body.content,
 			last_modified_time: moment().unix(),
 		};
+		if (this.ctx.user.admin) {
+			conditions.top = body.top;
+			conditions.good = body.good;
+		}
 		// 更新Topic文档
 		await this.ctx.model.Topic.findById(topicId).update(conditions);
 		this.ctx.redirect(`/topic/${topicId}`);

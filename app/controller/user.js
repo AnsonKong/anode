@@ -48,7 +48,7 @@ class UserController extends Controller {
 	// get /user/:username
 	async home() {
 		const username = this.ctx.params.username;
-		const user = await this.ctx.model.User.findOne({ username });
+		const user = await this.ctx.model.User.findOne({ username }).populate('collections');
 		const userId = user.id;
 		const topics = await this.ctx.service.topic.getTopics({ user: userId }, { created_time: -1 }, 5);
 		const replyTopics = await this.ctx.service.topic.getReplyTopics(userId, 5);
@@ -145,9 +145,13 @@ class UserController extends Controller {
 			// 实例化sender
 			await this.ctx.model.Message.populate(msgDoc, 'sender');
 			msgDoc.reply = await this.ctx.model.Reply.findById(msgDoc.data).populate('topic');
+			if (!msgDoc.reply) continue;
 			if (msgDoc.read) oldMessages.push(msgDoc);
 			else newMessages.push(msgDoc);
 		}
+		// 更新所有信息为已读
+		await this.ctx.model.Message.find({ receiver: this.ctx.user.id }).update({ read: true });
+
 		await this.ctx.render('user/messages.tpl', { oldMessages, newMessages });
 	}
 

@@ -49,8 +49,16 @@
 					请正确填写主题内容，要求字数1字以上。
 				</div>
 			</div>
+			{% if ctx.user.admin %}
 			<div class="form-group">
-				<button class="btn btn-primary" style="cursor: pointer;" onclick="checkForm('myForm', 'myTextarea')" type="submit">{{btnLabel}}</button>
+			  <input type="checkbox" id="inlineCheckbox1" value="1" {{ 'checked' if topic.top else '' }}  name="top">
+			  <label for="inlineCheckbox1">置顶</label>
+			  <input class="ml-3" type="checkbox" id="inlineCheckbox2" value="1" {{ 'checked' if topic.good else '' }} name="good">
+			  <label for="inlineCheckbox2">精华</label>
+			</div>
+			{% endif %}
+			<div class="form-group">
+				<button class="btn btn-primary pointer" onclick="checkForm('myForm', 'myTextarea')" type="submit">{{btnLabel}}</button>
 		  </div>
 		</form>
 	</div>

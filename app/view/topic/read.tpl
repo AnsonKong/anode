@@ -59,9 +59,18 @@
 						<i class="far fa-edit interactive_btn ml-2" title="编辑" onclick="onEditTopic('{{ ctx.params.id }}')"></i>
 						<i class="far fa-trash-alt interactive_btn ml-2" title="删除" onclick="onDelTopic('{{ ctx.params.id }}')"></i>
 					{% endif %}
-					{% if ctx.user and topic.user.id != ctx.user.id %}
-						{% set isCollected = (ctx.user.collections.indexOf(topic.id) != -1) %}
-						<button id="myCollectBtn" style="cursor: pointer;" class="ml-2 btn {{'btn-muted' if isCollected else 'btn-primary'}} btn-sm" onclick="onCollectTopic('{{ ctx.params.id }}')">{{'取消收藏' if isCollected else '收藏'}}</button>
+					{% if ctx.user %}
+						{% if ctx.user.admin %}
+							<!-- 设为置顶 -->
+							<button id="myTopBtn" class="ml-2 btn btn-sm {{'btn-muted' if topic.top else 'btn-primary'}} pointer" onclick="onSetTopTopic('{{ topic.id }}')">{{'取消置顶' if topic.top else '置顶'}}</button>
+							<!-- 设为精华 -->
+							<button id="myGoodBtn" class="ml-2 btn btn-sm {{'btn-muted' if topic.good else 'btn-primary'}} pointer" onclick="onSetGoodTopic('{{ topic.id }}')">{{'取消精华' if topic.good else '精华'}}</button>
+						{% endif %}
+						<!-- 收藏按钮 -->
+						{% if topic.user.id != ctx.user.id %}
+							{% set isCollected = (ctx.user.collections.indexOf(topic.id) != -1) %}
+							<button id="myCollectBtn" class="ml-2 btn btn-sm {{'btn-muted' if isCollected else 'btn-primary'}} pointer" onclick="onCollectTopic('{{ topic.id }}')">{{'取消收藏' if isCollected else '收藏'}}</button>
+						{% endif %}
 					{% endif %}
 				</div>
 			</div>

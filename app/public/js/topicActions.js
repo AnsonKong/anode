@@ -10,6 +10,7 @@ function onDelTopic(id) {
 	}
 }
 
+/** 收藏话题 */
 function onCollectTopic(id) {
 	$.post('/topic/collect', { id, _csrf: getCsrf() }, (result) => {
 		if (result.code == 0) {
@@ -22,6 +23,42 @@ function onCollectTopic(id) {
 				btn.addClass('btn-primary');
 				btn.removeClass('btn-muted');
 				btn.text('收藏');
+			}
+		}
+	});
+}
+
+/** 置顶话题 */
+function onSetTopTopic(id) {
+	$.post('/topic/top', { id, _csrf: getCsrf() }, (result) => {
+		if (result.code == 0) {
+			const btn = $('#myTopBtn');
+			if (result.data == true) {
+				btn.addClass('btn-muted');
+				btn.removeClass('btn-primary');
+				btn.text('取消置顶');
+			} else {
+				btn.addClass('btn-primary');
+				btn.removeClass('btn-muted');
+				btn.text('置顶');
+			}
+		}
+	});
+}
+
+/** 精华话题 */
+function onSetGoodTopic(id) {
+	$.post('/topic/good', { id, _csrf: getCsrf() }, (result) => {
+		if (result.code == 0) {
+			const btn = $('#myGoodBtn');
+			if (result.data == true) {
+				btn.addClass('btn-muted');
+				btn.removeClass('btn-primary');
+				btn.text('取消精华');
+			} else {
+				btn.addClass('btn-primary');
+				btn.removeClass('btn-muted');
+				btn.text('精华');
 			}
 		}
 	});

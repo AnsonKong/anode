@@ -2,7 +2,7 @@ module.exports = app => {
 	const mongoose = app.mongoose;
 	const Schema = mongoose.Schema;
 	const UserSchema = new Schema({
-		username: { type: String, default: 'unkown' },
+		username: { type: String, default: 'unknown' },
 		email: { type: String },
 		password: { type: String },
 		salt: { type: String },
@@ -15,6 +15,7 @@ module.exports = app => {
 		signature: { type: String },
 		messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }],
 		collections: [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
+		admin: { type: Boolean, default: false },
 	});
 
 	return mongoose.model('User', UserSchema);

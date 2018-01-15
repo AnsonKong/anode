@@ -1,6 +1,7 @@
 const moment = require('moment');
 const marked = require('marked');
 const xss = require("xss");
+const _ = require('lodash');
 xss.whiteList.b = ['style'];
 xss.whiteList.a.push('class');
 
@@ -150,6 +151,7 @@ exports.addQuery = (ctx, key, value) => {
 
 exports.highlight = (src, keyword, helper) => {
 	if (keyword) {
+		keyword = _.escapeRegExp(keyword);
 		const ar = keyword.split(' ');
 		const reg = new RegExp('(' + ar.join('|') + ')', 'gi');
 		src = src.replace(reg, '<b style="color: red;">$1</b>');
