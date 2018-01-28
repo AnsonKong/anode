@@ -26,8 +26,8 @@ module.exports = appInfo => {
   };
 
   config.passportGithub = {
-    key: 'bc0efa68b703557940f3',
-    secret: '07609073261b5ed948d3927a7fe52e02de74308d'
+    key: require('./github.local.passport').key,
+    secret: require('./github.local.passport').secret
   };
 
   config.multipart = {

@@ -8,6 +8,9 @@ yarn-error.log*
 # Run
 run/
 
+# passport
+config/github.*.passport.js
+
 # Runtime data
 pids
 *.pid
