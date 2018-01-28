@@ -26,6 +26,10 @@ class HomeController extends Controller {
     await this.ctx.render('index.tpl', { topics: mergedTopics, categoryTopics, noReplyTopics, pagination, tab });
   }
 
+  async about() {
+    await this.ctx.render('about.tpl');
+  }
+
   // get /search
   async search() {
     const keyword = this.ctx.request.query.q;

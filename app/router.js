@@ -6,6 +6,7 @@
 module.exports = app => {
   const { router: r, controller: c, middlewares: m } = app;
   r.get('/', c.home.index);
+  r.get('/about', c.home.about);
   // 1.user
   r.get('/signup', c.user.new);
   r.post('/signup', c.user.signup);

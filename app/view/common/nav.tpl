@@ -18,7 +18,6 @@
             <li class="nav-item mr-2 mr-lg-0">
                 <a class="nav-link" href="/user/{{ ctx.user.username }}"><img class="my-avatar nav-avatar rounded" src="{{ helper.parseAvatar(ctx.user.avatar) }}"></a>
             </li>
-            
             <li class="nav-item mr-2 mr-lg-0">
                 <a class="nav-link" href="/messages">未读消息
                     {% if helper.getNewMessagesLength(ctx.user.messages) %}
@@ -32,10 +31,16 @@
             <li class="nav-item mr-2 mr-lg-0">
                 <a class="nav-link" href="/setting">设置</a>
             </li>
+            <li class="nav-item mr-2 mr-lg-0">
+                <a class="nav-link" href="/about">关于</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/signout">退出</a>
             </li>
             {% else %}
+            <li class="nav-item mr-2 mr-lg-0">
+                <a class="nav-link" href="/about">关于</a>
+            </li>
             <li class="nav-item mr-2 mr-lg-0">
                 <a class="nav-link" href="/signin">登录</a>
             </li>

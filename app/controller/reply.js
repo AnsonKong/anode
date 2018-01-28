@@ -40,22 +40,30 @@ class ReplyController extends Controller {
 		const replyId = this.ctx.request.body.id;
 		const userId = this.ctx.user.id;
 		// 更新Reply
-		const reply = await this.ctx.model.Reply.findById(replyId);
 		let code = -1;
+		let msg;
 		let action;
-		if (reply) {
-			const index = reply.likes.indexOf(userId);
-			if (index != -1) {
-				reply.likes.splice(index, 1);
-				action = 'down';
-			} else {
-				reply.likes.push(userId);
-				action = 'up';
+		let data;
+		try {
+			const reply = await this.ctx.model.Reply.findById(replyId);
+			if (reply) {
+				const index = reply.likes.indexOf(userId);
+				if (index != -1) {
+					reply.likes.splice(index, 1);
+					action = 'down';
+				} else {
+					reply.likes.push(userId);
+					action = 'up';
+				}
+				await reply.save();	
+				code = 0;
+				data = reply.likes.length;
 			}
-			await reply.save();	
-			code = 0;
+		} catch(e) {
+			code = -1;
+			msg = e.toString();
 		}
-		this.ctx.body = { code, action, data: reply.likes.length };
+		this.ctx.body = { code, action, msg, data };
 	}
 }
 

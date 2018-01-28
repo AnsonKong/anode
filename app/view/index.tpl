@@ -7,9 +7,9 @@
 	{% import './common/panel.tpl' as panel %}
 	{% import './common/topicList.tpl' as topicList %}
 	{% import './common/pagination.tpl' as p %}
-	<div class="row">
+	<div class="row no-gutters">
 		<!-- left -->
-		<div class="col-lg-9 rounded">
+		<div class="col rounded mr-3">
 			<ul class="nav bg-white nav-tabs">
 			  <li class="nav-item">
 			    <a class="nav-link {{'active' if tab=='all' else ''}}" href="/?tab=all">全部</a>
@@ -56,6 +56,31 @@
 				{% endif %}
 			{% endset %}
 			{{ panel.init('无人回复的话题', module) }}
+
+			{% set module %}
+				<div class="p-3">
+					<ul style="list-style: none; padding: 0; margin: 0;">
+						<li>
+							<a target="_blank" href="https://cnodejs.org/">
+			          CNode：Node.js专业中文社区
+			      	</a>
+						</li>
+						<li class="my-1">
+							<a target="_blank" href="https://eggjs.org/">
+			          Egg.js 为企业级框架和应用而生
+			      	</a>
+						</li>
+						<li>
+							<a target="_blank" href="https://www.aliyun.com/product/ecs">
+			          阿里云服务器 ECS
+			      	</a>
+						</li>
+					</ul>
+				</div>
+			{% endset %}
+			<div class="mt-3">
+				{{ panel.init('友情链接', module) }}
+			</div>
 		</div>
 	</div>
 {% endblock %}
