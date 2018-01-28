@@ -7,9 +7,9 @@
 	{% import './common/panel.tpl' as panel %}
 	{% import './common/topicList.tpl' as topicList %}
 	{% import './common/pagination.tpl' as p %}
-	<div class="row no-gutters">
+	<div class="d-flex">
 		<!-- left -->
-		<div class="col rounded mr-3">
+		<div class="rounded mr-3 w-100">
 			<ul class="nav bg-white nav-tabs">
 			  <li class="nav-item">
 			    <a class="nav-link {{'active' if tab=='all' else ''}}" href="/?tab=all">全部</a>
@@ -41,7 +41,7 @@
 		  {% endif %}
 		</div>
 		<!-- right -->
-		<div class="d-none d-lg-block col-lg-3">
+		<div class="d-none d-lg-block" style="min-width: 280px;">
 			{% set module %}
 				{% if noReplyTopics.length %}
 				<ul class="list-group">
