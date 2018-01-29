@@ -11,6 +11,9 @@ run/
 # passport
 config/github.*.passport.js
 
+# alinode
+config/alinode.js
+
 # Runtime data
 pids
 *.pid

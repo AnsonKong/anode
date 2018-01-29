@@ -39,5 +39,10 @@ module.exports = appInfo => {
     ],
   };
 
+  config.alinode = {
+    appid: require('./alinode').appid,
+    secret: require('./alinode').secret,
+  }
+
   return config;
 };
