@@ -1,8 +1,8 @@
 {% extends "../common/common.tpl" %}
 {% block title %}{{ title }}{% endblock %}
 {% block customHead %}
-	{% include '../common/lepture.editor.tpl' %}
-	<script type="text/javascript" src="/public/js/check-form.js"></script>
+	{% include '../common/lepture-editor.tpl' %}
+	<script type="text/javascript" src="/public/js/custom/check-form.js"></script>
 	<style type="text/css">
 		.CodeMirror {
 		  height: 320px;
@@ -29,9 +29,9 @@
 			<div class="form-group">
 				<label>版块：</label>
 				<select class="form-control" name="category" required>
-		      <option {% if topic.category === '0' %}selected{% endif %} value="share">分享</option>
-		      <option {% if topic.category === '1' %}selected{% endif %} value="ask">问答</option>
-		      <option {% if topic.category === '2' %}selected{% endif %} value="job">招聘</option>
+		      <option {% if topic.category === 'share' %}selected{% endif %} value="share">分享</option>
+		      <option {% if topic.category === 'ask' %}selected{% endif %} value="ask">问答</option>
+		      <option {% if topic.category === 'job' %}selected{% endif %} value="job">招聘</option>
 		    </select>
 			</div>
 			<div class="form-group">
@@ -74,5 +74,5 @@
 	</script>
 {% endblock %}
 {% block topLayer %}
-	{% include '../common/editor.popup.modal.tpl' %}
+	{% include '../common/editor-popup-modal.tpl' %}
 {% endblock %}

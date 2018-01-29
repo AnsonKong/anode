@@ -5,8 +5,8 @@
 {% endblock %}
 {% block content %}
 	{% import './common/panel.tpl' as panel %}
-	{% import './common/topicList.tpl' as topicList %}
-	{% import './common/user.list.tpl' as userList %}
+	{% import './common/topic-list.tpl' as topicList %}
+	{% import './common/user-list.tpl' as userList %}
 	{% import './common/pagination.tpl' as p %}
 
 	<span>关键字"{{keyword}}"的搜索结果</span>

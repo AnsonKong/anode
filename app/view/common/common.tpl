@@ -5,8 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% include './bootstrap.css.tpl' %}
 		{% block customHead %}{% endblock %}
-		<script type="text/javascript" src="/public/js/default.js"></script>
-		<link rel="stylesheet" type="text/css" href="/public/css/default.css">
+		<script type="text/javascript" src="/public/js/custom/default.js"></script>
+		<link rel="stylesheet" type="text/css" href="/public/css/custom/default.css">
 	</head>
 	<body style="background-color: #e1e1e1">
 		<div class="d-flex flex-column" style="min-height: 100%;">
@@ -28,7 +28,7 @@
 				{% block customTail %}{% endblock %}
 			</div>
 			<!-- footer -->
-			<div class="d-none d-lg-block mt-auto bg-dark" style="height: 190px;">
+			<div class="d-none d-lg-block mt-auto bg-dark" style="height: 190px; font-size: 14px; line-height: 40px;">
 				<div class="container text-muted d-flex flex-column justify-content-center h-100">
 					<div class="d-flex align-items-center">
 						ANode 社区是一款以CNode 社区&nbsp;

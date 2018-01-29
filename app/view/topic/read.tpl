@@ -1,9 +1,9 @@
 {% extends "../common/common.tpl" %}
 {% block title %}{{ topic.title }}{% endblock %}
 {% block customHead %}
-	{% include '../common/lepture.editor.tpl' %}
-	<script type="text/javascript" src="/public/js/check-form.js"></script>
-	<script type="text/javascript" src="/public/js/xss.js"></script>
+	{% include '../common/lepture-editor.tpl' %}
+	<script type="text/javascript" src="/public/js/custom/check-form.js"></script>
+	<script type="text/javascript" src="/public/js/third-party/xss.js"></script>
 	{% include '../common/font-awesome.tpl' %}
 	{% include '../common/topic-management.tpl' %}
 	<style type="text/css">
@@ -153,9 +153,9 @@
 	{{ panel.init('添加回复', newReplyModule) }}
 {% endblock %}
 {% block customTail %}
-	<link rel="stylesheet" type="text/css" href="/public/css/editor-char-triggering-list.css">
-	<script type="text/javascript" src="/public/js/editor-char-triggering-list.js"></script>
-	<script type="text/javascript" src="/public/js/topic-read-replies-history.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/css/custom/editor-at-triggering-list.css">
+	<script type="text/javascript" src="/public/js/custom/editor-at-triggering-list.js"></script>
+	<script type="text/javascript" src="/public/js/custom/topic-replies-history.js"></script>
 	<script type="text/javascript">
 		const editor = new Editor({
 			element: $('#myTextarea')[0],
@@ -179,5 +179,5 @@
 {% endblock %}
 
 {% block topLayer %}
-	{% include '../common/editor.popup.modal.tpl' %}
+	{% include '../common/editor-popup-modal.tpl' %}
 {% endblock %}

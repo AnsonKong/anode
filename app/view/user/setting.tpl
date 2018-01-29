@@ -1,7 +1,7 @@
 {% extends "../common/common.tpl" %}
 {% block title %}设置{% endblock %}
 {% block customHead %}
-	<script type="text/javascript" src="/public/js/upload-actions.js"></script>
+	<script type="text/javascript" src="/public/js/custom/upload.js"></script>
 	<style type="text/css">
 		.profile-avatar {
 			width: 200px;
@@ -62,8 +62,8 @@
 {% endblock %}
 
 {% block customTail %}
-	<script type="text/javascript" src="/public/js/jquery.Jcrop.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/public/css/jquery.Jcrop.min.css">
+	<script type="text/javascript" src="/public/js/third-party/jquery.Jcrop.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/css/third-party/jquery.Jcrop.min.css">
 	<style type="text/css">
 		.jcrop-keymgr {
 		  opacity: 0;

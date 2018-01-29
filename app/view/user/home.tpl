@@ -86,7 +86,7 @@
 	{% set canEdit = (user.id == ctx.user.id) %}
 	<!-- 最近创建的话题 -->
 	{% set createdModule %}
-    {% from '../common/topicList.tpl' import init as initCreated %}
+    {% from '../common/topic-list.tpl' import init as initCreated %}
     {{ initCreated(topics, helper, ctx, canEdit) }}
     <div class="p-2">
 			<small>
@@ -105,7 +105,7 @@
 
 	<!-- 最近参与的话题 -->
 	{% set repliedModule %}
-    {% from '../common/topicList.tpl' import init as initReplied %}
+    {% from '../common/topic-list.tpl' import init as initReplied %}
     {{ initReplied(replyTopics, helper, ctx, canEdit) }}
     <div class="p-2">
 			<small>

@@ -1,8 +1,8 @@
 {% extends "../common/common.tpl" %}
 {% block title %}编辑回复{% endblock %}
 {% block customHead %}
-	{% include '../common/lepture.editor.tpl' %}
-	<script type="text/javascript" src="/public/js/check-form.js"></script>
+	{% include '../common/lepture-editor.tpl' %}
+	<script type="text/javascript" src="/public/js/custom/check-form.js"></script>
 	<style type="text/css">
 		.CodeMirror {
 		  height: 320px;
@@ -49,5 +49,5 @@
 	</script>
 {% endblock %}
 {% block topLayer %}
-	{% include '../common/editor.popup.modal.tpl' %}
+	{% include '../common/editor-popup-modal.tpl' %}
 {% endblock %}

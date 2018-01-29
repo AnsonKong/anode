@@ -6,7 +6,7 @@
 {% block content %}
 	{% import '../common/panel.tpl' as myPanel %}
 	{% set module %}
-    {% from '../common/user.list.tpl' import init %}
+    {% from '../common/user-list.tpl' import init %}
     {{ init(users, helper, ctx, keyword) }}
   	{% import '../common/pagination.tpl' as p %}
   	{% if users.length %}
