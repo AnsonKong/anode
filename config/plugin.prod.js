@@ -1,0 +1,3 @@
+exports.alinode = {
+	enable: true,
+}

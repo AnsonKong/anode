@@ -1,5 +1,5 @@
 {
-  "name": "egg-example",
+  "name": "anode",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -33,7 +33,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --port=80 --daemon --title=egg-server-anode",
+    "start": "egg-scripts start --port=80 --daemon --https=true --title=egg-server-anode",
     "stop": "egg-scripts stop",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
