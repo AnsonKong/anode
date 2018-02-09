@@ -33,7 +33,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --port=80 --daemon --https=true --title=egg-server-anode",
+    "start": "egg-scripts start --port=443 --daemon --https=true --key=fullPath.key --cert=fullPath.pem --title=egg-server-anode",
     "stop": "egg-scripts stop",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
