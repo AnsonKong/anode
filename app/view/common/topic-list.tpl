@@ -6,7 +6,7 @@
 			<div class="d-flex flex-nowrap">
 					<!-- left -->
 					<div class="d-flex align-items-center">
-						<a href="/user/{{ topic.user.username }}"><img class="replyAvatar rounded" src="{{ helper.parseAvatar(topic.user.avatar) }}"></a>
+						<a href="/user/{{ topic.user.username }}"><img class="reply-avatar rounded" src="{{ helper.parseAvatar(topic.user.avatar) }}"></a>
 						<small class="text-center" style="width: 80px;">{{ topic.reply_account }} / {{ topic.view_account }}</small>
 						{% if item.top %}
 							<div class="d-inline bg-success text-white p-1 mr-1" style="font-size: 12px">置顶</div>
@@ -29,7 +29,7 @@
 						<i class="far fa-trash-alt interactive_btn ml-2" title="删除" onclick="onDelTopic('{{ topic.id }}')"></i>
 						{% endif %}
 						{% if item.last_reply %}
-						<a class="ml-3" href="/topic/{{ item.id }}#{{ item.last_reply.id }}"><img class="replyAvatar rounded" src="{{ helper.parseAvatar(item.last_reply.user.avatar) }}"></a>
+						<a class="ml-3" href="/topic/{{ item.id }}#{{ item.last_reply.id }}"><img class="reply-avatar rounded" src="{{ helper.parseAvatar(item.last_reply.user.avatar) }}"></a>
 						{% endif %}
 						<small class="text-muted text-right ml-3" style="width: 60px;">{{ helper.fromNow((item.last_reply if item.last_reply else item).created_time) }}</small>
 					</div>

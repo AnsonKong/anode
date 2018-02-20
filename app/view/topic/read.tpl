@@ -91,10 +91,10 @@
 					<!-- row 1 -->
 					<div class="d-flex align-items-center">
 						<a class="reply-avatar-container mr-2" href="/user/{{ item.user.username }}">
-							<img class="replyAvatar rounded" src="{{ helper.parseAvatar(item.user.avatar) }}">
+							<img class="reply-avatar rounded" src="{{ helper.parseAvatar(item.user.avatar) }}">
 						</a>
 						<span class="mr-auto">
-							<small><b><a class="reply-username text-dark dumbText" href="/user/{{ item.user.username }}">{{ item.user.username }}</a></b></small>
+							<small><b><a class="reply-username text-dark dumb-text" href="/user/{{ item.user.username }}">{{ item.user.username }}</a></b></small>
 							<small><a href="#{{ item.id }}">{{ loop.index }}楼•{{ helper.fromNow(item.created_time) }}</a></small>
 							{% if item.user.id === topic.user.id %}
 								<small class="d-inline p-1 text-white bg-success">作者</small>

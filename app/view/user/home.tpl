@@ -14,7 +14,7 @@
 	{% set briefModule %}
 		<div class="d-flex flex-column p-3">
 			<div class="mb-2">
-	    	<img class="briefAvatar rounded" src="{{ helper.parseAvatar(user.avatar) }}">
+	    	<img class="brief-avatar rounded" src="{{ helper.parseAvatar(user.avatar) }}">
 	    	<big class="ml-2">{{ user.username }}</big>
 	    	{% if user.id == ctx.user.id %}
 				<i class="far fa-edit interactive_btn ml-2" onclick="window.location.href='/setting'" title="编辑"></i>
@@ -25,7 +25,7 @@
 				<div class="d-inline-flex icon-container">
 					<i class="fas fa-star interactive_btn mx-auto"></i>
 				</div>
-				<a class="text-muted dumbText" target="_blank" href="/user/{{ user.username }}/collections">
+				<a class="text-muted dumb-text" target="_blank" href="/user/{{ user.username }}/collections">
 					<small>{{ user.collections.length }}个话题收藏</small>
 				</a>
 			</div>
@@ -35,7 +35,7 @@
 				<div class="d-inline-flex icon-container">
 					<i class="fas fa-home interactive_btn mx-auto"></i>
 				</div>
-				<a class="text-muted dumbText" target="_blank" href="{{ user.website }}">
+				<a class="text-muted dumb-text" target="_blank" href="{{ user.website }}">
 					<small>{{ user.website }}</small>
 				</a>
 			</div>
@@ -53,7 +53,7 @@
 				<div class="d-inline-flex icon-container">
 					<i class="fab fa-github interactive_btn mx-auto"></i>
 				</div>
-				<a class="text-muted dumbText" target="_blank" href="{{ user.github }}">
+				<a class="text-muted dumb-text" target="_blank" href="{{ user.github }}">
 					<small>@{{ user.username }}</small>
 				</a>
 			</div>
@@ -63,7 +63,7 @@
 				<div class="d-inline-flex icon-container">
 					<i class="fab fa-weibo interactive_btn mx-auto"></i>
 				</div>
-				<a class="text-muted dumbText" target="_blank" href="{{ user.weibo }}">
+				<a class="text-muted dumb-text" target="_blank" href="{{ user.weibo }}">
 					<small>{{ user.weibo }}</small>
 				</a>
 			</div>
