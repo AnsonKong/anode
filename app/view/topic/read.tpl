@@ -4,6 +4,8 @@
 	{% include '../common/lepture-editor.tpl' %}
 	<script type="text/javascript" src="/public/js/custom/check-form-bb73c63751.js"></script>
 	<script type="text/javascript" src="/public/js/third-party/xss.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/css/third-party/prettify.css">
+	<script type="text/javascript" src="/public/js/third-party/prettify.js"></script>
 	{% include '../common/font-awesome.tpl' %}
 	{% include '../common/topic-management.tpl' %}
 	<style type="text/css">
@@ -76,6 +78,7 @@
 			</div>
 		</div>
 		<hr class="my-2">
+			
 		<div class="p-3 restrict-content">
 			{{ helper.shtml(helper.parseMarkdown(topic.content)) }}
 		</div>
@@ -175,6 +178,9 @@
 			const triggerList = new EditorCharTriggeringList(editor.codemirror, replyUsernamesSet);
 			triggerList.activate();
 		}
+
+		$('.restrict-content pre').addClass('prettyprint');
+		PR.prettyPrint();
 	</script>
 {% endblock %}
 
