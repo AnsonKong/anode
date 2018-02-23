@@ -5,8 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% include './bootstrap.css.tpl' %}
 		{% block customHead %}{% endblock %}
-		<script type="text/javascript" src="/public/js/custom/default.js"></script>
-		<link rel="stylesheet" type="text/css" href="/public/css/custom/default.css">
+		<script type="text/javascript" src="/public/js/custom/default-3011464f81.js"></script>
+		<link rel="stylesheet" type="text/css" href="/public/css/custom/default-da431dca28.css">
 	</head>
 	<body style="background-color: #e1e1e1">
 		<div class="d-flex flex-column" style="min-height: 100%;">

@@ -1,7 +1,7 @@
 {% extends "../common/common.tpl" %}
 {% block title %}注册{% endblock %}
 {% block customHead %}
-	<script type="text/javascript" src="/public/js/custom/check-form.js"></script>
+	<script type="text/javascript" src="/public/js/custom/check-form-bb73c63751.js"></script>
 {% endblock %}
 {% block content %}
 <div class="container">

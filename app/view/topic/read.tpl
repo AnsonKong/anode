@@ -2,7 +2,7 @@
 {% block title %}{{ topic.title }}{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture-editor.tpl' %}
-	<script type="text/javascript" src="/public/js/custom/check-form.js"></script>
+	<script type="text/javascript" src="/public/js/custom/check-form-bb73c63751.js"></script>
 	<script type="text/javascript" src="/public/js/third-party/xss.js"></script>
 	{% include '../common/font-awesome.tpl' %}
 	{% include '../common/topic-management.tpl' %}
@@ -153,9 +153,9 @@
 	{{ panel.init('添加回复', newReplyModule) }}
 {% endblock %}
 {% block customTail %}
-	<link rel="stylesheet" type="text/css" href="/public/css/custom/editor-at-triggering-list.css">
-	<script type="text/javascript" src="/public/js/custom/editor-at-triggering-list.js"></script>
-	<script type="text/javascript" src="/public/js/custom/topic-replies-history.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/css/custom/editor-at-triggering-list-ea9907a010.css">
+	<script type="text/javascript" src="/public/js/custom/editor-at-triggering-list-892f3a6a2d.js"></script>
+	<script type="text/javascript" src="/public/js/custom/topic-replies-history-b4fc5a77f4.js"></script>
 	<script type="text/javascript">
 		const editor = new Editor({
 			element: $('#myTextarea')[0],
