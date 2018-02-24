@@ -1,28 +1,42 @@
 const gulp = require('gulp');
+const del = require('del');
 const rev = require('gulp-rev');
 const revCollector = require("gulp-rev-collector");
- 
-gulp.task('default', () => {
-		gulp.src(['app/view/css/*.css'])
+
+const cssDist = 'app/public/css/custom';
+const jsDist = 'app/public/js/custom';
+const tplDist = 'app/view/dist';
+const buildDir = 'build';
+
+gulp.task('clean', function(cb) {
+    del.sync([cssDist, jsDist, tplDist, buildDir], { force: true });
+    cb();
+});
+
+gulp.task('devCss', function() {
+	var stream = gulp.src(['app/view/src/css/*.css'])
         .pipe(rev())
-        .pipe(gulp.dest('app/public/css/custom'))
+        .pipe(gulp.dest(cssDist))
         .pipe(rev.manifest({
         	path: 'rev-css-manifest.json'
         }))
         .pipe(gulp.dest('build/rev'));
+    return stream;
+});
 
-    gulp.src(['app/view/js/*.js'])
+gulp.task('devJs', function() {
+    var stream = gulp.src(['app/view/src/js/*.js'])
         .pipe(rev())
-        .pipe(gulp.dest('app/public/js/custom'))
+        .pipe(gulp.dest(jsDist))
         .pipe(rev.manifest({
-        	path: 'rev-js-manifest.json'
+            path: 'rev-js-manifest.json'
         }))
         .pipe(gulp.dest('build/rev'));
-		
-		gulp.src(['build/rev/*.json', 'app/view/**/*.tpl'])
-			.pipe(revCollector({
-				replaceReved: true
-			}))
-			.pipe(gulp.dest('app/view'));
-	}
-);
+    return stream;
+});
+
+gulp.task('default', ['clean', 'devCss', 'devJs'], () => {
+    gulp.src(['build/rev/*.json', 'app/view/src/**/*.tpl'])
+            .pipe(revCollector())
+            .pipe(gulp.dest(tplDist));
+});

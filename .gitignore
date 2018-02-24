@@ -5,6 +5,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# hashed dist
+app/public/css/custom
+app/public/js/custom
+app/view/dist
+
 # build
 build/
 
