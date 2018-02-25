@@ -10,6 +10,9 @@ app/public/css/custom
 app/public/js/custom
 app/view/dist
 
+# avatar
+app/public/avatar
+
 # build
 build/
 
