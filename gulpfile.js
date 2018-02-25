@@ -10,7 +10,12 @@ const revCollector = require("gulp-rev-collector");
 const cssDist = 'app/public/css/custom';
 const jsDist = 'app/public/js/custom';
 const tplDist = 'app/view/dist';
-const buildDir = 'build';
+const buildDir = 'build/rev';
+const formatOptions = {
+    prefix: '.',
+    suffix: '.min',
+    lastExt: false
+};
 
 gulp.task('clean', function(cb) {
     del.sync([cssDist, jsDist, tplDist, buildDir], { force: true });
@@ -22,14 +27,10 @@ gulp.task('devCss', function(cb) {
         gulp.src('app/view/src/css/*.css'),
         cleanCSS({compatibility: 'ie8'}),
         rev(),
-        revFormat({
-            prefix: '.',
-            suffix: '.min',
-            lastExt: false
-        }),
+        revFormat(formatOptions),
         gulp.dest(cssDist),
         rev.manifest({ path: 'rev-css-manifest.json' }),
-        gulp.dest('build/rev')
+        gulp.dest(buildDir)
         ], cb);
 });
 
@@ -38,14 +39,10 @@ gulp.task('devJs', ['devCss'], function(cb) {
         gulp.src('app/view/src/js/*.js'),
         uglify(),
         rev(),
-        revFormat({
-            prefix: '.',
-            suffix: '.min',
-            lastExt: false
-        }),
+        revFormat(formatOptions),
         gulp.dest(jsDist),
         rev.manifest({ path: 'rev-js-manifest.json' }),
-        gulp.dest('build/rev')
+        gulp.dest(buildDir)
         ], cb);
 });
 
