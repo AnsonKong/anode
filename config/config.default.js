@@ -22,9 +22,12 @@ module.exports = appInfo => {
   	}
   };
 
+  const dbConfig = require('./db');
   config.mongoose = {
-    url: 'mongodb://127.0.0.1/egg',
-    options: {}
+    url: `mongodb://${dbConfig.username}:${dbConfig.password}@127.0.0.1/egg`,
+    options: {
+      useMongoClient: true
+    }
   };
 
   config.passportGithub = {

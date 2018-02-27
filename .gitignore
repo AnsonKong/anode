@@ -18,6 +18,9 @@ config/github.*.passport.js
 # alinode
 config/alinode.js
 
+# db
+config/db.js
+
 # Runtime data
 pids
 *.pid
