@@ -5,6 +5,12 @@ module.exports = appInfo => {
   const config = exports = {};
   const baseDir = appInfo.baseDir;
   // use for cookie sign key, should change to your own and keep security
+  config.security = {
+    hsts: {
+      enable: true
+    }
+  };
+
   config.keys = appInfo.name + '_1513127576177_3743';
 
   // add your config here
