@@ -12,6 +12,10 @@ yarn-error.log*
 /app/public/dist/
 /app/view/dist/
 
+# dev local files
+/app/public/src/avatar/
+/app/public/src/topic/
+
 # Run
 /run/
 
