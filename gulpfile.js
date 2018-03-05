@@ -6,11 +6,18 @@ const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify-es').default;
 const pump = require('pump');
 const revCollector = require("gulp-rev-collector");
+const tar = require('gulp-tar');
+const gzip = require('gulp-gzip');
 
-const cssDist = 'app/public/css/custom';
-const jsDist = 'app/public/js/custom';
+
+const statics = ['app/public/src/img/**'];
+
+const publicDist = 'app/public/dist';
+const cssDist = 'app/public/dist/css/custom';
+const jsDist = 'app/public/dist/js/custom';
 const tplDist = 'app/view/dist';
 const buildDir = 'build/rev';
+
 const formatOptions = {
     prefix: '.',
     suffix: '.min',
@@ -18,13 +25,20 @@ const formatOptions = {
 };
 
 gulp.task('clean', function(cb) {
-    del.sync([cssDist, jsDist, tplDist, buildDir], { force: true });
+    del.sync([publicDist, tplDist, buildDir], { force: true });
     cb();
 });
 
-gulp.task('devCss', function(cb) {
+gulp.task('mvStatics', ['clean'], function(cb) {
+    pump([
+        gulp.src(statics, { base: 'app/public/src' }),
+        gulp.dest(publicDist)
+        ], cb);
+});
+
+gulp.task('devCss', ['mvStatics'], function(cb) {
 	pump([
-        gulp.src('app/view/src/css/*.css'),
+        gulp.src('app/public/src/css/custom/*.css'),
         cleanCSS({compatibility: 'ie8'}),
         rev(),
         revFormat(formatOptions),
@@ -36,7 +50,7 @@ gulp.task('devCss', function(cb) {
 
 gulp.task('devJs', ['devCss'], function(cb) {
     pump([
-        gulp.src('app/view/src/js/*.js'),
+        gulp.src('app/public/src/js/custom/*.js'),
         uglify(),
         rev(),
         revFormat(formatOptions),
@@ -46,10 +60,25 @@ gulp.task('devJs', ['devCss'], function(cb) {
         ], cb);
 });
 
-gulp.task('default', ['clean', 'devCss', 'devJs'], () => {
-    gulp.src(['build/rev/*.json', 'app/view/src/**/*.tpl'])
-            .pipe(revCollector({
-                revSuffix: '.[0-9a-f]{8,10}.min?'
-            }))
-            .pipe(gulp.dest(tplDist));
+gulp.task('devTpl', ['devJs'], function(cb) {
+    pump([
+        gulp.src(['build/rev/*.json', 'app/view/src/**/*.tpl']),
+        revCollector({ revSuffix: '.[0-9a-f]{8,10}.min?' }),
+        gulp.dest(tplDist)
+        ], cb);
 });
+
+gulp.task('default', ['clean', 'mvStatics', 'devCss', 'devJs', 'devTpl'], () => {
+    gulp.src([
+        './app/**', 
+        '!./app/public/{src,src/**}', 
+        '!./app/view/{src,src/**}', 
+        './config/**',
+        './package.json',
+        './package-lock.json'
+        ], { base: './' })
+        .pipe(tar('archive.tar'))
+        .pipe(gzip())
+        .pipe(gulp.dest('.'))
+});
+

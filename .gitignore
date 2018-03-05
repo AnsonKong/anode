@@ -1,25 +1,28 @@
 # Logs
-logs
+/logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# avatar & topic
-app/public/avatar
-app/public/topic
+# archive.tar.gz
+/archive.tar.gz
+
+# dist
+/app/public/dist/
+/app/view/dist/
 
 # Run
-run/
+/run/
 
 # passport
-config/github.*.passport.js
+/config/github.*.passport.js
 
 # alinode
-config/alinode.js
+/config/alinode.js
 
 # db
-config/db.js
+/config/db.js
 
 # Runtime data
 pids

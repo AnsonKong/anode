@@ -11,6 +11,10 @@ module.exports = appInfo => {
     }
   };
 
+  config.static = {
+    dir: path.join(appInfo.baseDir, 'app/public/src')
+  };
+
   config.keys = appInfo.name + '_1513127576177_3743';
 
   // add your config here
@@ -21,7 +25,7 @@ module.exports = appInfo => {
   };
 
   config.view = {
-    root: path.resolve(baseDir, 'app/view/dist'),
+    root: path.resolve(baseDir, 'app/view/src'),
   	defaultViewEngine: 'nunjucks',
   	mapping: {
   		'.tpl': 'nunjucks'

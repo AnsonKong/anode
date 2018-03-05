@@ -78,8 +78,7 @@ exports.parseAvatar = function(avatar) {
 };
 
 exports.githubAvatar = () => {
-	return '/public/img/zhihu-default-avatar.jpg';
-	// return `https://identicons.github.com/${name}.png`;
+	return '/public/dist/img/zhihu-default-avatar.jpg';
 };
 
 exports.parseCategory = (topicDoc) => {

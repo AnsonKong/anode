@@ -3,14 +3,15 @@
 const fs = require('fs');
 const gm = require('gm');
 const path = require('path');
+const url = require('url');
 const crypto = require('crypto');
 const Controller = require('egg').Controller;
 const awaitWriteStream = require('await-stream-ready').write;
 const toArray = require('stream-to-array');
 const sendToWormhole = require('stream-wormhole');
-const avatarOriginFolder = '/public/avatar/';
-const avatarCropFolder = '/public/avatar/crop/';
-const topicImgFolder = '/public/topic/img/';
+const avatarOriginFolder = '/avatar';
+const avatarCropFolder = '/avatar/crop';
+const topicImgFolder = '/topic/img';
 const Stream = require('stream').Stream;
 // 成功
 const SUCCESS = 0;
@@ -25,6 +26,9 @@ class UploadAjaxController extends Controller {
   }
   /** 检测文件是否已经存在，不存在则写入并返回路径 */
   async validateStream(source, publicDir, extname) {
+    const publicBase = this.config.static.dir;
+    const publicPrefix = this.config.static.prefix;
+
     let code = ERROR_UNKNOWN;
     let data;
     let msg;
@@ -49,12 +53,13 @@ class UploadAjaxController extends Controller {
         hash.update(buf);
         // 根据文件内容生成md5 digest文件摘要作为文件名
         const filename = hash.digest('hex') + extname;
-        let targetFile = path.join(this.config.baseDir, 'app', publicDir, filename);
+        let targetFile = path.join(publicBase, publicDir, filename);
         if (!fs.existsSync(targetFile)) {
           fs.writeFileSync(targetFile, buf);
         }
         code = SUCCESS;
-        data = publicDir + filename;
+        data = path.join(publicPrefix, publicDir, filename);
+        data = data.replace(/\\/g, '/');
       } catch (err) {
         msg = err.toString();
       }
@@ -73,6 +78,7 @@ class UploadAjaxController extends Controller {
   async avatarUpload() {
     const rb = this.ctx.request.body;
     const avatarUrl = rb.avatarUrl;
+    const publicBase = this.config.static.dir;
     const extname = path.extname(avatarUrl).toLowerCase();
     // 是否需要裁剪
     const doCrop = rb.hasOwnProperty('cropW');
@@ -95,7 +101,8 @@ class UploadAjaxController extends Controller {
       try{
         buf = await (async function() {
           return new Promise((resolve, reject) => {
-            const localUrl = path.join(baseDir, 'app', avatarUrl);
+            const avatarBaseName = path.basename(avatarUrl);
+            const localUrl = path.join(publicBase, avatarOriginFolder, avatarBaseName);
             gm(localUrl)
               .resize(resizeW, resizeH, '!')
               .crop(cropW, cropH, cropX, cropY)

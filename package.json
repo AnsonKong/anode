@@ -29,9 +29,11 @@
     "eslint-config-egg": "^5.1.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.2",
+    "gulp-gzip": "^1.4.2",
     "gulp-rev": "^8.1.1",
     "gulp-rev-collector": "^1.2.4",
     "gulp-rev-format": "^1.0.4",
+    "gulp-tar": "^2.1.0",
     "gulp-uglify-es": "^1.0.1",
     "webstorm-disable-index": "^1.2.0"
   },
@@ -39,7 +41,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --port=443 --daemon --https=true --key=fullPath.key --cert=fullPath.pem --title=egg-server-anode",
+    "start": "egg-scripts start --port=443 --daemon --https=true --key=/root/cert/cert.key --cert=/root/cert/cert.pem --title=egg-server-anode",
     "stop": "egg-scripts stop",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
