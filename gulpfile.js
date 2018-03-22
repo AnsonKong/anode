@@ -10,7 +10,7 @@ const tar = require('gulp-tar');
 const gzip = require('gulp-gzip');
 
 
-const statics = ['app/public/src/img/**'];
+const statics = ['app/public/src/img/**', 'app/public/src/css/third-party/**', 'app/public/src/js/third-party/**'];
 
 const publicDist = 'app/public/dist';
 const cssDist = 'app/public/dist/css/custom';
