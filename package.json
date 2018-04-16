@@ -42,7 +42,7 @@
   },
   "scripts": {
     "start": "egg-scripts start --port=443 --daemon --https=true --key=/root/cert/cert.key --cert=/root/cert/cert.pem --title=egg-server-anode",
-    "stop": "egg-scripts stop",
+    "stop": "egg-scripts stop --title=egg-server-anode",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
