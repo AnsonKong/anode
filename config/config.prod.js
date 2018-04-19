@@ -4,8 +4,12 @@ module.exports = appInfo => {
 	const config = {};
 	config.passportGithub = {
 	  key: require('./github.prod.passport').key,
-	  secret: require('./github.prod.passport').secret
+	  secret: require('./github.prod.passport').secret,
+	  callbackURL: 'https://www.anodejsfun.top/passport/github/callback',
+	  proxy: true
 	};
+
+	config.proxy = true;
 
 	config.alinode = {
 	  appid: require('./alinode').appid,
