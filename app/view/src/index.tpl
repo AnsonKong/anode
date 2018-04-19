@@ -9,7 +9,7 @@
 	{% import './common/pagination.tpl' as p %}
 	<div class="row no-gutters">
 		<!-- left -->
-		<div class="col-9 rounded">
+		<div class="col-lg-9 col-12 rounded">
 			<ul class="nav bg-white nav-tabs">
 			  <li class="nav-item">
 			    <a class="nav-link {{'active' if tab=='all' else ''}}" href="/?tab=all">全部</a>
