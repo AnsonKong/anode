@@ -20,10 +20,10 @@ see [egg docs][egg] for more detail.
 https://github.com/eggjs/egg-alinode
 
 以下私有配置应当由您自己创建：
-1. {app}/config/alinode.js // 记录Alinode的appid以及secret
-2. {app}/config/github.prod.passport.js // 记录在prod环境下Github OAuth Apps的key以及secret
-3. {app}/config/github.local.passport.js // 记录在local环境下Github OAuth Apps的key以及secret
-4. {app}/config/db.js // 记录访问MongoDB/egg的username以及password
+1. ${app}/config/alinode.js // 记录Alinode的appid以及secret
+2. ${app}/config/github.prod.passport.js // 记录在prod环境下Github OAuth Apps的key以及secret
+3. ${app}/config/github.local.passport.js // 记录在local环境下Github OAuth Apps的key以及secret
+4. ${app}/config/db.js // 记录访问MongoDB/egg的username以及password
 
 因ANode默认开启--https=true，所以您需要申请一个数字证书，并把.key和.pem文件存放在服务器某安全处，用于在npm start时加载。
 
@@ -51,3 +51,12 @@ $ npm stop
 - Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
 
 [egg]: https://eggjs.org
+
+### 截图预览
+#### Mobile:
+
+![Mobile Screenshot](./screenshots/mobile.jpg?raw=true "Mobile Screenshot")
+
+#### Destop:
+
+![Destop Screenshot](./screenshots/destop.jpg?raw=true "Destop Screenshot")
