@@ -14,8 +14,8 @@ module.exports = app => {
   r.get('/signin', c.user.old);
 
   const options = {
-  	successRedirect: '/',
-  	failureRedirect: '/signin'
+    successRedirect: '/',
+    failureRedirect: '/signin',
   };
 
   // passport-local

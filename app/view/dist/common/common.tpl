@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% include './bootstrap.css.tpl' %}
 		{% block customHead %}{% endblock %}
-		<script type="text/javascript" src="/public/js/custom/default.c8ecd63c9c.min.js"></script>
+		<script type="text/javascript" src="/public/js/custom/default.5df34fdc77.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="/public/css/custom/default.c381897d74.min.css">
 	</head>
 	<body style="background-color: #e1e1e1">

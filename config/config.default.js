@@ -7,42 +7,42 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.security = {
     hsts: {
-      enable: true
-    }
+      enable: true,
+    },
   };
 
   config.static = {
-    dir: path.join(appInfo.baseDir, 'app/public/src')
+    dir: path.join(appInfo.baseDir, 'app/public/src'),
   };
 
   config.keys = appInfo.name + '_1513127576177_3743';
 
   // add your config here
-  config.middleware = ['pre', 'notfoundHandler'];
+  config.middleware = [ 'pre', 'notfoundHandler' ];
 
   config.logger = {
-    consoleLevel: 'DEBUG'
+    consoleLevel: 'DEBUG',
   };
 
   config.view = {
     root: path.resolve(baseDir, 'app/view/src'),
-  	defaultViewEngine: 'nunjucks',
-  	mapping: {
-  		'.tpl': 'nunjucks'
-  	}
+    defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.tpl': 'nunjucks',
+    },
   };
 
   const dbConfig = require('./db');
   config.mongoose = {
     url: `mongodb://${dbConfig.username}:${dbConfig.password}@127.0.0.1/egg`,
     options: {
-      useMongoClient: true
-    }
+      useMongoClient: true,
+    },
   };
 
   config.passportGithub = {
     key: require('./github.local.passport').key,
-    secret: require('./github.local.passport').secret
+    secret: require('./github.local.passport').secret,
   };
 
   config.multipart = {
@@ -53,6 +53,6 @@ module.exports = appInfo => {
       '.jpeg',
     ],
   };
-  
+
   return config;
 };

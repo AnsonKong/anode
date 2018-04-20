@@ -2,7 +2,7 @@
 {% block title %}{{ title }}{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture-editor.tpl' %}
-	<script type="text/javascript" src="/public/js/custom/check-form.55e445679e.min.js"></script>
+	<script type="text/javascript" src="/public/js/custom/check-form.586cd04df7.min.js"></script>
 	<style type="text/css">
 		.CodeMirror {
 		  height: 320px;

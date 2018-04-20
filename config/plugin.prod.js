@@ -1,3 +1,4 @@
+'use strict';
 exports.alinode = {
-	enable: true,
-}
+  enable: true,
+};

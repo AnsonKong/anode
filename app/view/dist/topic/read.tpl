@@ -2,7 +2,7 @@
 {% block title %}{{ topic.title }}{% endblock %}
 {% block customHead %}
 	{% include '../common/lepture-editor.tpl' %}
-	<script type="text/javascript" src="/public/js/custom/check-form.55e445679e.min.js"></script>
+	<script type="text/javascript" src="/public/js/custom/check-form.586cd04df7.min.js"></script>
 	<script type="text/javascript" src="/public/js/third-party/xss.js"></script>
 	<link rel="stylesheet" type="text/css" href="/public/css/third-party/prettify.css">
 	<script type="text/javascript" src="/public/js/third-party/prettify.js"></script>
@@ -157,8 +157,8 @@
 {% endblock %}
 {% block customTail %}
 	<link rel="stylesheet" type="text/css" href="/public/css/custom/editor-at-triggering-list.adcd1837a4.min.css">
-	<script type="text/javascript" src="/public/js/custom/editor-at-triggering-list.93e0ab5c75.min.js"></script>
-	<script type="text/javascript" src="/public/js/custom/topic-replies-history.c5eef1b920.min.js"></script>
+	<script type="text/javascript" src="/public/js/custom/editor-at-triggering-list.17909c0ba3.min.js"></script>
+	<script type="text/javascript" src="/public/js/custom/topic-replies-history.c14b41363f.min.js"></script>
 	<script type="text/javascript">
 		const editor = new Editor({
 			element: $('#myTextarea')[0],

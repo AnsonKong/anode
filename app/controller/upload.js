@@ -1,12 +1,9 @@
 'use strict';
-
 const fs = require('fs');
 const gm = require('gm');
 const path = require('path');
-const url = require('url');
 const crypto = require('crypto');
 const Controller = require('egg').Controller;
-const awaitWriteStream = require('await-stream-ready').write;
 const toArray = require('stream-to-array');
 const sendToWormhole = require('stream-wormhole');
 const avatarOriginFolder = '/avatar';
@@ -24,7 +21,7 @@ class UploadAjaxController extends Controller {
     const extname = path.extname(readStream.filename).toLowerCase();
     this.ctx.body = await this.validateStream(readStream, topicImgFolder, extname);
   }
-  /** 检测文件是否已经存在，不存在则写入并返回路径 */
+  // 检测文件是否已经存在，不存在则写入并返回路径
   async validateStream(source, publicDir, extname) {
     const publicBase = this.config.static.dir;
     const publicPrefix = this.config.static.prefix;
@@ -53,7 +50,7 @@ class UploadAjaxController extends Controller {
         hash.update(buf);
         // 根据文件内容生成md5 digest文件摘要作为文件名
         const filename = hash.digest('hex') + extname;
-        let targetFile = path.join(publicBase, publicDir, filename);
+        const targetFile = path.join(publicBase, publicDir, filename);
         if (!fs.existsSync(targetFile)) {
           fs.writeFileSync(targetFile, buf);
         }
@@ -66,7 +63,7 @@ class UploadAjaxController extends Controller {
     }
     return { code, msg, data };
   }
-  /** 验证需要裁剪的头像图片的合法性 */
+  // 验证需要裁剪的头像图片的合法性
   // post /upload/avatar/validate
   async avatarValidate() {
     const readStream = await this.ctx.getFileStream();
@@ -91,14 +88,13 @@ class UploadAjaxController extends Controller {
       code = SUCCESS;
       data = avatarUrl;
     } else {
-      const baseDir = this.config.baseDir;
       const resizeW = rb.resizeW;
       const resizeH = rb.resizeH;
       const cropX = rb.cropX;
       const cropY = rb.cropY;
       const cropW = rb.cropW;
       const cropH = rb.cropH;
-      try{
+      try {
         buf = await (async function() {
           return new Promise((resolve, reject) => {
             const avatarBaseName = path.basename(avatarUrl);
@@ -115,7 +111,7 @@ class UploadAjaxController extends Controller {
               });
           });
         })();
-      } catch(err) {
+      } catch (err) {
         code = ERROR_UNKNOWN;
         msg = err.toString();
       }

@@ -1,7 +1,7 @@
 {
   "name": "anode",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node community based on the prototype of cnode",
   "private": true,
   "dependencies": {
     "await-stream-ready": "^1.0.1",
@@ -57,8 +57,9 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/AnsonKong/anode"
   },
-  "author": "",
+  "homepage": "https://www.anodejsfun.top/",
+  "author": "AnsonKong <kongweian@163.com>",
   "license": "MIT"
 }
