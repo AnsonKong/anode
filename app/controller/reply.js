@@ -2,7 +2,7 @@
 const Controller = require('egg').Controller;
 
 class ReplyController extends Controller {
-  // get /reply/del
+  // post /reply/del
   async del() {
     const replyId = this.ctx.request.body.id;
     let code = -1;
@@ -20,20 +20,33 @@ class ReplyController extends Controller {
   // get /reply/:id/edit
   async edit() {
     const replyId = this.ctx.params.id;
-    const reply = await this.ctx.model.Reply.findById(replyId);
-    await this.ctx.render('/reply/edit.tpl', { reply });
+    let reply;
+    if (replyId) {
+      reply = await this.ctx.model.Reply.findById(replyId);
+    }
+    if (reply) {
+      await this.ctx.render('/reply/edit.tpl', { reply });
+    } else {
+      this.ctx.service.router.storeAlertMsg(`${replyId}回复不存在`);
+      this.ctx.redirect('/');
+    }
   }
 
   // post /reply/:id/edit
   async update() {
     const replyId = this.ctx.params.id;
-    const body = this.ctx.request.body;
-    // 更新Reply
-    const reply = await this.ctx.model.Reply.findByIdAndUpdate(replyId, { content: body.content });
-    // 添加“回复被提到”提示消息
+    const content = this.ctx.request.body.content;
     const sender = this.ctx.user.id;
-    await this.ctx.service.reply.checkAtUsers(body.content, reply.id, sender);
-    this.ctx.redirect(`/topic/${reply.topic}#${reply.id}`);
+    if (replyId && content && sender) {
+      // 更新Reply
+      const reply = await this.ctx.model.Reply.findByIdAndUpdate(replyId, { content });
+      // 添加“回复被提到”提示消息
+      await this.ctx.service.reply.checkAtUsers(content, reply.id, sender);
+      this.ctx.redirect(`/topic/${reply.topic}#${reply.id}`);
+    } else {
+      this.ctx.service.router.storeAlertMsg(`${replyId}回复编辑失败`);
+      this.ctx.redirect('/');
+    }
   }
 
   // post /reply/like
@@ -45,24 +58,26 @@ class ReplyController extends Controller {
     let msg;
     let action;
     let data;
-    try {
-      const reply = await this.ctx.model.Reply.findById(replyId);
-      if (reply) {
-        const index = reply.likes.indexOf(userId);
-        if (index !== -1) {
-          reply.likes.splice(index, 1);
-          action = 'down';
-        } else {
-          reply.likes.push(userId);
-          action = 'up';
+    if (replyId && userId) {
+      try {
+        const reply = await this.ctx.model.Reply.findById(replyId);
+        if (reply) {
+          const index = reply.likes.indexOf(userId);
+          if (index !== -1) {
+            reply.likes.splice(index, 1);
+            action = 'down';
+          } else {
+            reply.likes.push(userId);
+            action = 'up';
+          }
+          await reply.save();
+          code = 0;
+          data = reply.likes.length;
         }
-        await reply.save();
-        code = 0;
-        data = reply.likes.length;
+      } catch (e) {
+        code = -1;
+        msg = e.toString();
       }
-    } catch (e) {
-      code = -1;
-      msg = e.toString();
     }
     this.ctx.body = { code, action, msg, data };
   }

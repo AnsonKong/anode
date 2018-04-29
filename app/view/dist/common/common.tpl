@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 	<head>
 		<title>{% block title %}{% endblock %} - ANode技术社区</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="author" content="AnsonKong">
+    <meta name="description" content="ANode Tech Community">
+    <meta name="keywords" content="Node, Community">
 		{% include './bootstrap.css.tpl' %}
 		{% block customHead %}{% endblock %}
 		<script type="text/javascript" src="/public/js/custom/default.5df34fdc77.min.js"></script>
