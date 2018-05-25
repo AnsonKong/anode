@@ -115,7 +115,7 @@ function onUserReply(parentReplyId, topicId, username) {
     // 1.添加textarea
     const newTextarea = $('<textarea id="newTextarea" class="form-control" name="content" required>');
     formGroup.append(newTextarea);
-    replyUserTextareaElement = newTextarea[0];
+    const replyUserTextareaElement = newTextarea[0];
     // 2.textarea错误提示
     const tip = $('<div class="invalid-feedback">请正确填写回复内容，要求字数1字以上。</div>');
     formGroup.append(tip);
@@ -137,7 +137,7 @@ function onUserReply(parentReplyId, topicId, username) {
     // 4.添加_csrf
     const replyUserCSRF = $('<input type="hidden" name="_csrf"/>');
     replyUserWrapper.append(replyUserCSRF);
-    replyUserCSRFElement = replyUserCSRF[0];
+    const replyUserCSRFElement = replyUserCSRF[0];
     replyUserCSRFElement.value = getCsrf();
     // 5.初始化editor
     replyUserEditor = new Editor({
